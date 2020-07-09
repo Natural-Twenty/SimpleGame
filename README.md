@@ -386,7 +386,7 @@ Fill in here.
 
 ### Week-06
 
-Fill in here.
+User and epic stories: Frank Merriman - 50%, The Minh Tran - 50% [Equal distribution]
 
 ### Week-07
 

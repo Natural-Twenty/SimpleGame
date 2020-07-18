@@ -36,7 +36,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
 
     @Override
-    public void onLoad(Entity player) {
+    public void onLoad(Player player) { //This was orignally public void onLoad(Enitity player) change back if it breaks
         ImageView view = new ImageView(playerImage);
         addEntity(player, view);
     }

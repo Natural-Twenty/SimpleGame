@@ -47,4 +47,19 @@ public class Dungeon {
     public void addEntity(Entity entity) {
         entities.add(entity);
     }
+
+    /**
+     * Return the entity at the given coordinates in the dungeon
+     * @param x
+     * @param y
+     * @return
+     */
+    public Entity getEntity(int x, int y) {
+        for (Entity e : entities) {
+            if (x == e.getX() && y == e.getY()) {
+                return e;
+            }
+        }
+        return null;
+    }
 }

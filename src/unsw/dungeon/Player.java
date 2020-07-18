@@ -1,5 +1,8 @@
 package unsw.dungeon;
 
+
+import java.util.List;
+
 /**
  * The player entity
  * @author Robert Clifton-Everest
@@ -47,13 +50,16 @@ public class Player extends Entity {
      * @return true if eligible tile for player movement
      */
     public boolean canEnterTile(int x, int y) {
-        Entity tile = dungeon.getEntity(x, y);
+        List<Entity> tileEntities = dungeon.getEntities(x, y);
 
-        if (tile == null) { //if null there is no entity block the tile so we can move there
+        if (tileEntities == null) { //if null there is no entity block the tile so we can move there
             return true;
         }
-        if (tile.getClass() == Wall.class) {
-            return false;
+        
+        for (Entity e : tileEntities) {
+            if (e instanceof Wall) {
+                return false;
+            }
         }
         
         return true;

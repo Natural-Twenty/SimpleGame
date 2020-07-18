@@ -52,14 +52,20 @@ public class Dungeon {
      * Return the entity at the given coordinates in the dungeon
      * @param x
      * @param y
-     * @return
+     * @return null if no entity at location
      */
     public Entity getEntity(int x, int y) {
         for (Entity e : entities) {
-            if (x == e.getX() && y == e.getY()) {
-                return e;
+            if (e != null) {
+                int eX = e.getX();
+                int eY = e.getY();
+
+                if (x == eX && y == eY) {
+                    return e;
+                }
             }
         }
+
         return null;
     }
 }

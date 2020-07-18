@@ -52,9 +52,11 @@ public class Player extends Entity {
         if (tile == null) { //if null there is no entity block the tile so we can move there
             return true;
         }
-
+        if (tile.getClass() == Wall.class) {
+            return false;
+        }
         
-
+        return true;
         
     }
 }

@@ -49,21 +49,27 @@ public class Dungeon {
     }
 
     /**
-     * Return the entity at the given coordinates in the dungeon
+     * Return all entities at the given coordinates in the dungeon
      * @param x
      * @param y
-     * @return null if no entity at location
+     * @return null if no entity at location otherwise a list of type entity
      */
-    public Entity getEntity(int x, int y) {
+    public List<Entity> getEntities(int x, int y) {
+        List<Entity> tileEntities= new ArrayList<>();
+
         for (Entity e : entities) {
             if (e != null) {
                 int eX = e.getX();
                 int eY = e.getY();
 
                 if (x == eX && y == eY) {
-                    return e;
+                    tileEntities.add(e);
                 }
             }
+        }
+        
+        if (tileEntities.size() > 0) {
+            return tileEntities;
         }
 
         return null;

@@ -1,7 +1,5 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-
 import org.junit.Test;
 
 import unsw.dungeon.*;
@@ -51,7 +49,7 @@ public class testBoulderAndSwitches {
 
         Boulder boulder = new Boulder(dungeon, 2, 2);
         dungeon.addEntity(boulder);
-        
+
         FloorSwitch floorSwitch = new FloorSwitch(dungeon, 2, 2);
         dungeon.addEntity(floorSwitch);
 

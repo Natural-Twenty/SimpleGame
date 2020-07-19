@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,8 +8,9 @@ import java.util.List;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity implements MoveBehaviour{
+public class Player extends Entity implements MoveBehaviour, Subject{
 
+    private List<Observer> listObservers;
     private Dungeon dungeon;
 
     /**
@@ -20,6 +21,7 @@ public class Player extends Entity implements MoveBehaviour{
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y);
         this.dungeon = dungeon;
+        listObservers = new ArrayList<>();
     }
 
     public void moveUp() {
@@ -51,7 +53,7 @@ public class Player extends Entity implements MoveBehaviour{
         if (canMove(newX, newY)) {
             x().set(newX);
             y().set(newY);
-            //updateObservers();
+            updateObservers();
         }
     }
 
@@ -84,6 +86,23 @@ public class Player extends Entity implements MoveBehaviour{
         
         return true;
         
+    }
+
+    @Override
+    public void detach(Observer o) {
+        listObservers.remove(o);
+    }
+
+    @Override
+    public void attach(Observer o) {
+        listObservers.add(o);
+    }
+
+    @Override
+    public void updateObservers() {
+        for (Observer o : listObservers) {
+            o.update();
+        }
     }
 
 }

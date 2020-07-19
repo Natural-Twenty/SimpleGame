@@ -73,10 +73,19 @@ public class Dungeon implements Observer{
         return levelComplete;
     }
 
+    //method overloading on update
     @Override
-    public void update() {
+    public void update(Object obj) {
+        if (obj instanceof Exit) {
+            update( (Exit) obj);
+        }
+    }
+
+    public void update(Exit exit) {
         checkGoalStatus();
     }
+
+    
 
     /**
      * Return all entities at the given coordinates in the dungeon

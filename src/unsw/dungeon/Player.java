@@ -51,6 +51,7 @@ public class Player extends Entity implements MoveBehaviour{
         if (canMove(newX, newY)) {
             x().set(newX);
             y().set(newY);
+            //updateObservers();
         }
     }
 
@@ -62,6 +63,11 @@ public class Player extends Entity implements MoveBehaviour{
      * @return true if eligible tile for player movement
      */
     public boolean canMove(int x, int y) {
+
+        if (dungeon.getCompletion()) { //when true dungeon is complete so player cannot move
+            return false;
+        }
+
         List<Entity> tileEntities = dungeon.getEntities(x, y);
 
         if (tileEntities.size() < 1) { //Basically same as old code for entity = null

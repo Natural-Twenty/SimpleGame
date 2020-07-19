@@ -3,8 +3,8 @@ package unsw.dungeon;
 import java.util.List;
 
 public class FloorSwitch extends Entity {
-    FloorSwitchState triggeredState;
-    FloorSwitchState untriggeredState;
+    private FloorSwitchState triggeredState;
+    private FloorSwitchState untriggeredState;
 
     FloorSwitchState currState;
 

@@ -1,7 +1,7 @@
 package unsw.dungeon;
 
 public class TriggeredState implements FloorSwitchState {
-    FloorSwitch floorSwitch;
+    private FloorSwitch floorSwitch;
 
     public TriggeredState(FloorSwitch floorSwitch) {
         this.floorSwitch = floorSwitch;

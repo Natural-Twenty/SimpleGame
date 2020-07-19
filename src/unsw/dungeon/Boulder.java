@@ -9,6 +9,7 @@ public class Boulder extends Entity implements MoveBehaviour{
         super(x,y);
         this.dungeon = dungeon;
     }
+    
 
     public void moveTo(int newX, int newY) {
         int oldX = this.getX();
@@ -74,6 +75,19 @@ public class Boulder extends Entity implements MoveBehaviour{
             return false;
         } else {
             return true;
+        }
+    }
+
+    @Override
+    public void onCollide(Entity entity) {
+        // Ensure pusher is a player
+        if (entity instanceof Player) {
+            // Compute direction of push
+            int xDirection = getX() - entity.getX();
+            int yDirection = getY() - entity.getY();
+            int x = getX() + xDirection;
+            int y = getY() + yDirection;
+            moveTo(x, y);
         }
     }
 }

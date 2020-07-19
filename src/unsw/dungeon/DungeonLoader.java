@@ -65,7 +65,7 @@ public abstract class DungeonLoader {
         dungeon.addEntity(entity);
     }
 
-    public abstract void onLoad(Entity player);
+    public abstract void onLoad(Player player); // This used to be Entity player change back if breaks
 
     public abstract void onLoad(Wall wall);
 

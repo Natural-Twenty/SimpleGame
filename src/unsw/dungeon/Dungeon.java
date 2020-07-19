@@ -47,4 +47,28 @@ public class Dungeon {
     public void addEntity(Entity entity) {
         entities.add(entity);
     }
+
+    /**
+     * Return all entities at the given coordinates in the dungeon
+     * @param x
+     * @param y
+     * @return null if no entity at location otherwise a list of type entity
+     */
+    public List<Entity> getEntities(int x, int y) {
+        List<Entity> tileEntities= new ArrayList<>();
+
+        for (Entity e : entities) {
+            if (e != null) {
+                int eX = e.getX();
+                int eY = e.getY();
+
+                if (x == eX && y == eY) {
+                    tileEntities.add(e);
+                }
+            }
+        }
+
+        return tileEntities;
+
+    }
 }

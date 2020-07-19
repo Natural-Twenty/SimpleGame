@@ -8,7 +8,6 @@ public class Wall extends Entity{
 
     @Override
     public boolean isBarrier(Entity e) {
-
         return true;
     }
 }

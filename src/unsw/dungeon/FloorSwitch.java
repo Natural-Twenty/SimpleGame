@@ -1,6 +1,8 @@
 package unsw.dungeon;
 
-public class FloorSwitch extends Entity{
+import java.util.List;
+
+public class FloorSwitch extends Entity {
     FloorSwitchState triggeredState;
     FloorSwitchState untriggeredState;
 
@@ -13,6 +15,7 @@ public class FloorSwitch extends Entity{
         triggeredState = new TriggeredState(this);
         untriggeredState = new UntriggeredState(this);
         this.dungeon =dungeon;
+        currState = checkBoulder(dungeon, x, y);
     }
 
     public void triggerFloorSwitch() {
@@ -45,5 +48,18 @@ public class FloorSwitch extends Entity{
         } else {
             return false;
         }
+    }
+
+    private FloorSwitchState checkBoulder(Dungeon dungeon, int x, int y) {
+        List<Entity> entities = dungeon.getEntities(x, y);
+        if (entities == null) {
+            return untriggeredState;
+        }
+        for (Entity e : entities) {
+            if (e instanceof Boulder) {
+                return triggeredState;
+            }
+        }
+        return untriggeredState;
     }
 }

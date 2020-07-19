@@ -67,11 +67,8 @@ public class Dungeon {
                 }
             }
         }
-        
-        if (tileEntities.size() > 0) {
-            return tileEntities;
-        }
 
-        return null;
+        return tileEntities;
+
     }
 }

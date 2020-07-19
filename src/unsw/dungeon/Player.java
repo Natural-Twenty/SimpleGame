@@ -8,7 +8,7 @@ import java.util.List;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity {
+public class Player extends Entity implements MoveBehaviour {
 
     private Dungeon dungeon;
 
@@ -23,23 +23,35 @@ public class Player extends Entity {
     }
 
     public void moveUp() {
-        if (getY() > 0 && canEnterTile(getX(), getY() - 1))
-            y().set(getY() - 1);
+        if (getY() > 0 /*&& checkTile(getX(), getY() - 1)*/)
+            moveTo(getX(), getY() - 1);
     }
 
     public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1 && canEnterTile(getX(), getY() + 1))
-            y().set(getY() + 1);
+        if (getY() < dungeon.getHeight() - 1 /*&& checkTile(getX(), getY() + 1)*/)
+            moveTo(getX(), getY() + 1);
     }
 
     public void moveLeft() {
-        if (getX() > 0 && canEnterTile(getX() - 1, getY()))
-            x().set(getX() - 1);
+        if (getX() > 0 /*&& checkTile(getX() - 1, getY())*/)
+            moveTo(getX() - 1, getY());
     }
 
     public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1 && canEnterTile(getX() + 1, getY()))
-            x().set(getX() + 1);
+        if (getX() < dungeon.getWidth() - 1 /*&& checkTile(getX() + 1, getY())*/)
+            moveTo(getX() + 1, getY());
+    }
+
+    /**
+     * This method takes in an x and y coordinate and attempts to move the player into it, checking collide behaviour first
+     * @param x cooridnate of tile we are moving to
+     * @param y cooridnate of tile we are moving to
+     */
+    public void moveTo (int newX, int newY) {
+        if (canMove(newX, newY)) {
+            x().set(newX);
+            y().set(newY);
+        }
     }
 
     /**
@@ -49,10 +61,10 @@ public class Player extends Entity {
      * @param y cooridnate of tile we are checking
      * @return true if eligible tile for player movement
      */
-    public boolean canEnterTile(int x, int y) {
+    public boolean canMove(int x, int y) {
         List<Entity> tileEntities = dungeon.getEntities(x, y);
 
-        if (tileEntities == null) { //if null there is no entity block the tile so we can move there
+        if (tileEntities.size() < 1) { //Basically same as old code for entity = null
             return true;
         }
         

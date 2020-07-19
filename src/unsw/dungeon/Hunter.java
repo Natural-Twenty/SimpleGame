@@ -28,7 +28,7 @@ public class Hunter extends Entity implements MoveBehaviour, Observer{
     /**
      * Given a target coordinate it will attempt to move in a straight line towards it
      * It will always move along the axis that has the smallest difference between target and current
-     * If both are the same it prefers moving horizontally
+     * If both are the same it prefers moving horizontally (even if both diff are 0)
      * @param targetX int giving location on x axis
      * @param targetY int giving location on y axis
      */
@@ -38,22 +38,40 @@ public class Hunter extends Entity implements MoveBehaviour, Observer{
 
         int xDiff = Math.abs(targetX - currX);
         int yDiff = Math.abs(targetY - currY);
-        //there could be issues around xdiff or ydiff being zero deal in morning
 
-        if (xDiff <= yDiff) {
-            if (targetX < currX) {
-                moveTo(currX - 1, currY);
-            } else {
-                moveTo(currX + 1, currY);
-            }
+        //there could be issues around xdiff or ydiff being zero causing enemy to move up/right
+        //solution to implement, if yDiff = 0 we want to try and move on x axis vice versa
+
+        if (yDiff == 0) {
+            moveHorizontal(currX, currY, targetX, targetY);
+            
+        } else if (xDiff == 0) {
+            moveVertical(currX, currY, targetX, targetY);
+
+        } else if (xDiff <= yDiff) {
+            moveHorizontal(currX, currY, targetX, targetY);
+
         } else {
-            if (targetY < currY) {
-                moveTo(currX, currY - 1);
-            } else {
-                moveTo(currX, currY + 1);
-            }
+            moveVertical(currX, currY, targetX, targetY);
+
         }
-        
+
+    }
+
+    public void moveHorizontal(int currX, int currY, int targetX, int targetY) {
+        if (targetX < currX) {
+            moveTo(currX - 1, currY);
+        } else {
+            moveTo(currX + 1, currY);
+        }
+    }
+
+    public void moveVertical(int currX, int currY, int targetX, int targetY) {
+        if (targetY < currY) {
+            moveTo(currX, currY - 1);
+        } else {
+            moveTo(currX, currY + 1);
+        }
     }
 
     @Override

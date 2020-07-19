@@ -7,18 +7,31 @@ import unsw.dungeon.*;
 public class testBoulderAndSwitches {
     
     @Test
-    // Test Boulder movement without walls
+    // Test Boulder movement without barriers such as walls
     public void testMovement() {
         Dungeon dungeon = new Dungeon(5, 5);
         Boulder boulder = new Boulder(dungeon, 2, 2);
+        Player player = new Player(dungeon, 2, 1);
         dungeon.addEntity(boulder);
-        // move boulder down
-        boulder.moveTo(2, 3);
+        // push boulder down
+        player.moveTo(2, 2);
         assert(boulder.getX() == 2 && boulder.getY() == 3);
-        // move bounder right
-        boulder.moveTo(3,3);
+        assert(player.getX() == 2 && player.getY() == 2);
+        // push boulder right
+        player.moveTo(1, 3);
+        player.moveTo(2, 3);
         assert(boulder.getX() == 3 && boulder.getY() == 3);
-        
+        assert(player.getX() == 2 && player.getY() == 3);
+        // push boulder left
+        player.moveTo(4,3);
+        player.moveTo(3, 3);
+        assert(boulder.getX() == 2 && boulder.getY() == 3);
+        assert(player.getX() == 3 && player.getY() == 3);
+        // push boulder up
+        player.moveTo(2, 4);
+        player.moveTo(2,3);
+        assert(boulder.getX() == 2 && boulder.getY() == 2);
+        assert(player.getX() == 2 && player.getY() == 3);
     }
 
     @Test

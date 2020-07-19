@@ -1,4 +1,4 @@
-package unsw.dungeon.FloorSwitch;
+package unsw.dungeon;
 
 public interface FloorSwitchState {
     public void triggerFloorSwitch();

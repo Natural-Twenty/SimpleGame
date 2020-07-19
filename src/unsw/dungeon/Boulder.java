@@ -18,13 +18,7 @@ public class Boulder extends Entity implements MoveBehaviour{
             x().set(newX);
             y().set(newY);
             changeFloorSwitchState(oldX, oldY, newX, newY);
-        } else {
-            // Can't move so boulder does nothing
-            return;
         }
-        
-        
-        
     }
 
     public boolean canMove(int newX, int newY) {

@@ -44,7 +44,7 @@ public class Dungeon {
         this.player = player;
     }
 
-    public void addEntity(Entity entity) {
+    public void addEntity(Entity entity) { //add a case for adding enemy which attaches it as an observer to player
         entities.add(entity);
     }
 

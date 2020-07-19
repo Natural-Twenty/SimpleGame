@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
-public class GoalCompositeOr implements GoalComponent{
+public class GoalOR implements Goal{
+    
     @Override
     public boolean isComplete() {
         // TODO Auto-generated method stub

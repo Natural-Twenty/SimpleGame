@@ -6,4 +6,9 @@ public class Wall extends Entity{
         super(x, y);
     }
 
+    @Override
+    public boolean isBarrier(Entity e) {
+
+        return true;
+    }
 }

@@ -39,4 +39,16 @@ public class Entity {
     public int getX() {
         return x().get();
     }
+
+    
+    public boolean isBarrier(Entity e) {
+        return false;
+    }
+
+    
+    public void onCollide(Entity e) {
+        
+    }
+
+
 }

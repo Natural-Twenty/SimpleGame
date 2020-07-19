@@ -8,7 +8,7 @@ import java.util.List;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity implements MoveBehaviour {
+public class Player extends Entity implements MoveBehaviour{
 
     private Dungeon dungeon;
 
@@ -23,22 +23,22 @@ public class Player extends Entity implements MoveBehaviour {
     }
 
     public void moveUp() {
-        if (getY() > 0 /*&& checkTile(getX(), getY() - 1)*/)
+        if (getY() > 0 )
             moveTo(getX(), getY() - 1);
     }
 
     public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1 /*&& checkTile(getX(), getY() + 1)*/)
+        if (getY() < dungeon.getHeight() - 1)
             moveTo(getX(), getY() + 1);
     }
 
     public void moveLeft() {
-        if (getX() > 0 /*&& checkTile(getX() - 1, getY())*/)
+        if (getX() > 0 )
             moveTo(getX() - 1, getY());
     }
 
     public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1 /*&& checkTile(getX() + 1, getY())*/)
+        if (getX() < dungeon.getWidth() - 1)
             moveTo(getX() + 1, getY());
     }
 
@@ -69,12 +69,15 @@ public class Player extends Entity implements MoveBehaviour {
         }
         
         for (Entity e : tileEntities) {
-            if (e instanceof Wall) {
+            if (e.isBarrier(this)) {
                 return false;
+            } else {
+                e.onCollide(this);
             }
         }
         
         return true;
         
     }
+
 }

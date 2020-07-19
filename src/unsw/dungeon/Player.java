@@ -101,7 +101,7 @@ public class Player extends Entity implements MoveBehaviour, Subject{
     @Override
     public void updateObservers() {
         for (Observer o : listObservers) {
-            o.update();
+            o.update(this);
         }
     }
 

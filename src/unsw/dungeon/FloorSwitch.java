@@ -1,14 +1,18 @@
 package unsw.dungeon;
 
-public class FloorSwitch {
+public class FloorSwitch extends Entity{
     FloorSwitchState triggeredState;
     FloorSwitchState untriggeredState;
 
     FloorSwitchState currState;
+
+    Dungeon dungeon;
     
-    public FloorSwitch() {
+    public FloorSwitch(Dungeon dungeon, int x, int y) {
+        super(x,y);
         triggeredState = new TriggeredState(this);
         untriggeredState = new UntriggeredState(this);
+        this.dungeon =dungeon;
     }
 
     public void triggerFloorSwitch() {
@@ -33,5 +37,13 @@ public class FloorSwitch {
 
     void setState(FloorSwitchState state) {
         this.currState = state;
+    }
+
+    public boolean isTriggered() {
+        if (currState == triggeredState) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

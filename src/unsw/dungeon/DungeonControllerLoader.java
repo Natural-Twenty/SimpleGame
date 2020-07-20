@@ -60,10 +60,10 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(exit, view);
     }
 
-    // @Override
-    // public void onLoad(Treasure treasure) {
-    //     //TODO for UI
-    // }
+    @Override
+    public void onLoad(Treasure treasure) {
+        //TODO for UI
+    }
 
     @Override
     public void onLoad(Door door) {

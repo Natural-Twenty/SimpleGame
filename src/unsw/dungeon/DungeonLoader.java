@@ -80,12 +80,23 @@ public abstract class DungeonLoader {
             break;
 
         case "treasure":
+            Treasure treasure = new Treasure(x, y);
+            onLoad(treasure);
+            entity = treasure;
             break;
 
         case "door":
+            int id = json.getInt("id");
+            Door door = new Door(x, y, id);
+            onLoad(door);
+            entity = door;
             break;
 
         case "key":
+            int id2 = json.getInt("id");
+            Key key = new Key(dungeon, x, y, id2);
+            onLoad(key);
+            entity = key;
             break;
 
         case "boulder":
@@ -102,8 +113,8 @@ public abstract class DungeonLoader {
             break;
 
         case "portal":
-            int id = json.getInt("id");
-            Portal portal = new Portal(dungeon, x, y, id);
+            int id3 = json.getInt("id");
+            Portal portal = new Portal(dungeon, x, y, id3);
             onLoad(portal);
             entity = portal;
             break;
@@ -116,9 +127,15 @@ public abstract class DungeonLoader {
             break;
 
         case "sword":
+            Sword sword = new Sword(x, y);
+            onLoad(sword);
+            entity = sword;
             break;
 
         case "invincibility":
+            Potion potion = new Potion(x, y);
+            onLoad(potion);
+            entity = potion;
             break;
 
         }
@@ -171,11 +188,11 @@ public abstract class DungeonLoader {
         } else if (goal.equals("treasure")) {
             GoalAND newGoal = new GoalAND();
             List<Entity> entities = dungeon.getAllEntities();
-            // for (Entity e : entities) {
-            //     if (e instanceof Treasure) {
-            //         newGoal.addSubGoal( (Goal) e);
-            //     }
-            // }
+            for (Entity e : entities) {
+                if (e instanceof Treasure) {
+                    newGoal.addSubGoal( (Goal) e);
+                }
+            }
             return newGoal;
 
         } else if (goal.equals("boulders")) {
@@ -210,7 +227,7 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(Exit exit);
 
-    //public abstract void onLoad(Treasure treasure);
+    public abstract void onLoad(Treasure treasure);
 
     public abstract void onLoad(Door door);
 

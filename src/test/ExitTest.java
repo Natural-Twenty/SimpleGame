@@ -1,5 +1,7 @@
 package test;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.Test;
 
 import unsw.dungeon.*;
@@ -12,6 +14,7 @@ public class ExitTest {
 
         Player player = new Player(dungeon, 1, 1);
         dungeon.addEntity(player);
+        dungeon.setPlayer(player);
 
         Exit exit = new Exit(1, 2);
         dungeon.addEntity(exit);
@@ -21,11 +24,11 @@ public class ExitTest {
 
         //move player onto exit
         player.moveDown();
-        assert(player.getX() == 1 && player.getY() == 2);
+        assertTrue(player.getX() == 1 && player.getY() == 2);
 
         //player shouldn't move since they triggered all goals
         player.moveDown();
-        assert(player.getX() == 1 && player.getY() == 2);
+        assertTrue(player.getX() == 1 && player.getY() == 2);
 
     }
 }

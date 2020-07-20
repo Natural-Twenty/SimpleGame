@@ -40,7 +40,7 @@ public class Exit extends Entity implements Goal, Subject {
     @Override
     public void updateObservers() {
         for (Observer o : listObservers) {
-            o.update();
+            o.update(this);
         }
     }
     

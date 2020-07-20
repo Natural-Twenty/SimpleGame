@@ -48,8 +48,22 @@ public class Dungeon implements Observer{
         this.player = player;
     }
 
-    public void addEntity(Entity entity) { //add a case for adding enemy which attaches it as an observer to player
+    public void addEntity(Entity entity) {
+        // if (entity instanceof Player) {
+        //     Player p = (Player) entity;
+        //     setPlayer(p);
+
+        // } else if (entity instanceof Hunter) { //cause errors if enemy added before player since player == null
+        //     Observer o = (Observer) entity;
+        //     player.attach(o);
+
+        // }
+
         entities.add(entity);
+    }
+
+    public void removeEntity(Entity entity) {
+        entities.remove(entity);
     }
 
     /**
@@ -64,6 +78,7 @@ public class Dungeon implements Observer{
     public void checkGoalStatus() {
         if(goal.isComplete()){
             levelComplete = true;
+            removeEntity(player);
             System.out.println("Congrats you win");
         }
     }
@@ -73,10 +88,19 @@ public class Dungeon implements Observer{
         return levelComplete;
     }
 
+    //method overloading on update
     @Override
-    public void update() {
+    public void update(Object obj) {
+        if (obj instanceof Exit) {
+            update( (Exit) obj);
+        }
+    }
+
+    public void update(Exit exit) {
         checkGoalStatus();
     }
+
+    
 
     /**
      * Return all entities at the given coordinates in the dungeon

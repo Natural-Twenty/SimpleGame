@@ -47,6 +47,56 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(wall, view);
     }
 
+    @Override
+    public void onLoad(Exit exit) {
+        //TODO for UI
+    }
+
+    // @Override
+    // public void onLoad(Treasure treasure) {
+    //     //TODO for UI
+    // }
+
+    // @Override
+    // public void onLoad(Door door) {
+    //     //TODO for UI
+    // }
+
+    // @Override
+    // public void onLoad(Key key) {
+    //     //TODO for UI
+    // }
+
+    @Override
+    public void onLoad(Boulder boulder) {
+        //TODO for UI
+    }
+
+    @Override
+    public void onLoad(FloorSwitch floorSwitch) {
+        //TODO for UI
+    }
+
+    @Override
+    public void onLoad(Portal portal) {
+        //TODO for UI
+    }
+
+    @Override
+    public void onLoad(Hunter hunter) {
+        //TODO for UI
+    }
+
+    // @Override
+    // public void onLoad(Sword sword) {
+    //     //TODO for UI
+    // }
+
+    // @Override
+    // public void onLoad(Potion potion) {
+    //     //TODO for UI
+    // }
+
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
         entities.add(view);

@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.util.List;
+
 /**
  * Loads a dungeon from a .json file.
  *
@@ -34,16 +36,18 @@ public abstract class DungeonLoader {
 
         Dungeon dungeon = new Dungeon(width, height);
 
+        //Adds entities to dungeon
         JSONArray jsonEntities = json.getJSONArray("entities");
-
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
-        //in here set a loop for linking observers to respective subjects (e.g goals to dungeon, enemies to player)
-        //possible way to add goals
-        // - loop thru dungeons entities and check if instanceof goalType (i.e Exit) and add to dungeon.addGoal();
+        
+        //Creates a goal tree and adds to dungeon
         JSONObject jsonGoals = json.getJSONObject("goal-condition");
-        loadGoal(dungeon, jsonGoals);
+        dungeon.addGoal(loadGoal(dungeon, jsonGoals));
+
+        //Initialise any enemies to track player
+        loadEnemies(dungeon.getAllEntities(), dungeon.getPlayer());
 
         return dungeon;
     }
@@ -61,41 +65,142 @@ public abstract class DungeonLoader {
             onLoad(player);
             entity = player;
             break;
+
         case "wall":
             Wall wall = new Wall(x, y);
             onLoad(wall);
             entity = wall;
             break;
-        // TODO Handle other possible entities
+
+        case "exit":
+            Exit exit = new Exit(x, y);
+            exit.attach(dungeon);
+            onLoad(exit);
+            entity = exit;
+            break;
+
+        case "treasure":
+            break;
+
+        case "door":
+            break;
+
+        case "key":
+            break;
+
+        case "boulder":
+            Boulder boulder = new Boulder(dungeon, x, y);
+            onLoad(boulder);
+            entity = boulder;
+            break;
+
+        case "switch":
+            FloorSwitch floorSwitch = new FloorSwitch(dungeon, x, y);
+            floorSwitch.attach(dungeon);
+            onLoad(floorSwitch);
+            entity = floorSwitch;
+            break;
+
+        case "portal":
+            int id = json.getInt("id");
+            Portal portal = new Portal(dungeon, x, y, id);
+            onLoad(portal);
+            entity = portal;
+            break;
+
+        case "enemy":
+            Hunter hunter = new Hunter(dungeon, x, y);
+            hunter.attach(dungeon);
+            onLoad(hunter);
+            entity = hunter;
+            break;
+
+        case "sword":
+            break;
+
+        case "invincibility":
+            break;
+
         }
         dungeon.addEntity(entity);
     }
 
-    //This is a prototype for adding goals in -> finish in milestone 3
-    private void loadGoal (Dungeon dungeon, JSONObject json) {
+    //This is a prototype for adding goals in via kind of recursion?
+    private Goal loadGoal (Dungeon dungeon, JSONObject json) {
 
         String goal = json.getString("goal");
-        JSONArray subgoals = json.getJSONArray("subgoals");
 
-        for (int i = 0; i < subgoals.length(); i++) {
-            loadGoal(dungeon, subgoals.getJSONObject(i));
-        } 
+        if (goal.equals("AND")) {
+            GoalAND newGoal = new GoalAND();
+            JSONArray subgoals = json.getJSONArray("subgoals");
+
+            for (int i = 0; i < subgoals.length(); i++) {
+                newGoal.addSubGoal(loadGoal(dungeon, subgoals.getJSONObject(i)));
+            }
+            return newGoal;
+
+        } else if (goal.equals("OR")) {
+            GoalOR newGoal = new GoalOR();
+            JSONArray subgoals = json.getJSONArray("subgoals");
+
+            for (int i = 0; i < subgoals.length(); i++) {
+                newGoal.addSubGoal(loadGoal(dungeon, subgoals.getJSONObject(i)));
+            }
+            return newGoal;
+
+        } else if (goal.equals("exit")) {
+            Goal newGoal = null;
+            List<Entity> entities = dungeon.getAllEntities();
+            for (Entity e : entities) {
+                if (e instanceof Exit) {
+                    return newGoal = (Goal) e;
+                }
+            }
+            return newGoal;
+
+        } else if (goal.equals("enemies")) {
+            GoalAND newGoal = new GoalAND();
+            List<Entity> entities = dungeon.getAllEntities();
+            for (Entity e : entities) {
+                if (e instanceof Hunter) {
+                    newGoal.addSubGoal( (Goal) e);
+                }
+            }
+            return newGoal;
+
+        } else if (goal.equals("treasure")) {
+            GoalAND newGoal = new GoalAND();
+            List<Entity> entities = dungeon.getAllEntities();
+            // for (Entity e : entities) {
+            //     if (e instanceof Treasure) {
+            //         newGoal.addSubGoal( (Goal) e);
+            //     }
+            // }
+            return newGoal;
+
+        } else if (goal.equals("boulders")) {
+            GoalAND newGoal = new GoalAND();
+            List<Entity> entities = dungeon.getAllEntities();
+            for (Entity e : entities) {
+                if (e instanceof FloorSwitch) {
+                    newGoal.addSubGoal( (Goal) e);
+                }
+            }
+            return newGoal;
+        }
+
+        return null;
+    }
 
 
-        Goal newGoal = null;
-        switch (goal) {
-        case "AND":
-
-        case "OR":
-
-        case "exit":
-            
-        case "enemies":
-
-        case "treasure":
-
-        case "boulders":
-
+    private void loadEnemies(List<Entity> entities, Player player) {
+        if (player == null) {
+            return;
+        }
+        for (Entity e : entities) {
+            if (e instanceof Hunter) {
+                player.attach( (Hunter) e);
+            }
         }
     }
 
@@ -103,6 +208,25 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(Wall wall);
 
-    // TODO Create additional abstract methods for the other entities
+    public abstract void onLoad(Exit exit);
+
+    //public abstract void onLoad(Treasure treasure);
+
+    //public abstract void onLoad(Door door);
+
+    //public abstract void onLoad(Key key);
+
+    public abstract void onLoad(Boulder boulder);
+
+    public abstract void onLoad(FloorSwitch floorSwitch);
+
+    public abstract void onLoad (Portal portal);
+
+    public abstract void onLoad(Hunter hunter);
+
+    //public abstract void onLoad(Sword sword);
+
+    //public abstract void onLoad(Potion potion);
+
 
 }

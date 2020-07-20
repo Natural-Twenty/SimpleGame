@@ -91,12 +91,12 @@ public class Dungeon implements Observer{
     //method overloading on update
     @Override
     public void update(Object obj) {
-        if (obj instanceof Exit) {
-            update( (Exit) obj);
+        if (obj instanceof Goal) {
+            update( (Goal) obj);
         }
     }
 
-    public void update(Exit exit) {
+    public void update(Goal goal) {
         checkGoalStatus();
     }
 

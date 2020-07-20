@@ -4,12 +4,12 @@ import java.util.List;
 
 public class Key extends Entity {
     private int u_id;
-    private Dungeon dungeon;
+    
 
     public Key(Dungeon dungeon, int x, int y, int u_id) {
         super(x, y);
         this.u_id = u_id;
-        this.dungeon = dungeon;
+        
     }
 
     public int getID() {
@@ -22,8 +22,7 @@ public class Key extends Entity {
             Player player = (Player) e;
             List<Entity> inventory = player.getInventory();
             if(canPickUpKey(inventory)) {
-                inventory.add(this);
-                dungeon.removeEntity(this);
+                player.equip(this);
             }
         }
     }

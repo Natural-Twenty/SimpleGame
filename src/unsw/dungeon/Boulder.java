@@ -89,19 +89,21 @@ public class Boulder extends Entity implements MoveBehaviour{
         if (entity instanceof Player) {
             // Compute direction of push
             Player player = (Player) entity;
-            int x = computeXDirection(player);
+            int x = player.computePrevXDirection(this);
             int y = computeYDirection(player);
             moveTo(x, y);
         }
     }
 
-    private int computeXDirection(Player player) {
+    private int computePrevXDirection(Player player) {
         int xDiff = getX() - player.getPrevX();
         return getX() + xDiff;
     }
 
-    private int computeYDirection(Player player) {
+    private int computePrevYDirection(Player player) {
         int yDiff = getY() - player.getPrevXY();
         return getY() + yDiff;
     }
+
+    private int
 }

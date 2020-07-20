@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,8 +8,10 @@ import java.util.List;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity implements MoveBehaviour{
+public class Player extends Entity implements MoveBehaviour, Subject{
 
+    private List<Observer> listObservers;
+    private List<Entity> inventory;
     private Dungeon dungeon;
     private int prevX;
     private int prevY;
@@ -22,6 +24,8 @@ public class Player extends Entity implements MoveBehaviour{
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y);
         this.dungeon = dungeon;
+        this.listObservers = new ArrayList<>();
+        this.inventory = new ArrayList<>();
     }
 
     public void moveUp() {
@@ -56,7 +60,7 @@ public class Player extends Entity implements MoveBehaviour{
             x().set(newX);
             y().set(newY);
             collide(newX, newY);
-            //updateObservers();
+            updateObservers();
         }
     }
 
@@ -113,6 +117,65 @@ public class Player extends Entity implements MoveBehaviour{
 
     public void setPrevY(int y) {
         prevY = y;
+    }
+    
+    public void equip(Entity e) {
+        inventory.add(e);
+    }
+
+    public void unequip(Entity e) {
+        inventory.remove(e);
+    }
+
+    public boolean isInvincible() {
+        return false;
+    }
+
+    @Override
+    public void detach(Observer o) {
+        listObservers.remove(o);
+    }
+
+    @Override
+    public void attach(Observer o) {
+        listObservers.add(o);
+    }
+
+    @Override
+    public void updateObservers() {
+        for (Observer o : listObservers) {
+            o.update(this);
+        }
+    }
+
+    /**
+     * 
+     * @param hunter
+     * @return true if player has an item that can be used to 
+     */
+    public boolean canFight(Hunter hunter) {
+
+        // for (Entity e : inventory) {
+        //     if (e instanceof Weapon) {
+        //         return true;
+        //     }
+        // }
+
+        return false;
+    }
+
+    @Override
+    public void onCollide(Entity e) {
+        if (e instanceof Hunter) {
+            Hunter h = (Hunter) e;
+
+            if(this.canFight(h)) {
+                dungeon.removeEntity(h);
+            } else {
+                dungeon.removeEntity(this);
+            }
+
+        }
     }
 
 }

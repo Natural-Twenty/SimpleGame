@@ -2,6 +2,11 @@ package unsw.dungeon;
 
 import java.util.List;
 
+/**
+ * A potion entity that makes a player impervious to attacks
+ * for 10 turns and also can destroy enemies on contact
+ * @author Frank Merriman, The Tran
+ */
 public class Potion extends Entity implements Weapon, Observer {
 
     int durability;

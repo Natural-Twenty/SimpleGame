@@ -2,7 +2,7 @@ package unsw.dungeon;
 /**
  * An interface for floor switch states
  * 
- * 
+ * @author Frank Merriman, The Tran
  */
 public interface FloorSwitchState {
     /**

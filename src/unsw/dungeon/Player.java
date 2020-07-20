@@ -124,22 +124,42 @@ public class Player extends Entity implements MoveBehaviour, Subject{
     private void setPrevY(int y) {
         prevY = y;
     }
-
+    /**
+     * Computers the relative x direction of an entity from the player's
+     * current x-coordinate.
+     * @param e An entity to compute against
+     * @return The relative x direction of the entity.
+     */
     public int computeXDirection(Entity e) {
         int xDiff = e.getX() - getX();
         return e.getX() + xDiff;
     }
-
+    /**
+     * Computers the relative y direction of an entity from the player's
+     * current y-coordinate.
+     * @param e An entity to compute against
+     * @return The relative y direction of the entity.
+     */
     public int computeYDirection(Entity e) {
         int yDiff = e.getY() - getY();
         return e.getY() + yDiff;
     }
-
+    /**
+     * Computers the relative x direction of an entity from the player's
+     * previous x-coordinate.
+     * @param e An entity to compute against
+     * @return The relative x direction of the entity.
+     */
     public int computePrevXDirection(Entity e) {
         int xDiff = e.getX() - getPrevX();
         return e.getX() + xDiff;
     }
-
+    /**
+     * Computers the relative y direction of an entity from the player's
+     * previous y-coordinate.
+     * @param e An entity to compute against
+     * @return The relative y direction of the entity.
+     */
     public int computePrevYDirection(Entity e) {
         int yDiff = e.getY() - getPrevY();
         return e.getY() + yDiff;

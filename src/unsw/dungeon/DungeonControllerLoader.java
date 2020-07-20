@@ -26,6 +26,9 @@ public class DungeonControllerLoader extends DungeonLoader {
     //Images
     private Image playerImage;
     private Image wallImage;
+    private Image exitImage;
+    private Image boulderImage;
+    private Image floorPlateImage;
 
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
@@ -33,6 +36,10 @@ public class DungeonControllerLoader extends DungeonLoader {
         entities = new ArrayList<>();
         playerImage = new Image((new File("images/human_new.png")).toURI().toString());
         wallImage = new Image((new File("images/brick_brown_0.png")).toURI().toString());
+        exitImage = new Image((new File("images/exit.png")).toURI().toString());
+        boulderImage = new Image((new File("images/boulder.png")).toURI().toString());
+        floorPlateImage = new Image((new File("images/pressure_plate.png")).toURI().toString());
+        
     }
 
     @Override
@@ -46,6 +53,59 @@ public class DungeonControllerLoader extends DungeonLoader {
         ImageView view = new ImageView(wallImage);
         addEntity(wall, view);
     }
+
+    @Override
+    public void onLoad(Exit exit) {
+        ImageView view = new ImageView(exitImage);
+        addEntity(exit, view);
+    }
+
+    // @Override
+    // public void onLoad(Treasure treasure) {
+    //     //TODO for UI
+    // }
+
+    // @Override
+    // public void onLoad(Door door) {
+    //     //TODO for UI
+    // }
+
+    // @Override
+    // public void onLoad(Key key) {
+    //     //TODO for UI
+    // }
+
+    @Override
+    public void onLoad(Boulder boulder) {
+        ImageView view = new ImageView(boulderImage);
+        addEntity(boulder, view);
+    }
+
+    @Override
+    public void onLoad(FloorSwitch floorSwitch) {
+        ImageView view = new ImageView(floorPlateImage);
+        addEntity(floorSwitch, view);
+    }
+
+    @Override
+    public void onLoad(Portal portal) {
+        //TODO for UI
+    }
+
+    @Override
+    public void onLoad(Hunter hunter) {
+        //TODO for UI
+    }
+
+    // @Override
+    // public void onLoad(Sword sword) {
+    //     //TODO for UI
+    // }
+
+    // @Override
+    // public void onLoad(Potion potion) {
+    //     //TODO for UI
+    // }
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);

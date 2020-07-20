@@ -49,16 +49,6 @@ public class Dungeon implements Observer{
     }
 
     public void addEntity(Entity entity) {
-        // if (entity instanceof Player) {
-        //     Player p = (Player) entity;
-        //     setPlayer(p);
-
-        // } else if (entity instanceof Hunter) { //cause errors if enemy added before player since player == null
-        //     Observer o = (Observer) entity;
-        //     player.attach(o);
-
-        // }
-
         entities.add(entity);
     }
 
@@ -93,12 +83,22 @@ public class Dungeon implements Observer{
     public void update(Object obj) {
         if (obj instanceof Goal) {
             update( (Goal) obj);
-        }
+        } //else if (obj instanceof Player) {
+        //    update( (Player) obj);
+        //}
     }
 
     public void update(Goal goal) {
         checkGoalStatus();
     }
+
+    // public void update(Player player) {
+    //     for (Entity e : entities) {
+    //         if (e.getRemoveStatus) {
+    //             entities.remove(e);
+    //         }
+    //     }
+    // }
 
     
 

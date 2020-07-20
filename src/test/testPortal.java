@@ -15,6 +15,9 @@ public class testPortal {
         Portal portal2 = new Portal(dungeon, 4, 4, 1);
 
         dungeon.addEntity(player);
+        dungeon.setPlayer(player);
+
+        dungeon.addEntity(player);
         dungeon.addEntity(portal1);
         dungeon.addEntity(portal2);
         // Move player into portal1
@@ -31,6 +34,8 @@ public class testPortal {
         Hunter hunter = new Hunter(dungeon, 5, 1);
 
         dungeon.addEntity(player);
+        dungeon.setPlayer(player);
+
         dungeon.addEntity(portal1);
         dungeon.addEntity(portal2);
         dungeon.addEntity(hunter);
@@ -53,6 +58,7 @@ public class testPortal {
         Boulder boulder = new Boulder(dungeon, 4, 4);
 
         dungeon.addEntity(player);
+        dungeon.setPlayer(player);
         dungeon.addEntity(portal1);
         dungeon.addEntity(portal2);
         dungeon.addEntity(boulder);
@@ -72,6 +78,7 @@ public class testPortal {
         Boulder boulder = new Boulder(dungeon, 2, 1);
 
         dungeon.addEntity(player);
+        dungeon.setPlayer(player);
         dungeon.addEntity(portal1);
         dungeon.addEntity(portal2);
         dungeon.addEntity(hunter);
@@ -94,6 +101,7 @@ public class testPortal {
         Portal portal6 = new Portal(dungeon, 4, 3, 3);
 
         dungeon.addEntity(player);
+        dungeon.setPlayer(player);
         dungeon.addEntity(portal1);
         dungeon.addEntity(portal2);
         dungeon.addEntity(portal3);

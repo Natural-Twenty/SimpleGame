@@ -119,10 +119,6 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         prevY = y;
     }
 
-    public void equip(Entity e) {
-        inventory.add(e);
-    }
-
     public int computeXDirection(Entity e) {
         int xDiff = e.getX() - getX();
         return e.getX() + xDiff;
@@ -143,12 +139,46 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         return e.getY() + yDiff;
     }
 
+    public void equip(Entity e) {
+        inventory.add(e);
+        //if e is a potion its also an observer to player movement
+        if (e instanceof Potion) {
+            attach( (Potion) e);
+        }
+        dungeon.removeEntity(e);
+    }
 
+    /**
+     * Remove a given entity from players inventory
+     * @param e entity to be removed
+     */
     public void unequip(Entity e) {
         inventory.remove(e);
     }
 
+    /**
+     * Method that checks players inventory for a sword
+     * @return true if player has a sword inventory
+     */
+    public boolean hasSword() {
+        for (Entity e : inventory) {
+            if (e instanceof Sword) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Method that checks players inventory for a potion
+     * @return true if player has a potion inventory
+     */
     public boolean isInvincible() {
+        for (Entity e : inventory) {
+            if (e instanceof Potion) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -171,18 +201,18 @@ public class Player extends Entity implements MoveBehaviour, Subject{
 
     /**
      * 
-     * @param hunter
-     * @return true if player has an item that can be used to 
+     * @param hunter enemy the player is fighting
+     * @return true if player has an item that can be used to fight
      */
     public boolean canFight(Hunter hunter) {
 
-        // for (Entity e : inventory) {
-        //     if (e instanceof Weapon) {
-        //         return true;
-        //     }
-        // }
+        for (Entity e : inventory) {
+            if (e instanceof Weapon) { 
+                return true;
+            }
+        }
 
-        return false; //swap between t/f to simulate a sword
+        return false;
     }
 
     @Override

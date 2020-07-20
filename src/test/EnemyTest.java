@@ -111,29 +111,61 @@ public class EnemyTest {
         List<Entity> entities = dungeon.getEntities(2, 1);
         assertFalse(entities.contains(hunter)); //enemy is killed and removed from dungeon list
 
+        assertTrue(dungeon.getCompletion());
         player.moveLeft();
         assertFalse(player.getX() == 1 && player.getY() == 1); //goal is complete player shouldnt be able to move
     }
 
     @Test
     public void testMultipleEnemyGoal() {
-        Dungeon dungeon = new Dungeon(5, 5);
+        Dungeon dungeon = new Dungeon(4, 4);
 
         Player player = new Player(dungeon, 0, 0);
         dungeon.addEntity(player);
         dungeon.setPlayer(player);
 
-        Hunter hunter = new Hunter(dungeon, 4, 0);
-        Hunter hunter2 = new Hunter(dungeon, 0, 4);
+        Hunter hunter = new Hunter(dungeon, 3, 0);
+        Hunter hunter2 = new Hunter(dungeon, 0, 3);
+
+        Sword sword = new Sword(1, 0);
+        dungeon.addEntity(sword);
 
         dungeon.addEntity(hunter);
         dungeon.addEntity(hunter2);
 
-        GoalAND destroyAllEnemies = new GoalAND();
+        player.attach(hunter);
+        player.attach(hunter2);
 
+        hunter.attach(dungeon);
+        hunter2.attach(dungeon);
+
+        GoalAND destroyAllEnemies = new GoalAND();
         destroyAllEnemies.addSubGoal(hunter);
         destroyAllEnemies.addSubGoal(hunter2);
 
         dungeon.addGoal(destroyAllEnemies);
+
+        player.moveRight();
+        assertTrue(player.getX() == 1 && player.getY() == 0);
+        assertTrue(hunter.getX() == 2 && hunter.getY() == 0);
+        assertTrue(hunter2.getX() == 1 && hunter2.getY() == 3);
+
+        player.moveRight(); //kills hunter
+        assertTrue(player.getX() == 2 && player.getY() == 0);
+        List<Entity> entities = dungeon.getAllEntities();
+        assertFalse(entities.contains(hunter));
+        assertTrue(hunter2.getX() == 2 && hunter2.getY() == 3);
+
+        player.moveDown();
+        assertTrue(player.getX() == 2 && player.getY() == 1);
+        assertTrue(hunter2.getX() == 2 && hunter2.getY() == 2);
+
+        player.moveDown();
+        assertTrue(player.getX() == 2 && player.getY() == 2);
+        List<Entity> entities2 = dungeon.getAllEntities();
+        assertFalse(entities2.contains(hunter2));
+
+        assertTrue(dungeon.getCompletion());
+
     }
 }

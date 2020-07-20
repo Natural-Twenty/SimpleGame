@@ -1,5 +1,8 @@
 package test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.Test;
 
 import unsw.dungeon.*;
@@ -12,6 +15,8 @@ public class testBoulderAndSwitches {
         Dungeon dungeon = new Dungeon(5, 5);
         Boulder boulder = new Boulder(dungeon, 2, 2);
         Player player = new Player(dungeon, 2, 1);
+        dungeon.addEntity(player);
+        dungeon.setPlayer(player);
         dungeon.addEntity(boulder);
         // push boulder down
         player.moveTo(2, 2);
@@ -42,9 +47,11 @@ public class testBoulderAndSwitches {
         Boulder boulderMove = new Boulder(dungeon, 2, 2);
         Boulder boulderWall = new Boulder(dungeon, 3, 2);
         Player player = new Player(dungeon, 1, 2);
+        dungeon.addEntity(player);
+        dungeon.setPlayer(player);
         dungeon.addEntity(boulderMove);
         dungeon.addEntity(boulderWall);
-        dungeon.addEntity(player);
+        //dungeon.addEntity(player);
         // Spawn a wall to the top of the first boulder.
         Wall wall = new Wall(2, 1);
         dungeon.addEntity(wall);
@@ -64,6 +71,8 @@ public class testBoulderAndSwitches {
     public void testFloorSwitch() {
         Dungeon dungeon = new Dungeon(5, 5);
         Player player = new Player(dungeon, 1, 2);
+        dungeon.addEntity(player);
+        dungeon.setPlayer(player);
 
         Boulder boulder = new Boulder(dungeon, 2, 2);
         dungeon.addEntity(boulder);
@@ -81,5 +90,58 @@ public class testBoulderAndSwitches {
         player.moveTo(3, 2);
         assert(floorSwitch.isTriggered());
         
+    }
+
+    @Test
+    public void testBoulderGoal() {
+        //Create all entities
+        Dungeon dungeon = new Dungeon(5, 5);
+        Player player = new Player(dungeon, 0, 0);
+
+        Boulder boulder1 = new Boulder(dungeon, 0, 1);
+        FloorSwitch floorSwitch1 = new FloorSwitch(dungeon, 0, 2);
+
+        Boulder boulder2 = new Boulder(dungeon, 1, 0);
+        FloorSwitch floorSwitch2 = new FloorSwitch(dungeon, 2, 0);
+
+        //Add all entities to the dungeon
+        dungeon.addEntity(player);
+        dungeon.setPlayer(player);
+        
+        dungeon.addEntity(boulder1);
+        dungeon.addEntity(floorSwitch1);
+        dungeon.addEntity(boulder2);
+        dungeon.addEntity(floorSwitch2);
+
+        //Attach observers to our leaf goals
+        floorSwitch1.attach(dungeon);
+        floorSwitch2.attach(dungeon);
+
+        //Combine our leaf goals under a AND goal
+        GoalAND moveAllBoulders = new GoalAND();
+        moveAllBoulders.addSubGoal(floorSwitch1);
+        moveAllBoulders.addSubGoal(floorSwitch2);
+
+        //Set dungeon goal to this goal
+        dungeon.addGoal(moveAllBoulders);
+
+        //move boulder onto switch2
+        assertFalse(floorSwitch2.isTriggered());
+        player.moveRight(); //should push boulder 2 onto plate 2
+        assertTrue(floorSwitch2.isTriggered());
+
+        player.moveLeft();
+
+        //move boulder onto switch1
+        assertFalse(floorSwitch1.isTriggered());
+        player.moveDown(); //should push boulder 1 onto plate 1 completing all goals freezing player
+        assertTrue(floorSwitch1.isTriggered());
+
+        assertTrue(dungeon.getCompletion());
+
+        player.moveUp(); //player shouldn't move back to 0,0
+        assertFalse(player.getX() == 0 && player.getY() == 0);
+
+
     }
 }

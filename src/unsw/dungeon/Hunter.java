@@ -19,45 +19,47 @@ public class Hunter extends Entity implements MoveBehaviour, Observer{
         }
     }
 
+    //Make sure that code that auto attaches enemy observers to Player does so after all entities added from json (maybe when adding goals?)
     public void update(Player player) {
         int targetX = player.getX();
         int targetY = player.getY();
-        findClosestPath(targetX, targetY);
+        boolean fearPlayer = player.isInvincible();
+        findClosestPath(targetX, targetY, fearPlayer);
     }
 
     /**
      * Given a target coordinate it will attempt to move in a straight line towards it
      * It will always move along the axis that has the smallest difference between target and current
      * If both are the same it prefers moving horizontally (even if both diff are 0)
+     * The enemy has reverse behaviour when the player is under potion influence
      * @param targetX int giving location on x axis
      * @param targetY int giving location on y axis
      */
-    public void findClosestPath(int targetX, int targetY) {
+    public void findClosestPath(int targetX, int targetY, boolean fearPlayer) {
         int currX = getX();
         int currY = getY();
 
         int xDiff = Math.abs(targetX - currX);
         int yDiff = Math.abs(targetY - currY);
 
-        //there could be issues around xdiff or ydiff being zero causing enemy to move up/right
-        //solution to implement, if yDiff = 0 we want to try and move on x axis vice versa
-
-        if (yDiff == 0) {
-            moveHorizontal(currX, currY, targetX, targetY);
-            
-        } else if (xDiff == 0) {
-            moveVertical(currX, currY, targetX, targetY);
-
-        } else if (xDiff <= yDiff) {
-            moveHorizontal(currX, currY, targetX, targetY);
-
+        // Moves away if fearPlayer is true
+        if (fearPlayer == false) {
+            if (yDiff == 0 || xDiff <= yDiff) {
+                moveHorizontal(currX, currY, targetX, targetY);
+            } else {
+                moveVertical(currX, currY, targetX, targetY);
+            }
         } else {
-            moveVertical(currX, currY, targetX, targetY);
+            if (xDiff > 0 && xDiff <= yDiff) {
+                moveHorizontal(targetX, targetY, currX, currY);
+            } else {
+                moveVertical(targetX, targetY, currX, currY);
 
+            }
         }
 
     }
-
+    //dont check yet if target is within dngeon constraints
     public void moveHorizontal(int currX, int currY, int targetX, int targetY) {
         if (targetX < currX) {
             moveTo(currX - 1, currY);
@@ -100,6 +102,20 @@ public class Hunter extends Entity implements MoveBehaviour, Observer{
         }
         
         return true;
+    }
+
+    @Override
+    public void onCollide(Entity e) {
+        if (e instanceof Player) {
+            Player p = (Player) e;
+
+            if(p.canFight(this)) {
+                dungeon.removeEntity(this);
+            } else {
+                dungeon.removeEntity(p);
+            }
+
+        }
     }
 
 }

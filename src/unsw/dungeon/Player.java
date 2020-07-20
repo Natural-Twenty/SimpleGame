@@ -11,6 +11,7 @@ import java.util.List;
 public class Player extends Entity implements MoveBehaviour, Subject{
 
     private List<Observer> listObservers;
+    private List<Entity> inventory;
     private Dungeon dungeon;
 
     /**
@@ -21,7 +22,8 @@ public class Player extends Entity implements MoveBehaviour, Subject{
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y);
         this.dungeon = dungeon;
-        listObservers = new ArrayList<>();
+        this.listObservers = new ArrayList<>();
+        this.inventory = new ArrayList<>();
     }
 
     public void moveUp() {
@@ -88,6 +90,18 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         
     }
 
+    public void equip(Entity e) {
+        inventory.add(e);
+    }
+
+    public void unequip(Entity e) {
+        inventory.remove(e);
+    }
+
+    public boolean isInvincible() {
+        return false;
+    }
+
     @Override
     public void detach(Observer o) {
         listObservers.remove(o);
@@ -102,6 +116,36 @@ public class Player extends Entity implements MoveBehaviour, Subject{
     public void updateObservers() {
         for (Observer o : listObservers) {
             o.update(this);
+        }
+    }
+
+    /**
+     * 
+     * @param hunter
+     * @return true if player has an item that can be used to 
+     */
+    public boolean canFight(Hunter hunter) {
+
+        // for (Entity e : inventory) {
+        //     if (e instanceof Weapon) {
+        //         return true;
+        //     }
+        // }
+
+        return false;
+    }
+
+    @Override
+    public void onCollide(Entity e) {
+        if (e instanceof Hunter) {
+            Hunter h = (Hunter) e;
+
+            if(this.canFight(h)) {
+                dungeon.removeEntity(h);
+            } else {
+                dungeon.removeEntity(this);
+            }
+
         }
     }
 

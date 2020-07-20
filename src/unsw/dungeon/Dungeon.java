@@ -52,6 +52,10 @@ public class Dungeon implements Observer{
         entities.add(entity);
     }
 
+    public void removeEntity(Entity entity) {
+        entities.remove(entity);
+    }
+
     /**
      * Add a sub goal to dungeons GoalAND, This might need to be made into GoalOR
      * @param newGoal is a subGoal we wish to add to the dungeon. Only one subgoal being added is the json equivelant
@@ -64,6 +68,7 @@ public class Dungeon implements Observer{
     public void checkGoalStatus() {
         if(goal.isComplete()){
             levelComplete = true;
+            removeEntity(player);
             System.out.println("Congrats you win");
         }
     }

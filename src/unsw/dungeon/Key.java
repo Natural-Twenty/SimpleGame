@@ -22,8 +22,7 @@ public class Key extends Entity {
             Player player = (Player) e;
             List<Entity> inventory = player.getInventory();
             if(canPickUpKey(inventory)) {
-                inventory.add(this);
-                dungeon.removeEntity(this);
+                player.equip(this);
             }
         }
     }

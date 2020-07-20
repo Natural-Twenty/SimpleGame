@@ -1,15 +1,46 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.lang.Math;
 
-public class Hunter extends Entity implements MoveBehaviour, Observer{
+public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Subject{
 
     private Dungeon dungeon;
+    private boolean defeated;
+    private List<Observer> listObservers;
 
     public Hunter(Dungeon dungeon, int x, int y) {
         super(x, y);
         this.dungeon = dungeon;
+        this.defeated = false;
+        listObservers = new ArrayList<>();
+    }
+
+    /**
+     * Each hunter will be stored within a GoalAND list of goal
+     * When they are killed by player they are marked as complete
+     */
+    @Override
+    public boolean isComplete() {
+        return defeated;
+    }
+
+    @Override
+    public void detach(Observer o) {
+        listObservers.remove(o);
+    }
+
+    @Override
+    public void attach(Observer o) {
+        listObservers.add(o);
+    }
+
+    @Override
+    public void updateObservers() {
+        for (Observer o : listObservers) {
+            o.update(this);
+        }
     }
 
     @Override
@@ -103,6 +134,11 @@ public class Hunter extends Entity implements MoveBehaviour, Observer{
         return true;
     }
 
+    public void defeat() {
+        defeated = true;
+        updateObservers();
+    }
+
     @Override
     public void onCollide(Entity e) {
         if (e instanceof Player) {
@@ -110,6 +146,7 @@ public class Hunter extends Entity implements MoveBehaviour, Observer{
 
             if(p.canFight(this)) {
                 dungeon.removeEntity(this);
+                defeat();
             } else {
                 dungeon.removeEntity(p);
             }

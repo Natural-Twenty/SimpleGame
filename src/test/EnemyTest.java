@@ -71,4 +71,47 @@ public class EnemyTest {
         List<Entity> entities = dungeon.getEntities(1, 2);
         assertFalse(entities.contains(player));
     }
+
+    //Until sword is implemented manually switch value of player.canFight() before runnnig tests
+
+    @Test
+    public void testEnemyGoal() {
+        Dungeon dungeon = new Dungeon(5, 5);
+
+        Player player = new Player(dungeon, 0, 0);
+        dungeon.addEntity(player);
+        dungeon.setPlayer(player);
+
+        Hunter hunter = new Hunter(dungeon, 4, 0);
+
+        dungeon.addEntity(hunter);
+        player.attach(hunter);
+        hunter.attach(dungeon);
+
+        dungeon.addGoal(hunter);
+
+
+        assertTrue(player.getX() == 0 && player.getY() == 0);
+        assertTrue(hunter.getX() == 4 && hunter.getY() == 0); //enemy should not move if player has done nothing
+
+        player.moveDown();
+        
+        assertTrue(player.getX() == 0 && player.getY() == 1);
+        assertTrue(hunter.getX() == 4 && hunter.getY() == 1); //enemy should move down to get closer to player
+
+        player.moveRight();
+        assertTrue(player.getX() == 1 && player.getY() == 1);
+        assertTrue(hunter.getX() == 3 && hunter.getY() == 1); //enemy should move left to get closer to player
+
+        
+        player.moveRight();
+        assertTrue(player.getX() == 2 && player.getY() == 1);
+        assertTrue(hunter.getX() == 2 && hunter.getY() == 1); //enemy should move into 2, 1 after player triggering players onCollide
+
+        List<Entity> entities = dungeon.getEntities(2, 1);
+        assertFalse(entities.contains(hunter)); //enemy is killed and removed from dungeon list
+
+        player.moveLeft();
+        assertFalse(player.getX() == 1 && player.getY() == 1); //goal is complete player shouldnt be able to move
+    }
 }

@@ -127,7 +127,8 @@ public class EnemyTest {
         Hunter hunter = new Hunter(dungeon, 3, 0);
         Hunter hunter2 = new Hunter(dungeon, 0, 3);
 
-        //put a sword at (1, 0)
+        Sword sword = new Sword(1, 0);
+        dungeon.addEntity(sword);
 
         dungeon.addEntity(hunter);
         dungeon.addEntity(hunter2);

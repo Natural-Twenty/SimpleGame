@@ -27,7 +27,7 @@ public class testDoorAndKey {
         Dungeon dungeon = new Dungeon(5, 5);
         Door door = new Door(3, 1, 1);
         Player player = new Player(dungeon, 1, 1);
-        Key key = new Key(dungeon, 2, 1, 1);
+        Key key = new Key(2, 1, 1);
 
         dungeon.addEntity(door);
         dungeon.addEntity(player);
@@ -48,7 +48,7 @@ public class testDoorAndKey {
         Dungeon dungeon = new Dungeon(5, 5);
         Door door = new Door(3, 1, 1);
         Player player = new Player(dungeon, 1, 1);
-        Key key = new Key(dungeon, 2, 1, 2);
+        Key key = new Key(2, 1, 2);
 
         dungeon.addEntity(door);
         dungeon.addEntity(player);
@@ -71,8 +71,8 @@ public class testDoorAndKey {
         Door door1 = new Door(3, 1, 1);
         Door door2 = new Door(3, 2, 2);
         Player player = new Player(dungeon, 1, 1);
-        Key key1 = new Key(dungeon, 2, 1, 1);
-        Key key2 = new Key(dungeon, 2, 2, 2);
+        Key key1 = new Key(2, 1, 1);
+        Key key2 = new Key(2, 2, 2);
 
         dungeon.addEntity(door1);
         dungeon.addEntity(door2);
@@ -114,7 +114,7 @@ public class testDoorAndKey {
         Dungeon dungeon = new Dungeon(5, 5);
         Door door = new Door(3, 1, 1);
         Player player = new Player(dungeon, 1, 1);
-        Key key = new Key(dungeon, 2, 1, 1);
+        Key key = new Key(2, 1, 1);
         Hunter hunter = new Hunter(dungeon, 4, 1);
         Wall wall1 = new Wall(4, 0);
         Wall wall2 = new Wall(5, 1);

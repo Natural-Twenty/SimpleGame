@@ -54,7 +54,6 @@ public class Hunter extends Entity implements MoveBehaviour, Observer{
                 moveHorizontal(targetX, targetY, currX, currY);
             } else {
                 moveVertical(targetX, targetY, currX, currY);
-
             }
         }
 

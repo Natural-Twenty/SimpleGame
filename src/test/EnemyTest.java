@@ -35,18 +35,40 @@ public class EnemyTest {
         assertTrue(player.getX() == 1 && player.getY() == 1);
         assertTrue(hunter.getX() == 3 && hunter.getY() == 1); //enemy should move left to get closer to player
 
-        //test not complete need to check edge cases of interacting
+        
         player.moveRight();
         assertTrue(player.getX() == 2 && player.getY() == 1);
         assertTrue(hunter.getX() == 2 && hunter.getY() == 1); //enemy should move into 2, 1 after player triggering players onCollide
 
         List<Entity> entities = dungeon.getEntities(2, 1);
-
         assertFalse(entities.contains(player));
     }
 
     @Test
     public void testPlayerReachesEnemy() {
+        Dungeon dungeon = new Dungeon(4, 4);
 
+        Player player = new Player(dungeon, 3, 3);
+        dungeon.addEntity(player);
+        dungeon.setPlayer(player);
+
+        Hunter hunter = new Hunter(dungeon, 0, 3);
+        dungeon.addEntity(hunter);
+        player.attach(hunter);
+
+        player.moveUp();
+        assertTrue(player.getX() == 3 && player.getY() == 2);
+        assertTrue(hunter.getX() == 0 && hunter.getY() == 2);
+
+        player.moveLeft();
+        assertTrue(player.getX() == 2 && player.getY() == 2);
+        assertTrue(hunter.getX() == 1 && hunter.getY() == 2);
+
+        player.moveLeft(); //player should trigger enemy.onCollide before enemy moves killing player
+        assertTrue(player.getX() == 1 && player.getY() == 2);
+        //assertTrue(hunter.getX() == 1 && hunter.getY() == 2);
+
+        List<Entity> entities = dungeon.getEntities(1, 2);
+        assertFalse(entities.contains(player));
     }
 }

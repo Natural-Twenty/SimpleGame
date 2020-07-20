@@ -74,47 +74,50 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
         int yDiff = Math.abs(targetY - currY);
 
         // Moves away if fearPlayer is true
+        if (xDiff == 0 && yDiff == 0) {
+            //do nothing
+        } else if (yDiff == 0) {
+            moveHorizontal(currX, currY, targetX, targetY, fearPlayer);
+        } else if (xDiff == 0) {
+            moveVertical(currX, currY, targetX, targetY, fearPlayer);
+        } else if (xDiff <= yDiff) {
+            moveHorizontal(currX, currY, targetX, targetY, fearPlayer);
+        } else if (yDiff < xDiff) {
+            moveVertical(currX, currY, targetX, targetY, fearPlayer);
+        }
+        
+
+    }
+    
+    public void moveHorizontal(int currX, int currY, int targetX, int targetY, boolean fearPlayer) {
         if (fearPlayer == false) {
-            if (xDiff == 0 && yDiff == 0) {
-                //do nothing
-            } else if (yDiff == 0) {
-                moveHorizontal(currX, currY, targetX, targetY);
-            } else if (xDiff == 0) {
-                moveVertical(currX, currY, targetX, targetY);
-            } else if (xDiff <= yDiff) {
-                moveHorizontal(currX, currY, targetX, targetY);
-            } else if (yDiff < xDiff) {
-                moveVertical(currX, currY, targetX, targetY);
+            if (targetX < currX) {
+                moveTo(currX - 1, currY);
+            } else {
+                moveTo(currX + 1, currY);
             }
         } else {
-            if (xDiff == 0 && yDiff == 0) {
-                //do nothing
-            } else if (yDiff == 0) {
-                moveHorizontal(targetX, targetY, currX, currY);
-            } else if (xDiff == 0) {
-                moveVertical(targetX, targetY, currX, currY);
-            } else if (xDiff <= yDiff) {
-                moveHorizontal(targetX, targetY, currX, currY);
-            } else if (yDiff < xDiff) {
-                moveVertical(targetX, targetY, currX, currY);
+            if (targetX < currX) {
+                moveTo(currX + 1, currY);
+            } else {
+                moveTo(currX - 1, currY);
             }
-        }
-
-    }
-    //dont check yet if target is within dngeon constraints
-    public void moveHorizontal(int currX, int currY, int targetX, int targetY) {
-        if (targetX < currX) {
-            moveTo(currX - 1, currY);
-        } else {
-            moveTo(currX + 1, currY);
         }
     }
 
-    public void moveVertical(int currX, int currY, int targetX, int targetY) {
-        if (targetY < currY) {
-            moveTo(currX, currY - 1);
+    public void moveVertical(int currX, int currY, int targetX, int targetY, boolean fearPlayer) {
+        if (fearPlayer == false) {
+            if (targetY < currY) {
+                moveTo(currX, currY - 1);
+            } else {
+                moveTo(currX, currY + 1);
+            }
         } else {
-            moveTo(currX, currY + 1);
+            if (targetY < currY) {
+                moveTo(currX, currY + 1);
+            } else {
+                moveTo(currX, currY - 1);
+            }
         }
     }
 

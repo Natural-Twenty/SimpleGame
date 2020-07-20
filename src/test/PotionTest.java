@@ -39,52 +39,47 @@ public class PotionTest {
 
     @Test
     public void testEnemyResponse() {
-        Dungeon dungeon = new Dungeon(15, 15);
+        Dungeon dungeon = new Dungeon(10, 7);
 
-        Player player = new Player(dungeon, 7, 7);
-        dungeon.addEntity(player);
+        Player player = new Player(dungeon, 6, 3);
+        Hunter hunterBelow = new Hunter(dungeon, 6, 5);
+        Hunter hunterAbove = new Hunter(dungeon, 6, 2);
+        Hunter hunterLeft = new Hunter(dungeon, 5, 3);
+        Hunter hunterRight = new Hunter(dungeon, 7, 3);
+        Potion potion = new Potion(6, 4);
+
         dungeon.setPlayer(player);
 
-        Potion potion = new Potion(7, 8);
+        dungeon.addEntity(player);
         dungeon.addEntity(potion);
-
-        Hunter hunterBelow = new Hunter(dungeon, 7, 9);
-        Hunter hunterAbove = new Hunter(dungeon, 7, 6);
-        Hunter hunterLeft = new Hunter(dungeon, 6, 7);
-        Hunter hunterRight = new Hunter(dungeon, 8, 7);
-
-        dungeon.addEntity(hunterLeft);
-        player.attach(hunterLeft);
-
-        dungeon.addEntity(hunterRight);
-        player.attach(hunterRight);
-
         dungeon.addEntity(hunterBelow);
-        player.attach(hunterBelow);
-
         dungeon.addEntity(hunterAbove);
+        dungeon.addEntity(hunterLeft);
+        dungeon.addEntity(hunterRight);
+        
+        player.attach(hunterBelow);
         player.attach(hunterAbove);
+        player.attach(hunterLeft);
+        player.attach(hunterRight);
+        
 
         assertFalse(player.isInvincible());
         player.moveDown(); // Counts as first "move"
         assertTrue(player.isInvincible());
 
-        assertTrue(hunterBelow.getX() == 7 && hunterBelow.getY() == 10); //should move in reverse to normal behaviour
-        assertTrue(hunterAbove.getX() == 7 && hunterAbove.getY() == 5);
-        assertTrue(hunterLeft.getX() == 5 && hunterLeft.getY() == 7);
-        assertTrue(hunterRight.getX() == 9 && hunterRight.getY() == 7);
+        //Player moves and becomes invincible before updating all its Observers at end of turn
+        //So enemies should be doing reverse behaviour to normal
+        assertTrue(hunterBelow.getX() == 6 && hunterBelow.getY() == 6); //should move in reverse to normal behaviour
+        assertTrue(hunterAbove.getX() == 6 && hunterAbove.getY() == 1);
+        assertTrue(hunterLeft.getX() == 4 && hunterLeft.getY() == 3);
+        assertTrue(hunterRight.getX() == 8 && hunterRight.getY() == 3);
         
-        player.moveDown(); // 2
-        player.moveDown(); // 3
-        player.moveDown(); // 4
-        player.moveDown(); // 5
-        player.moveDown(); // 5
-        player.moveDown(); // 6
-        player.moveDown(); // 7
-        player.moveDown(); // 8
-        player.moveDown(); // 9
-        assertTrue(player.isInvincible());
-        player.moveDown(); // During 10th turn player is invincible but when update runs at end it is removed
-        assertFalse(player.isInvincible());
+        player.moveUp(); // 2
+
+        assertTrue(hunterBelow.getX() == 6 && hunterBelow.getY() == 6); //should move in reverse to normal behaviour
+        assertTrue(hunterAbove.getX() == 6 && hunterAbove.getY() == 0);
+        assertTrue(hunterLeft.getX() == 3 && hunterLeft.getY() == 3);
+        assertTrue(hunterRight.getX() == 9 && hunterRight.getY() == 3);
+        
     }
 }

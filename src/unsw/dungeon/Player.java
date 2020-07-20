@@ -214,6 +214,9 @@ public class Player extends Entity implements MoveBehaviour, Subject{
                 if (e instanceof Sword) {
                     Sword playerSword = (Sword) e;
                     playerSword.useWeapon();
+                    if (playerSword.isBroken()) {
+                        unequip(playerSword);
+                    }
                     return true;
                 }
             }

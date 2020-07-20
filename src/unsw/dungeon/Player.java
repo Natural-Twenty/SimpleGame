@@ -205,8 +205,10 @@ public class Player extends Entity implements MoveBehaviour, Subject{
             } else {
                 dungeon.removeEntity(this);
             }
-
         }
     }
 
+    public List<Entity> getInventory() {
+        return inventory;
+    }
 }

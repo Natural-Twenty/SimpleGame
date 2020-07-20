@@ -182,16 +182,16 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         //     }
         // }
 
-        return false;
+        return false; //swap between t/f to simulate a sword
     }
 
     @Override
     public void onCollide(Entity e) {
         if (e instanceof Hunter) {
             Hunter h = (Hunter) e;
-
             if(this.canFight(h)) {
                 dungeon.removeEntity(h);
+                h.defeat();
             } else {
                 dungeon.removeEntity(this);
             }

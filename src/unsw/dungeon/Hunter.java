@@ -134,15 +134,19 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
         return true;
     }
 
+    public void defeat() {
+        defeated = true;
+        updateObservers();
+    }
+
     @Override
     public void onCollide(Entity e) {
         if (e instanceof Player) {
             Player p = (Player) e;
 
             if(p.canFight(this)) {
-                defeated = true;
                 dungeon.removeEntity(this);
-                updateObservers();
+                defeat();
             } else {
                 dungeon.removeEntity(p);
             }

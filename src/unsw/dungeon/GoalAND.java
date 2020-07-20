@@ -3,10 +3,18 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Creates a goal that is only complete when all of
+ * its children are also marked as complete
+ * @author Frank Merriman, The Tran
+ */
 public class GoalAND implements Goal{
 
     List<Goal> subGoals;
 
+    /**
+     * Create a new composite goal
+     */
     public GoalAND() {
         subGoals = new ArrayList<>();
     }

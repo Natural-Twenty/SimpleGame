@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * The player entity
- * @author Robert Clifton-Everest
+ * @author Robert Clifton-Everest, Frank Merriman, The Tran
  *
  */
 public class Player extends Entity implements MoveBehaviour, Subject{
@@ -65,11 +65,11 @@ public class Player extends Entity implements MoveBehaviour, Subject{
     }
 
     /**
-     * This method takes in an x and y coordinate and then checks the dungeon if there is a wall that matches
-     * those coordinates (will need to update to include doors)
+     * This method takes in an x and y coordinate and then checks the dungeon to see if the player can move
+     * into said coordinates
      * @param x cooridnate of tile we are checking
      * @param y cooridnate of tile we are checking
-     * @return true if eligible tile for player movement
+     * @return true if eligible location for player movement
      */
     public boolean canMove(int x, int y) {
 
@@ -94,6 +94,12 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         
     }
 
+    /**
+     * Runs the oncollide methods for any entity in the given coordinates
+     * passing Player as the object
+     * @param x axis location
+     * @param y axis location
+     */
     private void collide(int x, int y) {
         List<Entity> entities = dungeon.getEntities(x, y);
         for (Entity e : entities) {
@@ -139,6 +145,11 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         return e.getY() + yDiff;
     }
 
+    /**
+     * Add a given entity to players inventory. Set
+     * up entity to observe player if it is of type Potion
+     * @param e entity being added
+     */
     public void equip(Entity e) {
         inventory.add(e);
         //if e is a potion its also an observer to player movement
@@ -200,7 +211,8 @@ public class Player extends Entity implements MoveBehaviour, Subject{
     }
 
     /**
-     * 
+     * Checks if a player is equipped to fight and reduces durability on sword
+     * if it is only option
      * @param hunter enemy the player is fighting
      * @return true if player has an item that can be used to fight
      */

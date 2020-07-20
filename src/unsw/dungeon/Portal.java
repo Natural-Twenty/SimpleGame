@@ -37,6 +37,11 @@ public class Portal extends Entity {
         }
     }
 
+    /**
+     * Looks through dungeon for a different portal with
+     * the same id
+     * @return portal if it exits otherwise null
+     */
     private Portal findPair() {
         List<Entity> entities = dungeon.getAllEntities();
         for (Entity ent : entities) {
@@ -52,6 +57,10 @@ public class Portal extends Entity {
         return null;
     }
 
+    /**
+     * For a given portal checks if this is its matching portal
+     * @return this if is the pair otherwise null
+     */
     private Portal getPortalPair(Entity e) {
         if (e instanceof Portal && e != this) {
             Portal portalPair = (Portal) e;

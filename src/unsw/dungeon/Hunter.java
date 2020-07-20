@@ -87,9 +87,15 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
                 moveVertical(currX, currY, targetX, targetY);
             }
         } else {
-            if (0 <= xDiff && xDiff <= yDiff) {
+            if (xDiff == 0 && yDiff == 0) {
+                //do nothing
+            } else if (yDiff == 0) {
                 moveHorizontal(targetX, targetY, currX, currY);
-            } else if (0 <= yDiff && yDiff <= xDiff) {
+            } else if (xDiff == 0) {
+                moveVertical(targetX, targetY, currX, currY);
+            } else if (xDiff <= yDiff) {
+                moveHorizontal(targetX, targetY, currX, currY);
+            } else if (yDiff < xDiff) {
                 moveVertical(targetX, targetY, currX, currY);
             }
         }

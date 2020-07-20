@@ -148,11 +148,31 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         dungeon.removeEntity(e);
     }
 
+    /**
+     * Remove a given entity from players inventory
+     * @param e entity to be removed
+     */
     public void unequip(Entity e) {
         inventory.remove(e);
     }
 
-    //Keep track of potion duration from player inventory
+    /**
+     * Method that checks players inventory for a sword
+     * @return true if player has a sword inventory
+     */
+    public boolean hasSword() {
+        for (Entity e : inventory) {
+            if (e instanceof Sword) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Method that checks players inventory for a potion
+     * @return true if player has a potion inventory
+     */
     public boolean isInvincible() {
         for (Entity e : inventory) {
             if (e instanceof Potion) {

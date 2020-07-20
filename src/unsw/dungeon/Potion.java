@@ -13,7 +13,8 @@ public class Potion extends Entity implements Weapon, Observer {
      */
     public Potion(int x, int y) {
         super(x, y);
-        this.durability = 10;
+        this.durability = 11; //Need an extra durability over expected 
+                             //since update runs after equiping
     }
 
     @Override
@@ -23,12 +24,18 @@ public class Potion extends Entity implements Weapon, Observer {
         }
     }
 
-    @Override
+    /**
+     * Called everytime the observer pull is of type Player
+     * @param player
+     */
     public void update(Player player) {
         List<Entity> inventory = player.getInventory();
 
         if (inventory.contains(this)) {
             useWeapon();
+            if (isBroken()) {
+                player.unequip(this);
+            }
         }
     }
 
@@ -38,7 +45,20 @@ public class Potion extends Entity implements Weapon, Observer {
     }
 
     @Override
-    public int getDurability() {
-        return durability;
+    public boolean isBroken() {
+        if (durability <= 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onCollide(Entity e) {
+        if (e instanceof Player) {
+            Player player = (Player) e;
+            if (player.isInvincible() == false) {
+                player.equip(this);
+            }
+        }
     }
 }

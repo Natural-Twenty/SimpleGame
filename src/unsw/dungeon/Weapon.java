@@ -2,6 +2,6 @@ package unsw.dungeon;
 
 public interface Weapon {
 
-    public int getDurability();
+    public boolean isBroken();
     public void useWeapon();
 }

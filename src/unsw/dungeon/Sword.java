@@ -15,8 +15,21 @@ public class Sword extends Entity implements Weapon{
     }
 
     @Override
-    public int getDurability() {
-        return durability;
+    public boolean isBroken() {
+        if (durability <= 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onCollide(Entity e) {
+        if (e instanceof Player) {
+            Player player = (Player) e;
+            if (player.hasSword() == false) {
+                player.equip(this);
+            }
+        }
     }
 
 }

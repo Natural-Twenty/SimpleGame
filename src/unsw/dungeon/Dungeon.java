@@ -48,7 +48,17 @@ public class Dungeon implements Observer{
         this.player = player;
     }
 
-    public void addEntity(Entity entity) { //add a case for adding enemy which attaches it as an observer to player
+    public void addEntity(Entity entity) {
+        // if (entity instanceof Player) {
+        //     Player p = (Player) entity;
+        //     setPlayer(p);
+
+        // } else if (entity instanceof Hunter) { //cause errors if enemy added before player since player == null
+        //     Observer o = (Observer) entity;
+        //     player.attach(o);
+
+        // }
+
         entities.add(entity);
     }
 

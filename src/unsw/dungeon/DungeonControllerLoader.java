@@ -29,6 +29,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image exitImage;
     private Image boulderImage;
     private Image floorPlateImage;
+    private Image hunterImage;
+    private Image potionImage;
 
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
@@ -39,6 +41,8 @@ public class DungeonControllerLoader extends DungeonLoader {
         exitImage = new Image((new File("images/exit.png")).toURI().toString());
         boulderImage = new Image((new File("images/boulder.png")).toURI().toString());
         floorPlateImage = new Image((new File("images/pressure_plate.png")).toURI().toString());
+        hunterImage = new Image((new File("images/deep_elf_master_archer.png")).toURI().toString());
+        potionImage = new Image((new File("images/brilliant_blue_new.png")).toURI().toString());
         
     }
 
@@ -60,10 +64,10 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(exit, view);
     }
 
-    // @Override
-    // public void onLoad(Treasure treasure) {
-    //     //TODO for UI
-    // }
+    @Override
+    public void onLoad(Treasure treasure) {
+        //TODO for UI
+    }
 
     @Override
     public void onLoad(Door door) {
@@ -94,7 +98,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Hunter hunter) {
-        //TODO for UI
+        ImageView view = new ImageView(hunterImage);
+        addEntity(hunter, view);
     }
 
     @Override
@@ -104,7 +109,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Potion potion) {
-        //TODO for UI
+        ImageView view = new ImageView(potionImage);
+        addEntity(potion, view);
     }
 
     private void addEntity(Entity entity, ImageView view) {

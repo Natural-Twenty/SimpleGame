@@ -79,6 +79,7 @@ public class EnemyTest {
         Dungeon dungeon = new Dungeon(5, 5);
         Player player = new Player(dungeon, 0, 0);
         Hunter hunter = new Hunter(dungeon, 4, 0);
+        Sword sword = new Sword(0, 1);
 
         dungeon.addEntity(hunter);
 
@@ -89,6 +90,8 @@ public class EnemyTest {
         hunter.attach(dungeon);
 
         dungeon.addGoal(hunter);
+
+        dungeon.addEntity(sword);
 
 
         assertTrue(player.getX() == 0 && player.getY() == 0);

@@ -18,13 +18,11 @@ public class Portal extends Entity {
 
     @Override
     public void onCollide(Entity e) {
-        if(e instanceof Player) {
-            Player player = (Player) e;
+        if(e instanceof MoveBehaviour) {
             Portal portalPair = findPair();
             int teleportX = portalPair.getX();
             int teleportY = portalPair.getY();
-            player.moveTo(teleportX, teleportY);
-            //teleport(teleportX, teleportY);
+            teleport(e, teleportX, teleportY);
         }
     }
 
@@ -62,17 +60,35 @@ public class Portal extends Entity {
 
     @Override
     public boolean isBarrier(Entity e) {
-        if (e instanceof Player) {
-            return false;
-        } else {
-            return true;
+         if (e instanceof MoveBehaviour || e instanceof Portal) {
+             return false;
+         } else {
+             return true;
+         }
+        
+        
+    }
+
+    private void teleport(Entity e, int x, int y) {
+        if (!otherSideBlocked(x, y)) {
+            e.setX(x);
+            e.setY(y);
         }
         
     }
 
-    // private void teleport(Entity e) {
-    //     e.
-    // }
-
-    
+    private boolean otherSideBlocked(int x, int y) {
+        List<Entity> entities = dungeon.getEntities(x, y);
+        for (Entity e: entities) {
+            if (e == null) {
+                continue;
+            } else if (e.isBarrier(this)) {
+                // Something blocking the portal
+                return true;
+            } else {
+            }
+        }
+        // We are here because there is nothing blocking the portal.
+        return false;
+    }
 }

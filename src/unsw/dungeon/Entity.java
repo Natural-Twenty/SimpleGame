@@ -40,7 +40,14 @@ public class Entity {
         return x().get();
     }
 
-    
+    public void setX(int x) {
+        x().set(x);
+    }
+
+    public void setY(int y) {
+        y().set(y);
+    }
+
     public boolean isBarrier(Entity e) {
         return false;
     }

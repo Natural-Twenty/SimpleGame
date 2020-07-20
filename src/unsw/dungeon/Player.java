@@ -206,9 +206,16 @@ public class Player extends Entity implements MoveBehaviour, Subject{
      */
     public boolean canFight(Hunter hunter) {
 
-        for (Entity e : inventory) {
-            if (e instanceof Weapon) { 
-                return true;
+        if (isInvincible()) {
+            return true;
+        } else if (hasSword()) {
+            //only has one sword so find it and degrade quality
+            for (Entity e : inventory) {
+                if (e instanceof Sword) {
+                    Sword playerSword = (Sword) e;
+                    playerSword.useWeapon();
+                    return true;
+                }
             }
         }
 

@@ -65,15 +65,15 @@ public class DungeonControllerLoader extends DungeonLoader {
     //     //TODO for UI
     // }
 
-    // @Override
-    // public void onLoad(Door door) {
-    //     //TODO for UI
-    // }
+    @Override
+    public void onLoad(Door door) {
+        //TODO for UI
+    }
 
-    // @Override
-    // public void onLoad(Key key) {
-    //     //TODO for UI
-    // }
+    @Override
+    public void onLoad(Key key) {
+        //TODO for UI
+    }
 
     @Override
     public void onLoad(Boulder boulder) {
@@ -97,15 +97,15 @@ public class DungeonControllerLoader extends DungeonLoader {
         //TODO for UI
     }
 
-    // @Override
-    // public void onLoad(Sword sword) {
-    //     //TODO for UI
-    // }
+    @Override
+    public void onLoad(Sword sword) {
+        //TODO for UI
+    }
 
-    // @Override
-    // public void onLoad(Potion potion) {
-    //     //TODO for UI
-    // }
+    @Override
+    public void onLoad(Potion potion) {
+        //TODO for UI
+    }
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);

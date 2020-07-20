@@ -212,9 +212,9 @@ public abstract class DungeonLoader {
 
     //public abstract void onLoad(Treasure treasure);
 
-    //public abstract void onLoad(Door door);
+    public abstract void onLoad(Door door);
 
-    //public abstract void onLoad(Key key);
+    public abstract void onLoad(Key key);
 
     public abstract void onLoad(Boulder boulder);
 
@@ -224,9 +224,9 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(Hunter hunter);
 
-    //public abstract void onLoad(Sword sword);
+    public abstract void onLoad(Sword sword);
 
-    //public abstract void onLoad(Potion potion);
+    public abstract void onLoad(Potion potion);
 
 
 }

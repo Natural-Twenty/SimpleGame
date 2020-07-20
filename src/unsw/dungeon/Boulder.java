@@ -67,8 +67,8 @@ public class Boulder extends Entity implements MoveBehaviour{
     public boolean isBarrier(Entity e) {
         if (e instanceof Player) {
             Player player = (Player) e;
-            int x = computeXDirection(player);
-            int y = computeYDirection(player);
+            int x = player.computeXDirection(this);
+            int y = player.computeYDirection(this);
             List<Entity> entities = dungeon.getEntities(x, y);
             for (Entity ent : entities) {
                 if (ent.isBarrier(this)) {
@@ -90,20 +90,8 @@ public class Boulder extends Entity implements MoveBehaviour{
             // Compute direction of push
             Player player = (Player) entity;
             int x = player.computePrevXDirection(this);
-            int y = computeYDirection(player);
+            int y = player.computePrevYDirection(this);
             moveTo(x, y);
         }
     }
-
-    private int computePrevXDirection(Player player) {
-        int xDiff = getX() - player.getPrevX();
-        return getX() + xDiff;
-    }
-
-    private int computePrevYDirection(Player player) {
-        int yDiff = getY() - player.getPrevXY();
-        return getY() + yDiff;
-    }
-
-    private int
 }

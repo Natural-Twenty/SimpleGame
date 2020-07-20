@@ -107,7 +107,7 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         return prevX;
     }
     
-    public int getPrevXY() {
+    public int getPrevY() {
         return prevY;
     }
 
@@ -118,10 +118,31 @@ public class Player extends Entity implements MoveBehaviour, Subject{
     public void setPrevY(int y) {
         prevY = y;
     }
-    
+
     public void equip(Entity e) {
         inventory.add(e);
     }
+
+    public int computeXDirection(Entity e) {
+        int xDiff = e.getX() - getX();
+        return e.getX() + xDiff;
+    }
+
+    public int computeYDirection(Entity e) {
+        int yDiff = e.getY() - getY();
+        return e.getY() + yDiff;
+    }
+
+    public int computePrevXDirection(Entity e) {
+        int xDiff = e.getX() - getPrevX();
+        return e.getX() + xDiff;
+    }
+
+    public int computePrevYDirection(Entity e) {
+        int yDiff = e.getY() - getPrevY();
+        return e.getY() + yDiff;
+    }
+
 
     public void unequip(Entity e) {
         inventory.remove(e);

@@ -15,7 +15,7 @@ import java.util.List;
  * By extending this class, a subclass can hook into entity creation. This is
  * useful for creating UI elements with corresponding entities.
  *
- * @author Robert Clifton-Everest
+ * @author Robert Clifton-Everest, Frank Merriman, The Tran
  *
  */
 public abstract class DungeonLoader {
@@ -28,7 +28,7 @@ public abstract class DungeonLoader {
 
     /**
      * Parses the JSON to create a dungeon.
-     * @return
+     * @return dungeon that is created from json data
      */
     public Dungeon load() {
         int width = json.getInt("width");
@@ -52,6 +52,12 @@ public abstract class DungeonLoader {
         return dungeon;
     }
 
+    /**
+     * Reads a json object, creates corresponding entity and adds it to dungeons
+     * list of entities
+     * @param dungeon that is being inserted into
+     * @param json that is being parsed to create entities
+     */
     private void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");
         int x = json.getInt("x");
@@ -142,7 +148,13 @@ public abstract class DungeonLoader {
         dungeon.addEntity(entity);
     }
 
-    //This is a prototype for adding goals in via kind of recursion?
+    /**
+     * Recursively builds a tree of goals using the composite Goal pattern
+     * Goals are decided by parsing JSONObject data
+     * @param dungeon to add goal to
+     * @param json data to be read
+     * @return the Goal created on current pass of the method
+     */
     private Goal loadGoal (Dungeon dungeon, JSONObject json) {
 
         String goal = json.getString("goal");
@@ -210,6 +222,12 @@ public abstract class DungeonLoader {
     }
 
 
+    /**
+     * Sets every Hunter in dungeon to observe player
+     * which implements subject
+     * @param entities the potential observers
+     * @param player the subject
+     */
     private void loadEnemies(List<Entity> entities, Player player) {
         if (player == null) {
             return;

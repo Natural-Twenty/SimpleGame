@@ -4,10 +4,17 @@ import java.util.List;
 
 /**
  * A boulder entity that can be moved by players but blocks enemies
+ * @authour Frank Merriman, The Tran
  */
 public class Boulder extends Entity implements MoveBehaviour{
     private Dungeon dungeon;
 
+    /**
+     * Creates a new boulder entity
+     * @param dungeon that boulder is in
+     * @param x axis of created boulder
+     * @param y axis of created boulder
+     */
     public Boulder (Dungeon dungeon, int x, int y) {
         super(x,y);
         this.dungeon = dungeon;

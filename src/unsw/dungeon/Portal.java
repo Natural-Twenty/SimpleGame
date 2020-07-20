@@ -24,6 +24,7 @@ public class Portal extends Entity {
             int teleportX = portalPair.getX();
             int teleportY = portalPair.getY();
             player.moveTo(teleportX, teleportY);
+            //teleport(teleportX, teleportY);
         }
     }
 
@@ -68,6 +69,10 @@ public class Portal extends Entity {
         }
         
     }
+
+    // private void teleport(Entity e) {
+    //     e.
+    // }
 
     
 }

@@ -1,6 +1,4 @@
-/**
- *
- */
+
 package unsw.dungeon;
 
 import java.util.ArrayList;
@@ -47,7 +45,10 @@ public class Dungeon implements Observer{
     public void setPlayer(Player player) {
         this.player = player;
     }
-
+    /**
+     * 
+     * @param entity
+     */
     public void addEntity(Entity entity) {
         entities.add(entity);
     }

@@ -2,7 +2,12 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * A FloorSwitch class that represents a floor switch in the dungeon.
+ * It uses a state design pattern.
+ * 
+ * @author Frank Merriman, The Tran
+ */
 public class FloorSwitch extends Entity implements Goal, Subject{
     private FloorSwitchState triggeredState;
     private FloorSwitchState untriggeredState;
@@ -12,7 +17,12 @@ public class FloorSwitch extends Entity implements Goal, Subject{
     private List<Observer> listObservers;
 
     Dungeon dungeon;
-    
+    /**
+     * A constructor for FloorSwitch.
+     * @param dungeon Dungeon where the floor switch belongs
+     * @param x x-coordinate of the floor switch to appear
+     * @param y y-coordinate of the floor switch to appear
+     */
     public FloorSwitch(Dungeon dungeon, int x, int y) {
         super(x,y);
         triggeredState = new TriggeredState(this);
@@ -21,12 +31,16 @@ public class FloorSwitch extends Entity implements Goal, Subject{
         currState = checkBoulder(dungeon, x, y);
         this.listObservers = new ArrayList<>();
     }
-
+    /**
+     * Triggers the floor switch and notifies observers
+     */
     public void triggerFloorSwitch() {
         currState.triggerFloorSwitch();
         updateObservers();
     }
-
+    /**
+     * Untriggers the floor switch and notifies observers
+     */
     public void untriggerFloorSwitch() {
         currState.untriggerFloorSwitch();
         updateObservers();
@@ -47,7 +61,10 @@ public class FloorSwitch extends Entity implements Goal, Subject{
     public void setState(FloorSwitchState state) {
         this.currState = state;
     }
-
+    /**
+     * Checks if floor switch is triggered
+     * @return True if triggered, false if not
+     */
     public boolean isTriggered() {
         if (currState == triggeredState) {
             return true;

@@ -1,16 +1,25 @@
 package unsw.dungeon;
 
 import java.util.List;
-
+/**
+ * A Door class that represents a door in the dungeon.
+ * Uses state design pattern.
+ * 
+ * @author Frank Merriman, The Tran
+ */
 public class Door extends Entity {
     private DoorState closedState;
     private DoorState openState;
 
     private DoorState currState;
 
-
     private int u_id;
-
+    /**
+     * A constructor to create a door in the dungeon.
+     * @param x  x-coordinate of the door to appear in
+     * @param y y-coordinate of the door to appear in
+     * @param u_id  Unique ID of the door for interaction with a matching ID key.
+     */
     public Door(int x, int y, int u_id) {
         super(x, y);
         closedState = new ClosedDoorState(this);

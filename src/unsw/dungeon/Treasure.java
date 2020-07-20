@@ -2,11 +2,18 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * A Treasure class to represent treasure in the dungeon.
+ * 
+ */
 public class Treasure extends Entity implements Goal, Subject{
     private boolean collected;
     private List<Observer> listObservers;
-
+    /**
+     * A constructor to create a treasure entity in the dungeon
+     * @param x x-coordinate for the treasure to appear in
+     * @param y y-coordinate for the treasure to appear in
+     */
     public Treasure(int x, int y) {
         super(x, y);
         collected = false;

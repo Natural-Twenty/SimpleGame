@@ -1,12 +1,15 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class FloorSwitch extends Entity {
+public class FloorSwitch extends Entity implements Goal, Subject{
     private FloorSwitchState triggeredState;
     private FloorSwitchState untriggeredState;
 
     private FloorSwitchState currState;
+
+    private List<Observer> listObservers;
 
     Dungeon dungeon;
     
@@ -16,14 +19,17 @@ public class FloorSwitch extends Entity {
         untriggeredState = new UntriggeredState(this);
         this.dungeon =dungeon;
         currState = checkBoulder(dungeon, x, y);
+        this.listObservers = new ArrayList<>();
     }
 
     public void triggerFloorSwitch() {
         currState.triggerFloorSwitch();
+        updateObservers();
     }
 
     public void untriggerFloorSwitch() {
         currState.untriggerFloorSwitch();
+        updateObservers();
     }
 
     public FloorSwitchState getState() {
@@ -61,5 +67,28 @@ public class FloorSwitch extends Entity {
             }
         }
         return untriggeredState;
+    }
+
+
+    @Override
+    public boolean isComplete() {
+        return isTriggered();
+    }
+
+    @Override
+    public void detach(Observer o) {
+        listObservers.remove(o);
+    }
+
+    @Override
+    public void attach(Observer o) {
+        listObservers.add(o);
+    }
+
+    @Override
+    public void updateObservers() {
+        for (Observer o : listObservers) {
+            o.update(this);
+        }
     }
 }

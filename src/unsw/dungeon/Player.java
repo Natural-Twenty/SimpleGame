@@ -13,6 +13,8 @@ public class Player extends Entity implements MoveBehaviour, Subject{
     private List<Observer> listObservers;
     private List<Entity> inventory;
     private Dungeon dungeon;
+    private int prevX;
+    private int prevY;
 
     /**
      * Create a player positioned in square (x,y)
@@ -53,8 +55,11 @@ public class Player extends Entity implements MoveBehaviour, Subject{
      */
     public void moveTo (int newX, int newY) {
         if (canMove(newX, newY)) {
+            setPrevX(getX());
+            setPrevY(getY());
             x().set(newX);
             y().set(newY);
+            collide(newX, newY);
             updateObservers();
         }
     }
@@ -82,17 +87,62 @@ public class Player extends Entity implements MoveBehaviour, Subject{
             if (e.isBarrier(this)) {
                 return false;
             } else {
+                //e.onCollide(this);
+            }
+        }
+        return true;
+        
+    }
+
+    private void collide(int x, int y) {
+        List<Entity> entities = dungeon.getEntities(x, y);
+        for (Entity e : entities) {
+            if (e != null) {
                 e.onCollide(this);
             }
         }
-        
-        return true;
-        
+    }
+
+    public int getPrevX() {
+        return prevX;
+    }
+    
+    public int getPrevY() {
+        return prevY;
+    }
+
+    public void setPrevX(int x) {
+        prevX = x;
+    }
+
+    public void setPrevY(int y) {
+        prevY = y;
     }
 
     public void equip(Entity e) {
         inventory.add(e);
     }
+
+    public int computeXDirection(Entity e) {
+        int xDiff = e.getX() - getX();
+        return e.getX() + xDiff;
+    }
+
+    public int computeYDirection(Entity e) {
+        int yDiff = e.getY() - getY();
+        return e.getY() + yDiff;
+    }
+
+    public int computePrevXDirection(Entity e) {
+        int xDiff = e.getX() - getPrevX();
+        return e.getX() + xDiff;
+    }
+
+    public int computePrevYDirection(Entity e) {
+        int yDiff = e.getY() - getPrevY();
+        return e.getY() + yDiff;
+    }
+
 
     public void unequip(Entity e) {
         inventory.remove(e);

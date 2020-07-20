@@ -58,11 +58,11 @@ public class FloorSwitch extends Entity implements Goal, Subject{
 
     private FloorSwitchState checkBoulder(Dungeon dungeon, int x, int y) {
         List<Entity> entities = dungeon.getEntities(x, y);
-        if (entities == null) {
-            return untriggeredState;
-        }
+        // if (entities == null) {
+        //     return untriggeredState;
+        // }
         for (Entity e : entities) {
-            if (e instanceof Boulder) {
+            if (e != null && e instanceof Boulder) {
                 return triggeredState;
             }
         }

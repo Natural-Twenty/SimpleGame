@@ -101,4 +101,10 @@ public class Dungeon implements Observer{
         return tileEntities;
 
     }
+
+    public List<Entity> getAllEntities() {
+        return entities;
+    }
 }
+
+

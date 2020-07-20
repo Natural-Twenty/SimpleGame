@@ -11,6 +11,8 @@ import java.util.List;
 public class Player extends Entity implements MoveBehaviour{
 
     private Dungeon dungeon;
+    private int prevX;
+    private int prevY;
 
     /**
      * Create a player positioned in square (x,y)
@@ -49,8 +51,11 @@ public class Player extends Entity implements MoveBehaviour{
      */
     public void moveTo (int newX, int newY) {
         if (canMove(newX, newY)) {
+            setPrevX(getX());
+            setPrevY(getY());
             x().set(newX);
             y().set(newY);
+            collide(newX, newY);
             //updateObservers();
         }
     }
@@ -78,12 +83,36 @@ public class Player extends Entity implements MoveBehaviour{
             if (e.isBarrier(this)) {
                 return false;
             } else {
+                //e.onCollide(this);
+            }
+        }
+        return true;
+        
+    }
+
+    private void collide(int x, int y) {
+        List<Entity> entities = dungeon.getEntities(x, y);
+        for (Entity e : entities) {
+            if (e != null) {
                 e.onCollide(this);
             }
         }
-        
-        return true;
-        
+    }
+
+    public int getPrevX() {
+        return prevX;
+    }
+    
+    public int getPrevXY() {
+        return prevY;
+    }
+
+    public void setPrevX(int x) {
+        prevX = x;
+    }
+
+    public void setPrevY(int y) {
+        prevY = y;
     }
 
 }

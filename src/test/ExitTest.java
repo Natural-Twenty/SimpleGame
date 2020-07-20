@@ -27,6 +27,7 @@ public class ExitTest {
         assertTrue(player.getX() == 1 && player.getY() == 2);
 
         //player shouldn't move since they triggered all goals
+        assertTrue(dungeon.getCompletion());
         player.moveDown();
         assertTrue(player.getX() == 1 && player.getY() == 2);
 

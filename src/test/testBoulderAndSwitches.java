@@ -1,5 +1,6 @@
 package test;
 
+
 import org.junit.Test;
 
 import unsw.dungeon.*;
@@ -80,6 +81,40 @@ public class testBoulderAndSwitches {
         player.moveTo(4, 2);
         player.moveTo(3, 2);
         assert(floorSwitch.isTriggered());
-        
     }
+
+    @Test
+    // Test that enemies cannot move boulders
+    public void testBoulderWithEnemies() {
+        Dungeon dungeon = new Dungeon(5, 5);
+        Player player = new Player(dungeon, 1, 2);
+        Hunter hunter = new Hunter(dungeon, 3, 2);
+        Boulder boulder1 = new Boulder(dungeon, 2, 2);
+        Boulder boulder2 = new Boulder(dungeon, 3, 1);
+        Boulder boulder3 = new Boulder(dungeon, 4, 2);
+        Boulder boulder4 = new Boulder(dungeon, 3, 3);
+
+        dungeon.addEntity(player);
+        dungeon.setPlayer(player);
+        dungeon.addEntity(hunter);
+        player.attach(hunter);
+        dungeon.addEntity(boulder1);
+        dungeon.addEntity(boulder2);
+        dungeon.addEntity(boulder3);
+        dungeon.addEntity(boulder4);
+        // Move player, enemy should not move since it cannot push boulders
+        player.moveTo(0, 2);
+        assert(hunter.getX() == 3 && hunter.getY() == 2);
+        assert(boulder1.getX() == 2 && boulder1.getY() == 2);
+        assert(boulder2.getX() == 3 && boulder2.getY() == 1);
+        assert(boulder3.getX() == 4 && boulder3.getY() == 2);
+        assert(boulder4.getX() == 3 && boulder4.getY() == 3);
+        player.moveTo(1, 2);
+        assert(hunter.getX() == 3 && hunter.getY() == 2);
+        assert(boulder1.getX() == 2 && boulder1.getY() == 2);
+        assert(boulder2.getX() == 3 && boulder2.getY() == 1);
+        assert(boulder3.getX() == 4 && boulder3.getY() == 2);
+        assert(boulder4.getX() == 3 && boulder4.getY() == 3);
+    }
+    
 }

@@ -111,11 +111,11 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         return prevY;
     }
 
-    public void setPrevX(int x) {
+    private void setPrevX(int x) {
         prevX = x;
     }
 
-    public void setPrevY(int y) {
+    private void setPrevY(int y) {
         prevY = y;
     }
 

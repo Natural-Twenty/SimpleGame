@@ -47,7 +47,7 @@ public class Boulder extends Entity implements MoveBehaviour{
         return true;
     }
     
-    public void changeFloorSwitchState(int oldX, int oldY, int newX, int newY) {
+    private void changeFloorSwitchState(int oldX, int oldY, int newX, int newY) {
         // Boulder is moving off the floor switch
         List<Entity> oldEntities = dungeon.getEntities(oldX, oldY);
         for (Entity e : oldEntities) {

@@ -6,7 +6,7 @@ public class FloorSwitch extends Entity {
     private FloorSwitchState triggeredState;
     private FloorSwitchState untriggeredState;
 
-    FloorSwitchState currState;
+    private FloorSwitchState currState;
 
     Dungeon dungeon;
     

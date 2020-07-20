@@ -9,6 +9,7 @@ public class Boulder extends Entity implements MoveBehaviour{
         super(x,y);
         this.dungeon = dungeon;
     }
+    
 
     public void moveTo(int newX, int newY) {
         int oldX = this.getX();
@@ -17,13 +18,7 @@ public class Boulder extends Entity implements MoveBehaviour{
             x().set(newX);
             y().set(newY);
             changeFloorSwitchState(oldX, oldY, newX, newY);
-        } else {
-            // Can't move so boulder does nothing
-            return;
         }
-        
-        
-        
     }
 
     public boolean canMove(int newX, int newY) {
@@ -71,9 +66,42 @@ public class Boulder extends Entity implements MoveBehaviour{
     @Override
     public boolean isBarrier(Entity e) {
         if (e instanceof Player) {
+            Player player = (Player) e;
+            int x = computeXDirection(player);
+            int y = computeYDirection(player);
+            List<Entity> entities = dungeon.getEntities(x, y);
+            for (Entity ent : entities) {
+                if (ent.isBarrier(this)) {
+                    // Boulder is blocked
+                    return true;
+                }
+            }
+            // Boulder is not blocked.
             return false;
-        } else {
-            return true;
         }
+        // Entity trying to enter is not a player
+        return true;
+    }
+
+    @Override
+    public void onCollide(Entity entity) {
+        // Ensure pusher is a player
+        if (entity instanceof Player) {
+            // Compute direction of push
+            Player player = (Player) entity;
+            int x = computeXDirection(player);
+            int y = computeYDirection(player);
+            moveTo(x, y);
+        }
+    }
+
+    private int computeXDirection(Player player) {
+        int xDiff = getX() - player.getX();
+        return getX() + xDiff;
+    }
+
+    private int computeYDirection(Player player) {
+        int yDiff = getY() - player.getY();
+        return getY() + yDiff;
     }
 }

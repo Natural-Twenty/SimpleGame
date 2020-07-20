@@ -59,6 +59,7 @@ public class PotionTest {
         Hunter hunterLeft = new Hunter(dungeon, 5, 3);
         Hunter hunterRight = new Hunter(dungeon, 7, 3);
         Potion potion = new Potion(6, 4);
+        Wall wall = new Wall(3, 3);
 
         dungeon.setPlayer(player);
 
@@ -68,6 +69,7 @@ public class PotionTest {
         dungeon.addEntity(hunterAbove);
         dungeon.addEntity(hunterLeft);
         dungeon.addEntity(hunterRight);
+        dungeon.addEntity(wall);
         
         player.attach(hunterBelow);
         player.attach(hunterAbove);
@@ -90,7 +92,7 @@ public class PotionTest {
 
         assertTrue(hunterBelow.getX() == 6 && hunterBelow.getY() == 6); //should move in reverse to normal behaviour
         assertTrue(hunterAbove.getX() == 6 && hunterAbove.getY() == 0);
-        assertTrue(hunterLeft.getX() == 3 && hunterLeft.getY() == 3);
+        assertTrue(hunterLeft.getX() == 4 && hunterLeft.getY() == 3); //wall stops entery to 3,3
         assertTrue(hunterRight.getX() == 9 && hunterRight.getY() == 3);
         
     }

@@ -114,4 +114,6 @@ public class testPortal {
         player.moveTo(4, 3);
         assert(player.getX() == 2 && player.getY() == 3);
     }
+
+    
 }

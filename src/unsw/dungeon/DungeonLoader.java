@@ -100,7 +100,7 @@ public abstract class DungeonLoader {
 
         case "key":
             int id2 = json.getInt("id");
-            Key key = new Key(dungeon, x, y, id2);
+            Key key = new Key(x, y, id2);
             onLoad(key);
             entity = key;
             break;

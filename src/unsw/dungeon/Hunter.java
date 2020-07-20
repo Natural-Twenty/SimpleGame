@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.lang.Math;
 
+/**
+ * A basic enemy that pursues the enemy in straight lines, even if it means
+ * getting stuck on a wall
+ * @author Frank Merriman, The Tran
+ */
 public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Subject{
 
     private Dungeon dungeon;
@@ -50,7 +55,11 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
         }
     }
 
-    //Make sure that code that auto attaches enemy observers to Player does so after all entities added from json (maybe when adding goals?)
+    /**
+     * Moves the Hunter in response to the position of the player
+     * and whether they are invincible
+     * @param player who we base movement off of
+     */
     public void update(Player player) {
         int targetX = player.getX();
         int targetY = player.getY();
@@ -180,6 +189,12 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
         }
     }
 
+    /**
+     * Runs the oncollide methods for any entity in the given coordinates
+     * passing Hunter as the object
+     * @param x axis location
+     * @param y axis location
+     */
     private void collide(int x, int y) {
         List<Entity> entities = dungeon.getEntities(x, y);
         for (Entity e : entities) {

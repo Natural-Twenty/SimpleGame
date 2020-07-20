@@ -3,11 +3,20 @@ package unsw.dungeon;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * One type of goal that is completed simply by standing on it
+ * @author Frank Merriman, The Tran
+ */
 public class Exit extends Entity implements Goal, Subject {
 
     private boolean completed;
     private List<Observer> listObservers;
 
+    /**
+     * Creates a new exit entity at the given coordinates
+     * @param x axis location
+     * @param y axis location
+     */
     public Exit(int x, int y) {
         super(x, y);
         completed = false;

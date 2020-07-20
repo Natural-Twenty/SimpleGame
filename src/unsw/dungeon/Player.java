@@ -119,10 +119,6 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         prevY = y;
     }
 
-    public void equip(Entity e) {
-        inventory.add(e);
-    }
-
     public int computeXDirection(Entity e) {
         int xDiff = e.getX() - getX();
         return e.getX() + xDiff;
@@ -143,12 +139,26 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         return e.getY() + yDiff;
     }
 
+    public void equip(Entity e) {
+        inventory.add(e);
+        //if e is a potion its also an observer to player movement
+        if (e instanceof Potion) {
+            attach( (Potion) e);
+        }
+        dungeon.removeEntity(e);
+    }
 
     public void unequip(Entity e) {
         inventory.remove(e);
     }
 
+    //Keep track of potion duration from player inventory
     public boolean isInvincible() {
+        for (Entity e : inventory) {
+            if (e instanceof Potion) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -171,18 +181,18 @@ public class Player extends Entity implements MoveBehaviour, Subject{
 
     /**
      * 
-     * @param hunter
-     * @return true if player has an item that can be used to 
+     * @param hunter enemy the player is fighting
+     * @return true if player has an item that can be used to fight
      */
     public boolean canFight(Hunter hunter) {
 
-        // for (Entity e : inventory) {
-        //     if (e instanceof Weapon) {
-        //         return true;
-        //     }
-        // }
+        for (Entity e : inventory) {
+            if (e instanceof Weapon) { 
+                return true;
+            }
+        }
 
-        return false; //swap between t/f to simulate a sword
+        return false;
     }
 
     @Override

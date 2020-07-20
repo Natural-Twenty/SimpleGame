@@ -22,6 +22,15 @@ public class Boulder extends Entity implements MoveBehaviour{
     }
 
     public boolean canMove(int newX, int newY) {
+        if (
+            newX < 0 ||
+            newY < 0 ||
+            newX > dungeon.getWidth() - 1 ||
+            newY > dungeon.getHeight() - 1
+        ) {
+            return false;
+        }
+
         List<Entity> checkTile = dungeon.getEntities(newX, newY);
         if (checkTile.size() < 1) {
             return true;

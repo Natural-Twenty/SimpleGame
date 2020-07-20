@@ -60,11 +60,12 @@ public class Portal extends Entity {
 
     @Override
     public boolean isBarrier(Entity e) {
-        if (e instanceof MoveBehaviour || e instanceof Portal) {
-            return false;
-        } else {
-            return true;
-        }
+         if (e instanceof MoveBehaviour || e instanceof Portal) {
+             return false;
+         } else {
+             return true;
+         }
+        
         
     }
 

@@ -111,6 +111,7 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
         if (canMove(x, y)) {
             x().set(x);
             y().set(y);
+            collide(x, y);
         }
         
     }
@@ -127,7 +128,7 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
             if (e.isBarrier(this)) {
                 return false;
             } else {
-                e.onCollide(this);
+                //e.onCollide(this);
             }
         }
         
@@ -151,6 +152,15 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
                 dungeon.removeEntity(p);
             }
 
+        }
+    }
+
+    private void collide(int x, int y) {
+        List<Entity> entities = dungeon.getEntities(x, y);
+        for (Entity e : entities) {
+            if (e != null) {
+                e.onCollide(this);
+            }
         }
     }
 

@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * An entity in the dungeon.
- * @author Robert Clifton-Everest
+ * @author Robert Clifton-Everest, Frank Merriman, The Tran
  *
  */
 public class Entity {
@@ -16,8 +16,8 @@ public class Entity {
 
     /**
      * Create an entity positioned in square (x,y)
-     * @param x
-     * @param y
+     * @param x x axis position
+     * @param y y axis position
      */
     public Entity(int x, int y) {
         this.x = new SimpleIntegerProperty(x);
@@ -48,11 +48,22 @@ public class Entity {
         y().set(y);
     }
 
+    /**
+     * This method returns a boolean as to whether an entity
+     * can occupy the same tile as this.
+     * @param e Entity that is trying to enter this objects space in the game
+     * @return false if not overridden to be true by another method
+     */
     public boolean isBarrier(Entity e) {
         return false;
     }
 
-    
+    /**
+     * This method performs behaviour specific to
+     * certain entity interactions via TypeCasting e and then
+     * performing other methods depending on what this is versus e
+     * @param e Entity colliding with this Entity
+     */
     public void onCollide(Entity e) {
         
     }

@@ -2,6 +2,9 @@ package unsw.dungeon;
 
 import java.util.List;
 
+/**
+ * A boulder entity that can be moved by players but blocks enemies
+ */
 public class Boulder extends Entity implements MoveBehaviour{
     private Dungeon dungeon;
 
@@ -10,7 +13,6 @@ public class Boulder extends Entity implements MoveBehaviour{
         this.dungeon = dungeon;
     }
     
-
     public void moveTo(int newX, int newY) {
         int oldX = this.getX();
         int oldY = this.getY();
@@ -21,6 +23,7 @@ public class Boulder extends Entity implements MoveBehaviour{
         }
     }
 
+    
     public boolean canMove(int newX, int newY) {
         if (
             newX < 0 ||
@@ -46,6 +49,7 @@ public class Boulder extends Entity implements MoveBehaviour{
     
         return true;
     }
+    
     
     private void changeFloorSwitchState(int oldX, int oldY, int newX, int newY) {
         // Boulder is moving off the floor switch

@@ -20,7 +20,7 @@ public class Dungeon implements Observer{
     private int width, height;
     private List<Entity> entities;
     private Player player;
-    private GoalOR goal;
+    private Goal goal;
     private boolean levelComplete;
 
     public Dungeon(int width, int height) {
@@ -28,7 +28,7 @@ public class Dungeon implements Observer{
         this.height = height;
         this.entities = new ArrayList<>();
         this.player = null;
-        this.goal = new GoalOR();
+        this.goal = null;
         this.levelComplete = false;
     }
 
@@ -72,7 +72,7 @@ public class Dungeon implements Observer{
      * of not using AND/OR
      */
     public void addGoal(Goal newGoal) {
-        goal.addSubGoal(newGoal);
+        this.goal = newGoal;
     }
 
     public void checkGoalStatus() {

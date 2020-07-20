@@ -39,6 +39,12 @@ public abstract class DungeonLoader {
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+        //in here set a loop for linking observers to respective subjects (e.g goals to dungeon, enemies to player)
+        //possible way to add goals
+        // - loop thru dungeons entities and check if instanceof goalType (i.e Exit) and add to dungeon.addGoal();
+        JSONObject jsonGoals = json.getJSONObject("goal-condition");
+        loadGoal(dungeon, jsonGoals);
+
         return dungeon;
     }
 
@@ -63,6 +69,34 @@ public abstract class DungeonLoader {
         // TODO Handle other possible entities
         }
         dungeon.addEntity(entity);
+    }
+
+    //This is a prototype for adding goals in -> finish in milestone 3
+    private void loadGoal (Dungeon dungeon, JSONObject json) {
+
+        String goal = json.getString("goal");
+        JSONArray subgoals = json.getJSONArray("subgoals");
+
+        for (int i = 0; i < subgoals.length(); i++) {
+            loadGoal(dungeon, subgoals.getJSONObject(i));
+        } 
+
+
+        Goal newGoal = null;
+        switch (goal) {
+        case "AND":
+
+        case "OR":
+
+        case "exit":
+            
+        case "enemies":
+
+        case "treasure":
+
+        case "boulders":
+
+        }
     }
 
     public abstract void onLoad(Player player); // This used to be Entity player change back if breaks

@@ -75,16 +75,16 @@ public class EnemyTest {
     //Until sword is implemented manually switch value of player.canFight() before runnnig tests
 
     @Test
-    public void testEnemyGoal() {
+    public void testSingleEnemyGoal() {
         Dungeon dungeon = new Dungeon(5, 5);
-
         Player player = new Player(dungeon, 0, 0);
-        dungeon.addEntity(player);
-        dungeon.setPlayer(player);
-
         Hunter hunter = new Hunter(dungeon, 4, 0);
 
         dungeon.addEntity(hunter);
+
+        dungeon.addEntity(player);
+        dungeon.setPlayer(player);
+
         player.attach(hunter);
         hunter.attach(dungeon);
 
@@ -113,5 +113,27 @@ public class EnemyTest {
 
         player.moveLeft();
         assertFalse(player.getX() == 1 && player.getY() == 1); //goal is complete player shouldnt be able to move
+    }
+
+    @Test
+    public void testMultipleEnemyGoal() {
+        Dungeon dungeon = new Dungeon(5, 5);
+
+        Player player = new Player(dungeon, 0, 0);
+        dungeon.addEntity(player);
+        dungeon.setPlayer(player);
+
+        Hunter hunter = new Hunter(dungeon, 4, 0);
+        Hunter hunter2 = new Hunter(dungeon, 0, 4);
+
+        dungeon.addEntity(hunter);
+        dungeon.addEntity(hunter2);
+
+        GoalAND destroyAllEnemies = new GoalAND();
+
+        destroyAllEnemies.addSubGoal(hunter);
+        destroyAllEnemies.addSubGoal(hunter2);
+
+        dungeon.addGoal(destroyAllEnemies);
     }
 }

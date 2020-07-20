@@ -124,6 +124,16 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
 
     @Override
     public boolean canMove(int x, int y) {
+
+        if (
+            x < 0 ||
+            y < 0 ||
+            x > dungeon.getWidth() - 1 ||
+            y > dungeon.getHeight() - 1
+        ) {
+            return false;
+        }
+
         List<Entity> tileEntities = dungeon.getEntities(x, y);
 
         if (tileEntities.size() < 1) {

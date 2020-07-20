@@ -19,7 +19,7 @@ public class Door extends Entity {
         this.u_id = u_id;
     }
 
-    public boolean cannotUseKey(Key key) {
+    private boolean cannotUseKey(Key key) {
         if (getID() == key.getID()) {
             currState.openDoor();
             return false;

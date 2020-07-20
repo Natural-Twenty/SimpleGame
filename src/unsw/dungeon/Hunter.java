@@ -66,7 +66,7 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
      * @param targetX int giving location on x axis
      * @param targetY int giving location on y axis
      */
-    public void findClosestPath(int targetX, int targetY, boolean fearPlayer) {
+    private void findClosestPath(int targetX, int targetY, boolean fearPlayer) {
         int currX = getX();
         int currY = getY();
 
@@ -89,7 +89,7 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
 
     }
     
-    public void moveHorizontal(int currX, int currY, int targetX, int targetY, boolean fearPlayer) {
+    private void moveHorizontal(int currX, int currY, int targetX, int targetY, boolean fearPlayer) {
         if (fearPlayer == false) {
             if (targetX < currX) {
                 moveTo(currX - 1, currY);
@@ -105,7 +105,7 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
         }
     }
 
-    public void moveVertical(int currX, int currY, int targetX, int targetY, boolean fearPlayer) {
+    private void moveVertical(int currX, int currY, int targetX, int targetY, boolean fearPlayer) {
         if (fearPlayer == false) {
             if (targetY < currY) {
                 moveTo(currX, currY - 1);

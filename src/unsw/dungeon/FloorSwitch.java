@@ -44,7 +44,7 @@ public class FloorSwitch extends Entity implements Goal, Subject{
         return untriggeredState;
     }
 
-    void setState(FloorSwitchState state) {
+    public void setState(FloorSwitchState state) {
         this.currState = state;
     }
 

@@ -26,7 +26,7 @@ public class Portal extends Entity {
         }
     }
 
-    public Portal findPair() {
+    private Portal findPair() {
         List<Entity> entities = dungeon.getAllEntities();
         for (Entity ent : entities) {
             if (ent == null) {
@@ -41,7 +41,7 @@ public class Portal extends Entity {
         return null;
     }
 
-    public Portal getPortalPair(Entity e) {
+    private Portal getPortalPair(Entity e) {
         if (e instanceof Portal && e != this) {
             Portal portalPair = (Portal) e;
             if (portalPair.equalID(this.u_id)) {

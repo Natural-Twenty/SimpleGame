@@ -87,6 +87,7 @@ public abstract class DungeonLoader {
 
         case "treasure":
             Treasure treasure = new Treasure(x, y);
+            treasure.attach(dungeon);
             onLoad(treasure);
             entity = treasure;
             break;

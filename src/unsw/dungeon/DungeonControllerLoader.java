@@ -31,6 +31,12 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image floorPlateImage;
     private Image hunterImage;
     private Image potionImage;
+    private Image treasureImage;
+    private Image closedDoorImage;
+    private Image openDoorImage;
+    private Image keyImage;
+    private Image portalImage;
+    private Image swordImage;
 
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
@@ -43,6 +49,12 @@ public class DungeonControllerLoader extends DungeonLoader {
         floorPlateImage = new Image((new File("images/pressure_plate.png")).toURI().toString());
         hunterImage = new Image((new File("images/deep_elf_master_archer.png")).toURI().toString());
         potionImage = new Image((new File("images/brilliant_blue_new.png")).toURI().toString());
+        treasureImage = new Image((new File("images/gold_pile.png")).toURI().toString());
+        closedDoorImage = new Image((new File("images/closed_door.png")).toURI().toString());
+        openDoorImage = new Image((new File("images/open_door.png")).toURI().toString());
+        keyImage = new Image((new File("images/key.png")).toURI().toString());
+        portalImage = new Image((new File("images/portal.png")).toURI().toString());
+        swordImage = new Image((new File("images/greatsword_1_new.png")).toURI().toString());
         
     }
 
@@ -66,17 +78,20 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Treasure treasure) {
-        //TODO for UI
+        ImageView view = new ImageView(treasureImage);
+        addEntity(treasure, view);
     }
 
     @Override
     public void onLoad(Door door) {
-        //TODO for UI
+        ImageView view = new ImageView(closedDoorImage);
+        addEntity(door, view);
     }
 
     @Override
     public void onLoad(Key key) {
-        //TODO for UI
+        ImageView view = new ImageView(keyImage);
+        addEntity(key, view);
     }
 
     @Override
@@ -93,7 +108,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Portal portal) {
-        //TODO for UI
+        ImageView view = new ImageView(portalImage);
+        addEntity(portal, view);
     }
 
     @Override
@@ -104,7 +120,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Sword sword) {
-        //TODO for UI
+        ImageView view = new ImageView(swordImage);
+        addEntity(sword, view);
     }
 
     @Override

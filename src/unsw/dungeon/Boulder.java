@@ -26,11 +26,11 @@ public class Boulder extends Entity implements MoveBehaviour{
         if (canMove(newX, newY)){
             x().set(newX);
             y().set(newY);
+            collide(newX, newY);
             changeFloorSwitchState(oldX, oldY, newX, newY);
         }
     }
 
-    
     public boolean canMove(int newX, int newY) {
         if (
             newX < 0 ||
@@ -55,6 +55,15 @@ public class Boulder extends Entity implements MoveBehaviour{
         }
     
         return true;
+    }
+
+    private void collide(int x, int y) {
+        List<Entity> entities = dungeon.getEntities(x, y);
+        for (Entity e : entities) {
+            if (e != null) {
+                e.onCollide(this);
+            }
+        }
     }
     
     /**

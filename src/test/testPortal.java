@@ -123,5 +123,25 @@ public class testPortal {
         assert(player.getX() == 2 && player.getY() == 3);
     }
 
+    @Test
+    public void testBoulder() {
+        Dungeon dungeon = new Dungeon(5, 5);
+        Player player = new Player(dungeon, 0, 1);
+        Boulder boulder = new Boulder(dungeon, 1, 1);
+        Portal portal1 = new Portal(dungeon, 2, 1, 1);
+        Portal portal2 = new Portal(dungeon, 4, 4, 1);
+
+        dungeon.addEntity(player);
+        dungeon.setPlayer(player);
+        dungeon.addEntity(boulder);
+        dungeon.addEntity(player);
+        dungeon.addEntity(portal1);
+        dungeon.addEntity(portal2);
+
+        player.moveRight();
+        assert(player.getX() == 1 && player.getY() == 1);
+        assert(boulder.getX() == 4 && boulder.getY() == 4);
+    }
+
     
 }

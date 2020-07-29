@@ -44,7 +44,7 @@ public abstract class DungeonLoader {
         
         //Creates a goal tree and adds to dungeon
         JSONObject jsonGoals = json.getJSONObject("goal-condition");
-        dungeon.addGoal(loadGoal(dungeon, jsonGoals));
+        dungeon.addGoal(loadGoal(dungeon, jsonGoals, null));
 
         //Initialise any enemies to track player
         loadEnemies(dungeon.getAllEntities(), dungeon.getPlayer());
@@ -156,7 +156,7 @@ public abstract class DungeonLoader {
      * @param json data to be read
      * @return the Goal created on current pass of the method
      */
-    private Goal loadGoal (Dungeon dungeon, JSONObject json) {
+    private Goal loadGoal (Dungeon dungeon, JSONObject json, Goal parentGoal) {
 
         String goal = json.getString("goal");
 
@@ -165,7 +165,7 @@ public abstract class DungeonLoader {
             JSONArray subgoals = json.getJSONArray("subgoals");
 
             for (int i = 0; i < subgoals.length(); i++) {
-                newGoal.addSubGoal(loadGoal(dungeon, subgoals.getJSONObject(i)));
+                newGoal.addSubGoal(loadGoal(dungeon, subgoals.getJSONObject(i), newGoal));
             }
             return newGoal;
 
@@ -174,15 +174,22 @@ public abstract class DungeonLoader {
             JSONArray subgoals = json.getJSONArray("subgoals");
 
             for (int i = 0; i < subgoals.length(); i++) {
-                newGoal.addSubGoal(loadGoal(dungeon, subgoals.getJSONObject(i)));
+                newGoal.addSubGoal(loadGoal(dungeon, subgoals.getJSONObject(i), newGoal));
             }
             return newGoal;
 
-        } else if (goal.equals("exit")) {
+        } else if (goal.equals("exit")) { //Only allows 1 exit as a goal (per layer of subgoals)
             Goal newGoal = null;
             List<Entity> entities = dungeon.getAllEntities();
             for (Entity e : entities) {
                 if (e instanceof Exit) {
+                    //special case that exits must be completed last
+                    if (parentGoal != null && parentGoal instanceof GoalAND) {
+                        GoalAND parent = (GoalAND) parentGoal;
+                        Exit exit = (Exit) e;
+                        exit.setParentAND(parent);
+                    }
+
                     return newGoal = (Goal) e;
                 }
             }

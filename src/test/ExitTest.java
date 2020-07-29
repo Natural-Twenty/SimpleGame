@@ -73,4 +73,52 @@ public class ExitTest {
         player.moveDown();
         assertTrue(dungeon.getCompletion());
     }
+
+    //either get two treasure AND reach exit, exit should not trigger before the treasure is collected
+    @Test
+    public void testTwoTreasureANDExit() {
+        Dungeon dungeon = new Dungeon(3, 2);
+        Player player = new Player(dungeon, 0, 0);
+        Treasure treasure = new Treasure(1, 0);
+        Treasure treasure2 = new Treasure(2, 0);
+        Exit exit = new Exit(0, 1);
+
+        dungeon.setPlayer(player);
+        dungeon.addEntity(player);
+
+        dungeon.addEntity(treasure);
+        treasure.attach(dungeon);
+
+        dungeon.addEntity(treasure2);
+        treasure2.attach(dungeon);
+
+        dungeon.addEntity(exit);
+        exit.attach(dungeon);
+
+        GoalAND getTreasure = new GoalAND();
+        getTreasure.addSubGoal(treasure);
+        getTreasure.addSubGoal(treasure2);
+
+        GoalAND doGoal = new GoalAND();
+        doGoal.addSubGoal(getTreasure);
+        exit.setParentAND(doGoal);
+        doGoal.addSubGoal(exit);
+
+        dungeon.addGoal(doGoal);
+
+        assertFalse(dungeon.getCompletion());
+        player.moveDown(); //If code isnt working, exit is triggered as complete now
+        
+        player.moveUp();
+        player.moveRight(); //get t1
+        player.moveRight(); //get t2
+
+        assertFalse(dungeon.getCompletion()); //Exit should not have been triggered earlier as it was in an AND
+
+        player.moveLeft();
+        player.moveLeft();
+
+        player.moveDown();
+        assertTrue(dungeon.getCompletion());
+    }
 }

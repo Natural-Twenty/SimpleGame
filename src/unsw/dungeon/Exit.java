@@ -11,6 +11,7 @@ public class Exit extends Entity implements Goal, Subject {
 
     private boolean completed;
     private List<Observer> listObservers;
+    private GoalAND parentAND;
 
     /**
      * Creates a new exit entity at the given coordinates
@@ -21,14 +22,31 @@ public class Exit extends Entity implements Goal, Subject {
         super(x, y);
         completed = false;
         listObservers = new ArrayList<>();
+        parentAND = null;
     }
 
     @Override
     public void onCollide(Entity e) {
-        if (e instanceof Player) {
-            completed = true; //doesnt address problem of exit being always last in multi-goal
+        if (e instanceof Player && canComplete()) {
+            completed = true;
             updateObservers();
         }
+    }
+
+    public void setParentAND(GoalAND parent) {
+        parentAND = parent;
+    }
+
+    /**
+     * Checks if Exits parent GoalAND (if it has one), has completed all
+     * other objectives, if all non-exit goals are complete, then we are allowed
+     * to complete this exit
+     */
+    public boolean canComplete() {
+        if (parentAND != null && parentAND.isCompleteExceptExit(this) == false) {
+            return false;
+        }
+        return true;
     }
 
     @Override

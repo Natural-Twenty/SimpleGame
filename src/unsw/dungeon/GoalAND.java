@@ -33,6 +33,25 @@ public class GoalAND implements Goal{
     }
 
     /**
+     * Calls isComplete on all direct children of the current GoalAND
+     * that are not the given e
+     * @param e instance of an exit object
+     * @return true if all non-exit direct subgoals are complete
+     */
+    public boolean isCompleteExceptExit(Exit e) {
+
+        for (Goal g : subGoals) {
+            if (!g.equals(e)) {
+                if (g.isComplete() == false) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Takes in an object of type goal and adds
      * it to the this.subGoals list
      * @param goal new goal to be added to subGoals list

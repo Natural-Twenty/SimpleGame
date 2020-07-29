@@ -105,7 +105,9 @@ public class Boulder extends Entity implements MoveBehaviour{
             Player player = (Player) e;
             int x = player.computeXDirection(this);
             int y = player.computeYDirection(this);
-            List<Entity> entities = dungeon.getEntities(x, y);
+            int newX = getX() + x;
+            int newY = getY() + y;
+            List<Entity> entities = dungeon.getEntities(newX, newY);
             for (Entity ent : entities) {
                 if (ent.isBarrier(this)) {
                     // Boulder is blocked
@@ -127,7 +129,9 @@ public class Boulder extends Entity implements MoveBehaviour{
             Player player = (Player) entity;
             int x = player.computePrevXDirection(this);
             int y = player.computePrevYDirection(this);
-            moveTo(x, y);
+            int newX = getX() + x;
+            int newY = getY() + y;
+            moveTo(newX, newY);
         }
     }
 }

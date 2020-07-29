@@ -131,8 +131,8 @@ public class Player extends Entity implements MoveBehaviour, Subject{
      * @return The relative x direction of the entity.
      */
     public int computeXDirection(Entity e) {
-        int xDiff = e.getX() - getX();
-        return e.getX() + xDiff;
+        return e.getX() - getX();
+        
     }
     /**
      * Computers the relative y direction of an entity from the player's
@@ -141,8 +141,8 @@ public class Player extends Entity implements MoveBehaviour, Subject{
      * @return The relative y direction of the entity.
      */
     public int computeYDirection(Entity e) {
-        int yDiff = e.getY() - getY();
-        return e.getY() + yDiff;
+        return e.getY() - getY();
+        
     }
     /**
      * Computers the relative x direction of an entity from the player's
@@ -151,8 +151,8 @@ public class Player extends Entity implements MoveBehaviour, Subject{
      * @return The relative x direction of the entity.
      */
     public int computePrevXDirection(Entity e) {
-        int xDiff = e.getX() - getPrevX();
-        return e.getX() + xDiff;
+        return e.getX() - getPrevX();
+        
     }
     /**
      * Computers the relative y direction of an entity from the player's
@@ -161,8 +161,8 @@ public class Player extends Entity implements MoveBehaviour, Subject{
      * @return The relative y direction of the entity.
      */
     public int computePrevYDirection(Entity e) {
-        int yDiff = e.getY() - getPrevY();
-        return e.getY() + yDiff;
+        return e.getY() - getPrevY();
+        
     }
 
     /**

@@ -33,6 +33,7 @@ public class Portal extends Entity {
             Portal portalPair = findPair();
             int teleportX = portalPair.getX();
             int teleportY = portalPair.getY();
+            movePushables(e, teleportX, teleportY);
             teleport(e, teleportX, teleportY);
         }
     }
@@ -69,6 +70,27 @@ public class Portal extends Entity {
             }
         }
         return null;
+    }
+
+    private void movePushables(Entity e, int x, int y) {
+        if (e instanceof Player) {
+            Player player = (Player) e;
+            int xOffset = player.computePrevXDirection(this);
+            int yOffset = player.computePrevYDirection(this);
+            int newX = x + xOffset;
+            int newY = y + yOffset;
+            List<Entity>entities = dungeon.getEntities(x, y);
+            for (Entity ent : entities) {
+                pushBoulder(ent, newX, newY);
+            }
+        }
+    }
+
+    private void pushBoulder(Entity e, int x, int y) {
+        if (e instanceof Boulder) {
+            Boulder boulder = (Boulder) e;
+            boulder.moveTo(x, y);
+        }
     }
     /**
      * Checks if the provided u_id is equal to the portal caller's u_id.

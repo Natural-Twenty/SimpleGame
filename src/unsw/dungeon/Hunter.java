@@ -31,16 +31,27 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
         return defeated;
     }
 
+    /**
+     * Remove an observer from a subject.
+     * @param o An observer to remove
+     */
     @Override
     public void detach(Observer o) {
         listObservers.remove(o);
     }
 
+    /**
+     * Add an observer to the subject.
+     * @param o An observer to add
+     */
     @Override
     public void attach(Observer o) {
         listObservers.add(o);
     }
 
+    /**
+     * Notify all observers that are attached to subject
+     */
     @Override
     public void updateObservers() {
         for (Observer o : listObservers) {

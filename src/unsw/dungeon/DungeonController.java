@@ -8,9 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
+// import javafx.scene.layout.StackPane;
+// import javafx.collections.ObservableList;
+// import javafx.scene.Node;
 
 
 import java.io.File;
@@ -27,16 +27,18 @@ public class DungeonController {
     @FXML
     private GridPane background;
 
-    private List<ImageView> initialEntities;
+    private List<ImageView> stationaryEntities;
+    private List<ImageView> movingEntities;
 
     private Player player;
 
     private Dungeon dungeon;
 
-    public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
+    public DungeonController(Dungeon dungeon, List<ImageView> stationaryEntities, List<ImageView> movingEntities) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
-        this.initialEntities = new ArrayList<>(initialEntities);
+        this.stationaryEntities = new ArrayList<>(stationaryEntities);
+        this.movingEntities = new ArrayList<>(movingEntities);
     }
 
     @FXML
@@ -50,7 +52,20 @@ public class DungeonController {
             }
         }
 
-        for (ImageView entity : initialEntities) {
+        for (ImageView entity : stationaryEntities) {
+            background.getChildren().add(entity);
+        }
+
+        //initialise foreground with blank images
+        for (int x = 0; x < dungeon.getWidth(); x++) {
+            for (int y = 0; y < dungeon.getHeight(); y++) {
+                ImageView blank = new ImageView(ground);
+                blank.setOpacity(0);
+                foreground.add(blank, x, y);
+            }
+        }
+
+        for (ImageView entity : movingEntities) {
             foreground.getChildren().add(entity);
         }
 

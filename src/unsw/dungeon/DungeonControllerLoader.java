@@ -21,7 +21,8 @@ import java.io.File;
  */
 public class DungeonControllerLoader extends DungeonLoader {
 
-    private List<ImageView> entities;
+    private List<ImageView> stationaryEntities;
+    private List<ImageView> movingEntities;
 
     //Images
     private Image playerImage;
@@ -41,7 +42,10 @@ public class DungeonControllerLoader extends DungeonLoader {
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
         super(filename);
-        entities = new ArrayList<>();
+
+        stationaryEntities = new ArrayList<>();
+        movingEntities = new ArrayList<>();
+
         playerImage = new Image((new File("images/human_new.png")).toURI().toString());
         wallImage = new Image((new File("images/brick_brown_0.png")).toURI().toString());
         exitImage = new Image((new File("images/exit.png")).toURI().toString());
@@ -132,7 +136,11 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
-        entities.add(view);
+        if (entity instanceof MoveBehaviour) {
+            movingEntities.add(view);
+        } else {
+            stationaryEntities.add(view);
+        }
     }
 
     /**
@@ -185,7 +193,7 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @throws FileNotFoundException
      */
     public DungeonController loadController() throws FileNotFoundException {
-        return new DungeonController(load(), entities);
+        return new DungeonController(load(), stationaryEntities, movingEntities);
     }
 
 

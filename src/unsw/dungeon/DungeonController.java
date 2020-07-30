@@ -8,6 +8,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+
 
 import java.io.File;
 
@@ -17,9 +21,11 @@ import java.io.File;
  *
  */
 public class DungeonController {
+    @FXML
+    private GridPane foreground;
 
     @FXML
-    private GridPane squares;
+    private GridPane background;
 
     private List<ImageView> initialEntities;
 
@@ -37,36 +43,37 @@ public class DungeonController {
     public void initialize() {
         Image ground = new Image((new File("images/dirt_0_new.png")).toURI().toString());
 
-        // Add the ground first so it is below all other entities
+        // Add the ground to background first so it is below all other entities
         for (int x = 0; x < dungeon.getWidth(); x++) {
             for (int y = 0; y < dungeon.getHeight(); y++) {
-                squares.add(new ImageView(ground), x, y);
+                background.add(new ImageView(ground), x, y);
             }
         }
 
-        for (ImageView entity : initialEntities)
-            squares.getChildren().add(entity);
+        for (ImageView entity : initialEntities) {
+            foreground.getChildren().add(entity);
+        }
 
     }
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {
-        case UP:
-            player.moveUp();
-            break;
-        case DOWN:
-            player.moveDown();
-            break;
-        case LEFT:
-            player.moveLeft();
-            break;
-        case RIGHT:
-            player.moveRight();
-            break;
-        default:
-            break;
-        }
+            case UP:
+                player.moveUp();
+                break;
+            case DOWN:
+                player.moveDown();
+                break;
+            case LEFT:
+                player.moveLeft();
+                break;
+            case RIGHT:
+                player.moveRight();
+                break;
+            default:
+                break;
+            }
     }
 
 }

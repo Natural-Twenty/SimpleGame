@@ -60,6 +60,7 @@ public class Treasure extends Entity implements Goal, Subject{
             collected = true;
             p.equip(this);
             updateObservers();
+            setDisplayOnScreen(false);
         }
     }
 }

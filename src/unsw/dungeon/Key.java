@@ -32,6 +32,7 @@ public class Key extends Entity {
             List<Entity> inventory = player.getInventory();
             if(canPickUpKey(inventory)) {
                 player.equip(this);
+                setDisplayOnScreen(false);
             }
         }
     }

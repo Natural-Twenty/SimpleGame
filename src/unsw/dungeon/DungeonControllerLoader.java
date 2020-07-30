@@ -148,6 +148,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     private void trackPosition(Entity entity, Node node) {
         GridPane.setColumnIndex(node, entity.getX());
         GridPane.setRowIndex(node, entity.getY());
+
         entity.x().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
@@ -155,11 +156,24 @@ public class DungeonControllerLoader extends DungeonLoader {
                 GridPane.setColumnIndex(node, newValue.intValue());
             }
         });
+        
         entity.y().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
                     Number oldValue, Number newValue) {
                 GridPane.setRowIndex(node, newValue.intValue());
+            }
+        });
+
+        //Tracks an entity in terms of what image to display (might need to change to an enum so that door can change image etc)
+        entity.displayOnScreen().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable,
+                    Boolean oldValue, Boolean newValue) {
+                if (newValue == false) {
+                    ImageView image = (ImageView) node;
+                    image.setImage(null);
+                }
             }
         });
     }

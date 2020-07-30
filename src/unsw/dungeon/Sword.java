@@ -38,6 +38,7 @@ public class Sword extends Entity implements Weapon{
             Player player = (Player) e;
             if (player.hasSword() == false) {
                 player.equip(this);
+                setDisplayOnScreen(false);
             }
         }
     }

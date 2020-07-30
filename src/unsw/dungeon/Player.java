@@ -275,8 +275,10 @@ public class Player extends Entity implements MoveBehaviour, Subject{
             if(this.canFight(h)) {
                 dungeon.removeEntity(h);
                 h.defeat();
+                h.setDisplayOnScreen(false);
             } else {
                 dungeon.removeEntity(this);
+                setDisplayOnScreen(false);
             }
         }
     }

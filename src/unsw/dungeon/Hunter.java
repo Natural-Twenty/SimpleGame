@@ -193,8 +193,10 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
             if(p.canFight(this)) {
                 dungeon.removeEntity(this);
                 defeat();
+                setDisplayOnScreen(false);
             } else {
                 dungeon.removeEntity(p);
+                p.setDisplayOnScreen(false);
             }
 
         }

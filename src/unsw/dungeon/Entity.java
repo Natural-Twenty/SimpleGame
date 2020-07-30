@@ -1,6 +1,8 @@
 package unsw.dungeon;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
@@ -14,6 +16,8 @@ public class Entity {
     // externally observed.
     private IntegerProperty x, y;
 
+    private BooleanProperty displayOnScreen;
+
     /**
      * Create an entity positioned in square (x,y)
      * @param x x axis position
@@ -22,6 +26,19 @@ public class Entity {
     public Entity(int x, int y) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
+        this.displayOnScreen = new SimpleBooleanProperty(true);
+    }
+
+    public BooleanProperty displayOnScreen() {
+        return displayOnScreen;
+    }
+
+    public boolean getDisplayOnScreen() {
+        return displayOnScreen().get();
+    }
+
+    public void setDisplayOnScreen(boolean state) {
+        displayOnScreen().set(state);
     }
 
     public IntegerProperty x() {

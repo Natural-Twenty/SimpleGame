@@ -21,7 +21,8 @@ import java.io.File;
  */
 public class DungeonControllerLoader extends DungeonLoader {
 
-    private List<ImageView> entities;
+    private List<ImageView> stationaryEntities;
+    private List<ImageView> movingEntities;
 
     //Images
     private Image playerImage;
@@ -41,7 +42,10 @@ public class DungeonControllerLoader extends DungeonLoader {
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
         super(filename);
-        entities = new ArrayList<>();
+
+        stationaryEntities = new ArrayList<>();
+        movingEntities = new ArrayList<>();
+
         playerImage = new Image((new File("images/human_new.png")).toURI().toString());
         wallImage = new Image((new File("images/brick_brown_0.png")).toURI().toString());
         exitImage = new Image((new File("images/exit.png")).toURI().toString());
@@ -132,7 +136,11 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
-        entities.add(view);
+        if (entity instanceof MoveBehaviour) {
+            movingEntities.add(view);
+        } else {
+            stationaryEntities.add(view);
+        }
     }
 
     /**
@@ -148,6 +156,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     private void trackPosition(Entity entity, Node node) {
         GridPane.setColumnIndex(node, entity.getX());
         GridPane.setRowIndex(node, entity.getY());
+
         entity.x().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
@@ -155,11 +164,24 @@ public class DungeonControllerLoader extends DungeonLoader {
                 GridPane.setColumnIndex(node, newValue.intValue());
             }
         });
+        
         entity.y().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
                     Number oldValue, Number newValue) {
                 GridPane.setRowIndex(node, newValue.intValue());
+            }
+        });
+
+        //Tracks an entity in terms of what image to display (might need to change to an enum so that door can change image etc)
+        entity.displayOnScreen().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable,
+                    Boolean oldValue, Boolean newValue) {
+                if (newValue == false) {
+                    ImageView image = (ImageView) node;
+                    image.setImage(null);
+                }
             }
         });
     }
@@ -171,7 +193,7 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @throws FileNotFoundException
      */
     public DungeonController loadController() throws FileNotFoundException {
-        return new DungeonController(load(), entities);
+        return new DungeonController(load(), stationaryEntities, movingEntities);
     }
 
 

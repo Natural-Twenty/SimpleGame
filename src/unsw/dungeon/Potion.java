@@ -63,6 +63,7 @@ public class Potion extends Entity implements Weapon, Observer {
             Player player = (Player) e;
             if (player.isInvincible() == false) {
                 player.equip(this);
+                setDisplayOnScreen(false);
             }
         }
     }

@@ -37,6 +37,9 @@ public class DungeonController {
     @FXML
     private Button menuButton;
 
+    @FXML
+    private Button retryButton;
+
     private List<ImageView> stationaryEntities;
     private List<ImageView> movingEntities;
 
@@ -94,12 +97,17 @@ public class DungeonController {
                 if (newValue.intValue() == 0) {
                     completionMessage.setText("");
                     menuButton.setVisible(false);
+                    retryButton.setVisible(false);
+
                 } else if (newValue.intValue() == 1) {
                     completionMessage.setText("LEVEL COMPLETE");
                     menuButton.setVisible(true);
+                    retryButton.setVisible(true);
+
                 } else if (newValue.intValue() == 2) {
                     completionMessage.setText("LEVEL FAILED");
                     menuButton.setVisible(true);
+                    retryButton.setVisible(true);
                 }
             }
         });
@@ -126,14 +134,14 @@ public class DungeonController {
     }
 
     @FXML
-    public void loadMenu(Event event) {
+    public void handleMenuButton(Event event) {
         menuScreen.start();
     }
 
-    // @FXML
-    // public void retry(Event event) {
-    //     dungeonScreen.start();
-    // }
+    @FXML
+    public void handleRetryButton(Event event) {
+        dungeonScreen.start();
+    }
 
 
     public void setMenuScreen(MenuScreen menuScreen) {

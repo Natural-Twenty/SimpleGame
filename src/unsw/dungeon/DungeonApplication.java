@@ -32,7 +32,7 @@ public class DungeonApplication extends Application {
 
         dungeonScreen.getController().setMenuScreen(menuScreen);
         //let controller see its screen so that it can reset the level without needing to go to menu
-        //dungeonScreen.getController().setDungeonScreen(dungeonScreen);
+        dungeonScreen.getController().setDungeonScreen(dungeonScreen);
 
         menuScreen.start();
 

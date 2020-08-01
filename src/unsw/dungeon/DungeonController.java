@@ -8,9 +8,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 // import javafx.scene.layout.StackPane;
 // import javafx.collections.ObservableList;
 // import javafx.scene.Node;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 
 
 import java.io.File;
@@ -26,6 +29,9 @@ public class DungeonController {
 
     @FXML
     private GridPane background;
+
+    @FXML
+    private Text completionMessage;
 
     private List<ImageView> stationaryEntities;
     private List<ImageView> movingEntities;
@@ -69,6 +75,24 @@ public class DungeonController {
             foreground.getChildren().add(entity);
         }
 
+        setDungeonListener();
+
+    }
+
+    private void setDungeonListener() {
+        dungeon.levelComplete().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable,
+                    Number oldValue, Number newValue) {
+                if (newValue.intValue() == 0) {
+                    completionMessage.setText("");
+                } else if (newValue.intValue() == 1) {
+                    completionMessage.setText("LEVEL COMPLETE");
+                } else if (newValue.intValue() == 2) {
+                    completionMessage.setText("LEVEL FAILED");
+                }
+            }
+        });
     }
 
     @FXML

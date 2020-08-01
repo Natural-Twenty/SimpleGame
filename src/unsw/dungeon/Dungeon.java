@@ -4,8 +4,8 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * A dungeon in the interactive dungeon player.
@@ -18,11 +18,12 @@ import javafx.beans.property.SimpleBooleanProperty;
  */
 public class Dungeon implements Observer{
 
+    
     private int width, height;
     private List<Entity> entities;
     private Player player;
     private Goal goal;
-    private BooleanProperty levelComplete;
+    private IntegerProperty levelComplete;
 
     public Dungeon(int width, int height) {
         this.width = width;
@@ -30,19 +31,23 @@ public class Dungeon implements Observer{
         this.entities = new ArrayList<>();
         this.player = null;
         this.goal = null;
-        this.levelComplete = new SimpleBooleanProperty(false);
+        this.levelComplete = new SimpleIntegerProperty(0);
     }
 
-    //Making this a boolean property allows us to listen for changes
-    public BooleanProperty levelComplete() {
+
+    //IntegerPropert allows us to save multiple states
+    // 0 - in progress
+    // 1 - complete
+    // 2 - failed
+    public IntegerProperty levelComplete() {
         return levelComplete;
     }
 
-    public boolean getlevelComplete() {
+    public int getlevelComplete() {
         return levelComplete().get();
     }
 
-    public void setlevelComplete(boolean state) {
+    public void setlevelComplete(int state) {
         levelComplete().set(state);
     }
 
@@ -84,9 +89,7 @@ public class Dungeon implements Observer{
 
     public void checkGoalStatus() {
         if(goal.isComplete()){
-            setlevelComplete(true);
-            // removeEntity(player);
-            // System.out.println("Congrats you win");
+            setlevelComplete(1);
         }
     }
 

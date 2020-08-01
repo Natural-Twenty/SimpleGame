@@ -1,7 +1,6 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
 
@@ -22,9 +21,9 @@ public class TreasureTest {
         dungeon.addGoal(treasure);
         
 
-        assertFalse(dungeon.getlevelComplete());
+        assertEquals(0, dungeon.getlevelComplete());
         player.moveRight();
-        assertTrue(dungeon.getlevelComplete());
+        assertEquals(1, dungeon.getlevelComplete());
     }
 
     @Test
@@ -47,11 +46,11 @@ public class TreasureTest {
 
         dungeon.addGoal(getTreasure);
 
-        assertFalse(dungeon.getlevelComplete());
+        assertEquals(0, dungeon.getlevelComplete());
         player.moveRight();
-        assertFalse(dungeon.getlevelComplete());
+        assertEquals(0, dungeon.getlevelComplete());
         player.moveRight();
-        assertTrue(dungeon.getlevelComplete());
+        assertEquals(1, dungeon.getlevelComplete());
         
     }
 }

@@ -1,5 +1,6 @@
 package test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -114,7 +115,7 @@ public class EnemyTest {
         List<Entity> entities = dungeon.getEntities(2, 1);
         assertFalse(entities.contains(hunter)); //enemy is killed and removed from dungeon list
 
-        assertTrue(dungeon.getlevelComplete());
+        assertEquals(1, dungeon.getlevelComplete()); //dungeon is completed
         player.moveLeft();
         assertFalse(player.getX() == 1 && player.getY() == 1); //goal is complete player shouldnt be able to move
     }
@@ -168,7 +169,7 @@ public class EnemyTest {
         List<Entity> entities2 = dungeon.getAllEntities();
         assertFalse(entities2.contains(hunter2));
 
-        assertTrue(dungeon.getlevelComplete());
+        assertEquals(1, dungeon.getlevelComplete()); //dungeon is completed
 
     }
 }

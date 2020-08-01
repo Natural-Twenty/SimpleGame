@@ -12,14 +12,23 @@ import java.lang.Math;
 public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Subject{
 
     private Dungeon dungeon;
-    private boolean defeated;
     private List<Observer> listObservers;
+
+    private HunterState normalState;
+    private HunterState fearedState;
+    private HunterState deadState;
+
+    private HunterState currState;
 
     public Hunter(Dungeon dungeon, int x, int y) {
         super(x, y);
         this.dungeon = dungeon;
-        this.defeated = false;
         listObservers = new ArrayList<>();
+
+        normalState = new HunterNormalState(this);
+        fearedState = new HunterFearState(this);
+        deadState = new HunterDeadState(this);
+        currState = normalState;
     }
 
     /**
@@ -28,7 +37,7 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
      */
     @Override
     public boolean isComplete() {
-        return defeated;
+        return currState.isDefeated();
     }
 
     /**
@@ -74,8 +83,12 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
     public void update(Player player) {
         int targetX = player.getX();
         int targetY = player.getY();
-        boolean fearPlayer = player.isInvincible();
-        findClosestPath(targetX, targetY, fearPlayer);
+        if (player.isInvincible()) {
+            fear();
+        } else {
+            normalise();
+        }
+        findClosestPath(targetX, targetY);
     }
 
     /**
@@ -86,7 +99,7 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
      * @param targetX int giving location on x axis
      * @param targetY int giving location on y axis
      */
-    private void findClosestPath(int targetX, int targetY, boolean fearPlayer) {
+    private void findClosestPath(int targetX, int targetY) {
         int currX = getX();
         int currY = getY();
 
@@ -97,48 +110,16 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
         if (xDiff == 0 && yDiff == 0) {
             //do nothing
         } else if (yDiff == 0) {
-            moveHorizontal(currX, currY, targetX, targetY, fearPlayer);
+            currState.moveHorizontal(currX, currY, targetX, targetY);
         } else if (xDiff == 0) {
-            moveVertical(currX, currY, targetX, targetY, fearPlayer);
+            currState.moveVertical(currX, currY, targetX, targetY);
         } else if (xDiff <= yDiff) {
-            moveHorizontal(currX, currY, targetX, targetY, fearPlayer);
+            currState.moveHorizontal(currX, currY, targetX, targetY);
         } else if (yDiff < xDiff) {
-            moveVertical(currX, currY, targetX, targetY, fearPlayer);
+            currState.moveVertical(currX, currY, targetX, targetY);
         }
         
 
-    }
-    
-    private void moveHorizontal(int currX, int currY, int targetX, int targetY, boolean fearPlayer) {
-        if (fearPlayer == false) {
-            if (targetX < currX) {
-                moveTo(currX - 1, currY);
-            } else {
-                moveTo(currX + 1, currY);
-            }
-        } else {
-            if (targetX < currX) {
-                moveTo(currX + 1, currY);
-            } else {
-                moveTo(currX - 1, currY);
-            }
-        }
-    }
-
-    private void moveVertical(int currX, int currY, int targetX, int targetY, boolean fearPlayer) {
-        if (fearPlayer == false) {
-            if (targetY < currY) {
-                moveTo(currX, currY - 1);
-            } else {
-                moveTo(currX, currY + 1);
-            }
-        } else {
-            if (targetY < currY) {
-                moveTo(currX, currY + 1);
-            } else {
-                moveTo(currX, currY - 1);
-            }
-        }
     }
 
     @Override
@@ -181,10 +162,34 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
     }
 
     public void defeat() {
-        defeated = true;
+        currState.killHunter();
         updateObservers();
     }
 
+    public void fear() {
+        currState.fearHunter();
+    }
+
+    public void normalise() {
+        currState.normaliseHunter();
+    }
+
+    public void setState(HunterState state) {
+        currState = state;
+    }
+
+    public HunterState getNormalState() {
+        return normalState;
+    }
+
+    public HunterState getFearedState() {
+        return fearedState;
+    }
+
+    public HunterState getDeadState() {
+        return deadState;
+    }
+    
     @Override
     public void onCollide(Entity e) {
         if (e instanceof Player) {

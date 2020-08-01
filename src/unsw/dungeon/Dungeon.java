@@ -4,6 +4,9 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -15,11 +18,12 @@ import java.util.List;
  */
 public class Dungeon implements Observer{
 
+    
     private int width, height;
     private List<Entity> entities;
     private Player player;
     private Goal goal;
-    private boolean levelComplete;
+    private IntegerProperty levelComplete;
 
     public Dungeon(int width, int height) {
         this.width = width;
@@ -27,7 +31,24 @@ public class Dungeon implements Observer{
         this.entities = new ArrayList<>();
         this.player = null;
         this.goal = null;
-        this.levelComplete = false;
+        this.levelComplete = new SimpleIntegerProperty(0);
+    }
+
+
+    //IntegerPropert allows us to save multiple states
+    // 0 - in progress
+    // 1 - complete
+    // 2 - failed
+    public IntegerProperty levelComplete() {
+        return levelComplete;
+    }
+
+    public int getlevelComplete() {
+        return levelComplete().get();
+    }
+
+    public void setlevelComplete(int state) {
+        levelComplete().set(state);
     }
 
     public int getWidth() {
@@ -68,16 +89,14 @@ public class Dungeon implements Observer{
 
     public void checkGoalStatus() {
         if(goal.isComplete()){
-            levelComplete = true;
-            removeEntity(player);
-            System.out.println("Congrats you win");
+            setlevelComplete(1);
         }
     }
 
-    //quick method for checking if a level is in completed mode
-    public boolean getCompletion() {
-        return levelComplete;
-    }
+    // //quick method for checking if a level is in completed mode
+    // public boolean getCompletion() {
+    //     return levelComplete.get();
+    // }
 
     //method overloading on update
     @Override

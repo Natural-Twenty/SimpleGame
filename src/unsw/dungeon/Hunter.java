@@ -202,6 +202,7 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
             } else {
                 dungeon.removeEntity(p);
                 p.setDisplayOnScreen(false);
+                dungeon.setlevelComplete(2); //level failed
             }
 
         }

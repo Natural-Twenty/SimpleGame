@@ -1,5 +1,6 @@
 package test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -137,7 +138,7 @@ public class testBoulderAndSwitches {
         player.moveDown(); //should push boulder 1 onto plate 1 completing all goals freezing player
         assertTrue(floorSwitch1.isTriggered());
 
-        assertTrue(dungeon.getCompletion());
+        assertEquals(1, dungeon.getlevelComplete());
 
         player.moveUp(); //player shouldn't move back to 0,0
         assertFalse(player.getX() == 0 && player.getY() == 0);

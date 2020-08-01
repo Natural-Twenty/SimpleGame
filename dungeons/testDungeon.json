@@ -251,6 +251,12 @@
       },
       {
         "x": 8,
+        "y": 4,
+        "type": "invincibility",
+        "id": 0
+      },
+      {
+        "x": 8,
         "y": 8,
         "type": "portal",
         "id": 0

@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
@@ -35,10 +36,14 @@
             <Font size="22.0" />
          </font>
       </Text>
-      <Button fx:id="levelSelectButton" mnemonicParsing="false" onMouseClicked="#loadLevelSelect" text="Level Select" visible="false" StackPane.alignment="CENTER">
+      <HBox alignment="CENTER" StackPane.alignment="CENTER">
          <StackPane.margin>
             <Insets top="50.0" />
          </StackPane.margin>
-      </Button>
+         <children>
+            <Button fx:id="menuButton" mnemonicParsing="false" onMouseClicked="#handleMenuButton" text="Menu" visible="false" />
+            <Button fx:id="retryButton" mnemonicParsing="false" onAction="#handleRetryButton" text="Retry" visible="false" />
+         </children>
+      </HBox>
    </children>
 </StackPane>

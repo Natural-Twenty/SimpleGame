@@ -22,9 +22,9 @@ public class TreasureTest {
         dungeon.addGoal(treasure);
         
 
-        assertFalse(dungeon.getCompletion());
+        assertFalse(dungeon.getlevelComplete());
         player.moveRight();
-        assertTrue(dungeon.getCompletion());
+        assertTrue(dungeon.getlevelComplete());
     }
 
     @Test
@@ -47,11 +47,11 @@ public class TreasureTest {
 
         dungeon.addGoal(getTreasure);
 
-        assertFalse(dungeon.getCompletion());
+        assertFalse(dungeon.getlevelComplete());
         player.moveRight();
-        assertFalse(dungeon.getCompletion());
+        assertFalse(dungeon.getlevelComplete());
         player.moveRight();
-        assertTrue(dungeon.getCompletion());
+        assertTrue(dungeon.getlevelComplete());
         
     }
 }

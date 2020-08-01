@@ -28,7 +28,7 @@ public class ExitTest {
         assertTrue(player.getX() == 1 && player.getY() == 2);
 
         //player shouldn't move since they triggered all goals
-        assertTrue(dungeon.getCompletion());
+        assertTrue(dungeon.getlevelComplete());
         player.moveDown();
         assertTrue(player.getX() == 1 && player.getY() == 2);
 
@@ -65,13 +65,13 @@ public class ExitTest {
 
         dungeon.addGoal(chooseGoal);
 
-        assertFalse(dungeon.getCompletion());
+        assertFalse(dungeon.getlevelComplete());
         player.moveRight();
-        assertFalse(dungeon.getCompletion());
+        assertFalse(dungeon.getlevelComplete());
         player.moveLeft();
         
         player.moveDown();
-        assertTrue(dungeon.getCompletion());
+        assertTrue(dungeon.getlevelComplete());
     }
 
     //either get two treasure AND reach exit, exit should not trigger before the treasure is collected
@@ -106,19 +106,19 @@ public class ExitTest {
 
         dungeon.addGoal(doGoal);
 
-        assertFalse(dungeon.getCompletion());
+        assertFalse(dungeon.getlevelComplete());
         player.moveDown(); //If code isnt working, exit is triggered as complete now
         
         player.moveUp();
         player.moveRight(); //get t1
         player.moveRight(); //get t2
 
-        assertFalse(dungeon.getCompletion()); //Exit should not have been triggered earlier as it was in an AND
+        assertFalse(dungeon.getlevelComplete()); //Exit should not have been triggered earlier as it was in an AND
 
         player.moveLeft();
         player.moveLeft();
 
         player.moveDown();
-        assertTrue(dungeon.getCompletion());
+        assertTrue(dungeon.getlevelComplete());
     }
 }

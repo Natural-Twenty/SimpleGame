@@ -137,7 +137,7 @@ public class testBoulderAndSwitches {
         player.moveDown(); //should push boulder 1 onto plate 1 completing all goals freezing player
         assertTrue(floorSwitch1.isTriggered());
 
-        assertTrue(dungeon.getCompletion());
+        assertTrue(dungeon.getlevelComplete());
 
         player.moveUp(); //player shouldn't move back to 0,0
         assertFalse(player.getX() == 0 && player.getY() == 0);

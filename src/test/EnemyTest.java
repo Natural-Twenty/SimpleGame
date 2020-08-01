@@ -114,7 +114,7 @@ public class EnemyTest {
         List<Entity> entities = dungeon.getEntities(2, 1);
         assertFalse(entities.contains(hunter)); //enemy is killed and removed from dungeon list
 
-        assertTrue(dungeon.getCompletion());
+        assertTrue(dungeon.getlevelComplete());
         player.moveLeft();
         assertFalse(player.getX() == 1 && player.getY() == 1); //goal is complete player shouldnt be able to move
     }
@@ -168,7 +168,7 @@ public class EnemyTest {
         List<Entity> entities2 = dungeon.getAllEntities();
         assertFalse(entities2.contains(hunter2));
 
-        assertTrue(dungeon.getCompletion());
+        assertTrue(dungeon.getlevelComplete());
 
     }
 }

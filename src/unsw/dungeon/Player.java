@@ -73,7 +73,8 @@ public class Player extends Entity implements MoveBehaviour, Subject{
      */
     public boolean canMove(int x, int y) {
 
-        if (dungeon.getCompletion()) { //when true dungeon is complete so player cannot move
+        //if we do a state pattern for player we could have it observe this value to change to 'dead'
+        if (dungeon.getlevelComplete()) { //when true dungeon is complete so player cannot move
             return false;
         }
 

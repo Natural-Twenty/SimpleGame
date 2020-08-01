@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -14,7 +15,7 @@ import javafx.scene.text.Text;
 // import javafx.scene.Node;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-
+import javafx.event.Event;
 
 import java.io.File;
 
@@ -32,6 +33,9 @@ public class DungeonController {
 
     @FXML
     private Text completionMessage;
+
+    @FXML
+    private Button levelSelectButton;
 
     private List<ImageView> stationaryEntities;
     private List<ImageView> movingEntities;
@@ -86,10 +90,13 @@ public class DungeonController {
                     Number oldValue, Number newValue) {
                 if (newValue.intValue() == 0) {
                     completionMessage.setText("");
+                    levelSelectButton.setVisible(false);
                 } else if (newValue.intValue() == 1) {
                     completionMessage.setText("LEVEL COMPLETE");
+                    levelSelectButton.setVisible(true);
                 } else if (newValue.intValue() == 2) {
                     completionMessage.setText("LEVEL FAILED");
+                    levelSelectButton.setVisible(true);
                 }
             }
         });
@@ -113,6 +120,12 @@ public class DungeonController {
             default:
                 break;
             }
+    }
+
+    @FXML
+    public void loadLevelSelect(Event event) {
+        //Somehow we will change FXML/Controller here to return to a level select menu
+        //Also consider adding a reset button here that reloads current level
     }
 
 }

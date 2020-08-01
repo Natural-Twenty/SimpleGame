@@ -35,7 +35,7 @@
             <Font size="22.0" />
          </font>
       </Text>
-      <Button fx:id="levelSelectButton" mnemonicParsing="false" onMouseClicked="#loadLevelSelect" text="Level Select" visible="false" StackPane.alignment="CENTER">
+      <Button fx:id="menuButton" mnemonicParsing="false" onMouseClicked="#loadMenu" text="Menu" visible="false" StackPane.alignment="CENTER">
          <StackPane.margin>
             <Insets top="50.0" />
          </StackPane.margin>

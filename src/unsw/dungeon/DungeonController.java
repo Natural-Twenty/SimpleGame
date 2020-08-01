@@ -35,10 +35,13 @@ public class DungeonController {
     private Text completionMessage;
 
     @FXML
-    private Button levelSelectButton;
+    private Button menuButton;
 
     private List<ImageView> stationaryEntities;
     private List<ImageView> movingEntities;
+
+    private MenuScreen menuScreen;
+    private DungeonScreen dungeonScreen;
 
     private Player player;
 
@@ -90,13 +93,13 @@ public class DungeonController {
                     Number oldValue, Number newValue) {
                 if (newValue.intValue() == 0) {
                     completionMessage.setText("");
-                    levelSelectButton.setVisible(false);
+                    menuButton.setVisible(false);
                 } else if (newValue.intValue() == 1) {
                     completionMessage.setText("LEVEL COMPLETE");
-                    levelSelectButton.setVisible(true);
+                    menuButton.setVisible(true);
                 } else if (newValue.intValue() == 2) {
                     completionMessage.setText("LEVEL FAILED");
-                    levelSelectButton.setVisible(true);
+                    menuButton.setVisible(true);
                 }
             }
         });
@@ -123,9 +126,22 @@ public class DungeonController {
     }
 
     @FXML
-    public void loadLevelSelect(Event event) {
-        //Somehow we will change FXML/Controller here to return to a level select menu
-        //Also consider adding a reset button here that reloads current level
+    public void loadMenu(Event event) {
+        menuScreen.start();
+    }
+
+    // @FXML
+    // public void retry(Event event) {
+    //     dungeonScreen.start();
+    // }
+
+
+    public void setMenuScreen(MenuScreen menuScreen) {
+        this.menuScreen = menuScreen;
+    }
+
+    public void setDungeonScreen(DungeonScreen dungeonScreen) {
+        this.dungeonScreen = dungeonScreen;
     }
 
 }

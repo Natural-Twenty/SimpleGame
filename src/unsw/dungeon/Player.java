@@ -280,6 +280,7 @@ public class Player extends Entity implements MoveBehaviour, Subject{
             } else {
                 dungeon.removeEntity(this);
                 setDisplayOnScreen(false);
+                dungeon.setlevelComplete(2); //level failed
             }
         }
     }

@@ -89,6 +89,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     @Override
     public void onLoad(Door door) {
         ImageView view = new ImageView(closedDoorImage);
+        changeStateImage(door, view);
         addEntity(door, view);
     }
 
@@ -136,12 +137,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
-
-        //Set up door to have its image swapping setup
-        if (entity instanceof Door) {
-            changeStateImage( (Door) entity, view);
-        }
-
+        
         if (entity instanceof MoveBehaviour) {
             movingEntities.add(view);
         } else {

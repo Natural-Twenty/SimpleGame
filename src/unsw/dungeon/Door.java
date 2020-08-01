@@ -7,11 +7,18 @@ import java.util.List;
  * 
  * @author Frank Merriman, The Tran
  */
-public class Door extends Entity {
-    private DoorState closedState;
-    private DoorState openState;
 
-    private DoorState currState;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+public class Door extends Entity {
+    // private DoorState closedState;
+    // private DoorState openState;
+
+    // private DoorState currState;
+
+    private BooleanProperty openState;
+
+    
 
     private int u_id;
     /**
@@ -22,18 +29,31 @@ public class Door extends Entity {
      */
     public Door(int x, int y, int u_id) {
         super(x, y);
-        closedState = new ClosedDoorState(this);
-        openState = new OpenDoorState(this);
-        currState = closedState;
+        // closedState = new ClosedDoorState(this);
+        // openState = new OpenDoorState(this);
+        // currState = closedState;
+        openState = new SimpleBooleanProperty(false);
         this.u_id = u_id;
     }
 
-    private boolean cannotUseKey(Key key) {
+    public BooleanProperty openState() {
+        return openState;
+    }
+
+    public boolean getOpenState() {
+        return openState().get();
+    }
+
+    public void setOpenState(boolean state) {
+        openState().set(state);
+    }
+
+    private boolean correctKey(Key key) {
         if (getID() == key.getID()) {
-            currState.openDoor();
-            return false;
+            openState.set(true);
+            return true;
         }
-        return true;
+        return false;
     }
 
     public int getID() {
@@ -42,7 +62,7 @@ public class Door extends Entity {
 
     @Override
     public boolean isBarrier(Entity e) {
-        if (currState == openState) {
+        if (getOpenState() == true) {
             // Door is open
             return false;
         } else if (e instanceof Player) {
@@ -52,11 +72,12 @@ public class Door extends Entity {
                 if (ent instanceof Key) {
                     Key key = (Key) ent;
                     // If key cannot be used, door is barrier. If key can be used, door is not barrier.
-                    boolean result = cannotUseKey(key);
-                    if (!result) {
+                    if (correctKey(key)) {
                         player.unequip(key);
+                        return false;
+                    } else {
+                        return true;
                     }
-                    return result;
                 }
             }
             // No key found.
@@ -67,16 +88,16 @@ public class Door extends Entity {
         }
     }
 
-    public DoorState getClosedState() {
-        return closedState;
-    }
+    // public DoorState getClosedState() {
+    //     return closedState;
+    // }
 
-    public DoorState getOpenState() {
-        return openState;
-    }
+    // public DoorState getOpenState() {
+    //     return openState;
+    // }
 
-    public void setState(DoorState state) {
-        currState = state;
-    }
+    // public void setState(DoorState state) {
+    //     currState = state;
+    // }
 
 }

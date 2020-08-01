@@ -136,6 +136,12 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
+
+        //Set up door to have its image swapping setup
+        if (entity instanceof Door) {
+            changeStateImage( (Door) entity, view);
+        }
+
         if (entity instanceof MoveBehaviour) {
             movingEntities.add(view);
         } else {
@@ -181,6 +187,23 @@ public class DungeonControllerLoader extends DungeonLoader {
                 if (newValue == false) {
                     ImageView image = (ImageView) node;
                     image.setImage(null);
+                }
+            }
+        });
+    }
+
+    //If we want to add other images we will method overload 
+    private void changeStateImage(Door door, Node node) {
+        door.openState().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable,
+                    Boolean oldValue, Boolean newValue) {
+                if (newValue == true) {
+                    ImageView image = (ImageView) node;
+                    image.setImage(openDoorImage);
+                } else if (newValue == false) {
+                    ImageView image = (ImageView) node;
+                    image.setImage(closedDoorImage);
                 }
             }
         });

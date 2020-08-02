@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -15,16 +16,16 @@ public class TutorialController {
     private Button exitButton;
 
     @FXML
-    private Button itemsButton;
-
-    @FXML
-    private Button goalsButton;
-
-    @FXML
     private Pane tutorialPane;
 
     @FXML
     private TextArea textArea;
+
+    @FXML
+    private GridPane gridpane1;
+
+    @FXML
+    private GridPane gridpane2;
 
     private TutorialScreen tutorialScreen;
     private Stage stage;

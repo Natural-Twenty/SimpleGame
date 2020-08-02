@@ -1,29 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="872.0" stylesheets="@Tutorial.css" xmlns="http://javafx.com/javafx/11.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="tutorialPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@Tutorial.css" xmlns="http://javafx.com/javafx/11.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="650.0" fitWidth="872.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="608.0" fitWidth="800.0" layoutY="-5.0" pickOnBounds="true">
          <image>
             <Image url="@../../backgrounds/dungeonwall.png" />
          </image>
+         <effect>
+            <GaussianBlur />
+         </effect>
       </ImageView>
       <Label layoutX="360.0" layoutY="14.0" prefHeight="39.0" prefWidth="153.0" text="Tutorial" textFill="#eeecec">
          <font>
             <Font size="31.0" />
          </font></Label>
-      <TextArea layoutX="61.0" layoutY="53.0" opacity="0.81" prefHeight="549.0" prefWidth="582.0" text="Movement&#10;Move your character using the directional arrows (Up, Right, Down, Left keys)&#10;&#10;Boulders&#10;- You can push boulders in the direction you are moving. However, you cannot&#10;  push a boulder if there is something else blocking it on the other side.&#10;&#10;- Boulders can be teleported using portals and be pushed in the direction of &#10;  you entering the portal like normal. However, you will not teleport if the &#10;  boulder cannot be pushed in the direction where it would collide with another&#10;  object.&#10;&#10;- Boulders can activate floor switches when a boulder is on top of one.&#10;&#10;Portals&#10;- Portals comes in pairs and will teleport you to the other paired up portal.&#10;  Enemies can teleport too and so can boulders.&#10;&#10;Key&#10;- A key will only open a certain door. If you pick one up, try it on different doors&#10;to find the correct door it will open. &#10;- Keys can be picked up by moving over them only if you do not have a key in &#10; your inventory. This means you can only hold one key at a time.&#10;&#10;Door&#10;- Find the unique key that opens the door to open the way. Be careful though,&#10;  once opened, enemies can also go through the door. There is only one correct&#10;  key to open each door.&#10;&#10;Wall&#10;- A wall blocks all movement and is impassable unless an item allows you to do so.&#10;&#10;How to win&#10;- Complete the goals to win.&#10;- Remember that OR means complete either while AND means complete both.&#10;- Reaching the exit must be completed last to win the level. Additionally, reaching&#10;  exit will not count as the goal being completed.&#10;&#10;Hunters&#10;- They will try chase you down to best of their ability (even if it doesn't amount to&#10;much).&#10;- They are persistent but can be fended off with a sword. &#10;- If they reach you and you do not have a sword or an invicibility potion in effect, &#10;  you will lose.&#10;- They cannot push boulders like you do, however. They also cannot pick up items.&#10;&#10;&#10;Different types of goals&#10;Kill all enemies&#10;- Kill all enemies in the level using whatever tools you can scavenge.&#10;&#10;Activate all floor switches&#10;- Trigger all floor switches by having a boulder on top of each switch.&#10;&#10;Reach exit&#10;- Move over the exit. This goal will not be checked off if you reach the goal before&#10;  completing other goals. Thus, this exit should be completed last.&#10;&#10;Collect treasure&#10;- Collect the required amount of treasure to complete this goal.&#10;&#10;Note that you can have mutliple goals. For example: kill all enemies AND activate&#10;all floor switches means you must complete both to win the level.&#10;Kill all enemies OR activate all switches means you can complete either one &#10;(or both, if you're really up for it) to win the level.&#10;">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets></TextArea>
-      <Button fx:id="exitBtn" layoutX="679.0" layoutY="562.0" mnemonicParsing="false" onAction="#handleExitBtn" opacity="0.78" text="Exit to Main Menu" />
+      <Button fx:id="exitBtn" layoutX="333.0" layoutY="571.0" mnemonicParsing="false" onAction="#handleExitBtn" opacity="0.78" text="Exit to Main Menu" />
+      <GridPane fx:id="gridpane1" layoutX="14.0" layoutY="53.0" prefHeight="519.0" prefWidth="364.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="57.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="345.0" minWidth="10.0" prefWidth="307.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="133.0" minHeight="0.0" prefHeight="39.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="166.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="201.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="175.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="153.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="140.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="140.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="140.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/human_new.png" />
+               </image>
+            </ImageView>
+            <TextArea editable="false" opacity="0.9" prefHeight="64.0" prefWidth="282.0" text="This is your character. You can move your &#10;character using the arrow keys&#10;(Up, Down, Left, Right directional keys)." GridPane.columnIndex="1" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../../backgrounds/background_wall.png" />
+               </image>
+            </ImageView>
+            <TextArea editable="false" opacity="0.9" prefHeight="200.0" prefWidth="200.0" text="Wall: It blocks your movement as well&#10;as enemies and boulders." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../../images/portal.png" />
+               </image>
+            </ImageView>
+            <TextArea editable="false" opacity="0.9" prefHeight="62.0" prefWidth="307.0" text="Portal: Portals come in pairs and are&#10;connected to each other. Going into one &#10;teleports you to it's pair." GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../../images/closed_door.png" />
+               </image>
+            </ImageView>
+            <TextArea editable="false" opacity="0.9" prefHeight="200.0" prefWidth="200.0" text="Closed door: Acts like a wall so you can't go&#10;thought it. However, enemies won't be able&#10;to go through it as well. A closed door only &#10;accepts a unique key that only opens door." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@../../images/open_door.png" />
+               </image>
+            </ImageView>
+            <TextArea editable="false" opacity="0.9" prefHeight="200.0" prefWidth="200.0" text="Open door: You can pass through this &#10;normally." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
+               <image>
+                  <Image url="@../../images/key.png" />
+               </image>
+            </ImageView>
+            <TextArea editable="false" opacity="0.9" prefHeight="200.0" prefWidth="200.0" text="Key: Pick one up by moving over it. Only&#10;one can be held at a time. A key can only&#10;be used on the one correct door." GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
+               <image>
+                  <Image url="@../../images/boulder.png" />
+               </image>
+            </ImageView>
+            <TextArea editable="false" opacity="0.9" prefHeight="78.0" prefWidth="307.0" text="Boulder: You can push this in the same&#10;direction as you moving into it if nothing is&#10;blocking it on the other side. Boulders can&#10;be teleported and pushed the same way." GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="7">
+               <image>
+                  <Image url="@../../images/pressure_plate.png" />
+               </image>
+            </ImageView>
+            <TextArea editable="false" opacity="0.9" prefHeight="200.0" prefWidth="200.0" text="Floor Switch: Triggered when a boulder is&#10;on top. " GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="8">
+               <image>
+                  <Image url="@../../images/gold_pile.png" />
+               </image>
+            </ImageView>
+            <TextArea editable="false" opacity="0.9" prefHeight="200.0" prefWidth="200.0" text="Treasure: Pick this up by moving over it. " GridPane.columnIndex="1" GridPane.rowIndex="8" />
+         </children>
+      </GridPane>
+      <GridPane fx:id="gridpane2" layoutX="413.0" layoutY="53.0" prefHeight="519.0" prefWidth="374.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="181.0" minWidth="10.0" prefWidth="53.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.0" minWidth="10.0" prefWidth="321.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="118.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="113.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/exit.png" />
+               </image>
+            </ImageView>
+            <TextArea editable="false" opacity="0.9" prefHeight="200.0" prefWidth="200.0" text="Exit: After completing all goals, move here to&#10;win the level." GridPane.columnIndex="1" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../../images/deep_elf_master_archer.png" />
+               </image>
+            </ImageView>
+            <TextArea editable="false" opacity="0.9" prefHeight="200.0" prefWidth="200.0" text="Enemy: Will kill you if it reaches you (on top&#10;of you). Chases you down unless you are&#10;invincible, then it will move away from you.&#10;Can be fended off with a sword." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../../images/greatsword_1_new.png" />
+               </image>
+            </ImageView>
+            <TextArea editable="false" opacity="0.9" prefHeight="200.0" prefWidth="200.0" text="Sword: Pick this up by moving over it. While&#10;in your inventory, you will kill enemies that&#10;reach you but will consume a use. It breaks&#10;when uses remaining is 0 and be removed&#10;from your inventory." GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../../images/brilliant_blue_new.png" />
+               </image>
+            </ImageView>
+            <TextArea editable="false" opacity="0.9" prefHeight="200.0" prefWidth="200.0" text="Invincibility potion: Pick this up by moving&#10;over it. Used upon pickup and will grant you&#10;invincibility that lasts 10 moves. All enemies&#10;will move away from you and reaching them&#10;will kill them" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
    </children>
 </Pane>

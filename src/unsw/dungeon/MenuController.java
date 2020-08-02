@@ -16,7 +16,6 @@ import javafx.scene.control.ChoiceBox;
 
 public class MenuController {
 
-    
     @FXML
     private Button levelSelectButton;
 
@@ -24,12 +23,17 @@ public class MenuController {
     private ChoiceBox<String> levelSelectChoiceBox;
 
     @FXML
+    private Button tutorialBtn;
+
+    @FXML
     private Pane menuPane;
+
 
     private Stage stage;
 
     private DungeonScreen dungeonScreen;
     private MenuScreen menuScreen;
+    private TutorialScreen tutorialScreen;
 
     ObservableList<String> levelList = FXCollections.observableArrayList();
 
@@ -75,5 +79,13 @@ public class MenuController {
 
         levelList.addAll(level1, level2, level3, level4);
         levelSelectChoiceBox.getItems().addAll(levelList);
+    }
+
+    
+
+    public void handleTutorialBtn(ActionEvent event) throws IOException {
+        tutorialScreen = new TutorialScreen(stage);
+        tutorialScreen.getController().setMenuScreen(menuScreen);
+        tutorialScreen.start();
     }
 }

@@ -35,5 +35,6 @@
       </Text>
       <ChoiceBox fx:id="levelSelectChoiceBox" layoutX="225.0" layoutY="187.0" prefWidth="150.0" />
       <Button fx:id="levelSelectButton" alignment="CENTER" layoutX="389.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleLevelSelect" prefHeight="26.0" prefWidth="100.0" text="Play Level" />
+      <Button fx:id="tutorialBtn" layoutX="225.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleTutorialBtn" prefHeight="26.0" prefWidth="90.0" text="Tutorial" />
    </children>
 </Pane>

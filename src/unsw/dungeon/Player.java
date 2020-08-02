@@ -266,18 +266,26 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         if (isInvincible()) {
             return true;
         } else if (hasSword()) {
+            Sword playerSword = null;
             //only has one sword so find it and degrade quality
             for (Entity e : inventory) {
                 if (e instanceof Sword) {
-                    Sword playerSword = (Sword) e;
-                    playerSword.useWeapon();
+                    playerSword =  (Sword) e;
+                    // playerSword.useWeapon();
+                    // if (playerSword.isBroken()) {
+                    //     unequip(playerSword);
+                    // }
+                    // return true;
+                }
+            }
+            if (playerSword != null) {
+                playerSword.useWeapon();
                     if (playerSword.isBroken()) {
                         unequip(playerSword);
                     }
                     return true;
                 }
             }
-        }
 
         return false;
     }

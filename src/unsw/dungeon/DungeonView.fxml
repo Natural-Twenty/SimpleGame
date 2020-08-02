@@ -13,6 +13,7 @@
 <!-- This is the foreground on which moveable entities will be displayed -->
 <!-- This will be the background we print the floor onto and then non-moveable entities -->
 
+
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress" stylesheets="@Dungeon.css" xmlns="http://javafx.com/javafx/11.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane fx:id="background">
@@ -31,19 +32,23 @@
             <RowConstraints />
          </rowConstraints>
       </GridPane>
-      <Text fx:id="completionMessage" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="" textAlignment="CENTER">
+      <Text fx:id="completionMessage" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="" textAlignment="CENTER" wrappingWidth="138.0">
          <font>
             <Font size="22.0" />
          </font>
       </Text>
-      <HBox alignment="CENTER" StackPane.alignment="CENTER">
-         <StackPane.margin>
-            <Insets top="50.0" />
-         </StackPane.margin>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="115.0" StackPane.alignment="BOTTOM_RIGHT">
          <children>
-            <Button fx:id="menuButton" mnemonicParsing="false" onMouseClicked="#handleMenuButton" text="Menu" visible="false" />
-            <Button fx:id="retryButton" mnemonicParsing="false" onAction="#handleRetryButton" text="Retry" visible="false" />
+            <Button fx:id="menuButton" mnemonicParsing="false" onMouseClicked="#handleMenuButton" text="Menu" />
+            <Button fx:id="retryButton" mnemonicParsing="false" onAction="#handleRetryButton" text="Retry" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Button>
          </children>
+         <StackPane.margin>
+            <Insets bottom="5.0" right="5.0" />
+         </StackPane.margin>
       </HBox>
    </children>
 </StackPane>

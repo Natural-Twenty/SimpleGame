@@ -98,18 +98,15 @@ public class DungeonController {
                     Number oldValue, Number newValue) {
                 if (newValue.intValue() == 0) {
                     completionMessage.setText("");
-                    menuButton.setVisible(false);
-                    retryButton.setVisible(false);
+                    
 
                 } else if (newValue.intValue() == 1) {
                     completionMessage.setText("LEVEL COMPLETE");
-                    menuButton.setVisible(true);
-                    retryButton.setVisible(true);
+                    
 
                 } else if (newValue.intValue() == 2) {
                     completionMessage.setText("LEVEL FAILED");
-                    menuButton.setVisible(true);
-                    retryButton.setVisible(true);
+                    
                 }
             }
         });

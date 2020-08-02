@@ -45,7 +45,8 @@ public class DungeonController {
     private List<ImageView> movingEntities;
 
     private MenuScreen menuScreen;
-    private DungeonScreen dungeonScreen;
+    
+    private String level;
 
     private Player player;
 
@@ -141,7 +142,7 @@ public class DungeonController {
 
     @FXML
     public void handleRetryButton(Event event) throws IOException {
-        dungeonScreen.start();
+        menuScreen.getController().startDungeon(level);
     }
 
 
@@ -149,8 +150,8 @@ public class DungeonController {
         this.menuScreen = menuScreen;
     }
 
-    public void setDungeonScreen(DungeonScreen dungeonScreen) {
-        this.dungeonScreen = dungeonScreen;
+    public void setLevelName(String level) {
+        this.level = level;
     }
 
 }

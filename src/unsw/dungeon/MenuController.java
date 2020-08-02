@@ -57,10 +57,14 @@ public class MenuController {
             return;
         }
 
+        startDungeon(level);
+
+    }
+
+    public void startDungeon(String level) throws IOException {
         dungeonScreen = new DungeonScreen(stage, level);
         dungeonScreen.getController().setMenuScreen(menuScreen);
         dungeonScreen.start();
-
     }
 
     public void loadLevelNames() {

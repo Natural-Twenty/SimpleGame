@@ -46,19 +46,19 @@ public class DungeonControllerLoader extends DungeonLoader {
         stationaryEntities = new ArrayList<>();
         movingEntities = new ArrayList<>();
 
-        playerImage = new Image((new File("images/human_new.png")).toURI().toString());
-        wallImage = new Image((new File("images/brick_brown_0.png")).toURI().toString());
-        exitImage = new Image((new File("images/exit.png")).toURI().toString());
-        boulderImage = new Image((new File("images/boulder.png")).toURI().toString());
-        floorPlateImage = new Image((new File("images/pressure_plate.png")).toURI().toString());
-        hunterImage = new Image((new File("images/deep_elf_master_archer.png")).toURI().toString());
-        potionImage = new Image((new File("images/brilliant_blue_new.png")).toURI().toString());
-        treasureImage = new Image((new File("images/gold_pile.png")).toURI().toString());
-        closedDoorImage = new Image((new File("images/closed_door.png")).toURI().toString());
-        openDoorImage = new Image((new File("images/open_door.png")).toURI().toString());
-        keyImage = new Image((new File("images/key.png")).toURI().toString());
-        portalImage = new Image((new File("images/portal.png")).toURI().toString());
-        swordImage = new Image((new File("images/greatsword_1_new.png")).toURI().toString());
+        playerImage = new Image((new File("src/images/human_new.png")).toURI().toString());
+        wallImage = new Image((new File("src/images/brick_brown_0.png")).toURI().toString());
+        exitImage = new Image((new File("src/images/exit.png")).toURI().toString());
+        boulderImage = new Image((new File("src/images/boulder.png")).toURI().toString());
+        floorPlateImage = new Image((new File("src/images/pressure_plate.png")).toURI().toString());
+        hunterImage = new Image((new File("src/images/deep_elf_master_archer.png")).toURI().toString());
+        potionImage = new Image((new File("src/images/brilliant_blue_new.png")).toURI().toString());
+        treasureImage = new Image((new File("src/images/gold_pile.png")).toURI().toString());
+        closedDoorImage = new Image((new File("src/images/closed_door.png")).toURI().toString());
+        openDoorImage = new Image((new File("src/images/open_door.png")).toURI().toString());
+        keyImage = new Image((new File("src/images/key.png")).toURI().toString());
+        portalImage = new Image((new File("src/images/portal.png")).toURI().toString());
+        swordImage = new Image((new File("src/images/greatsword_1_new.png")).toURI().toString());
         
     }
 

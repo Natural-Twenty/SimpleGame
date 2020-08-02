@@ -26,7 +26,7 @@ public class DungeonScreen {
      */
     public DungeonScreen(Stage stage, String level) throws IOException {
         this.stage = stage;
-        this.title = "Dungeon Level";
+        this.title = "Level: "+level;
 
         dungeonLoader = new DungeonControllerLoader(level+".json");
         controller = dungeonLoader.loadController();

@@ -17,7 +17,7 @@ public class MenuScreen {
 
     public MenuScreen(Stage stage) throws IOException {
         this.stage = stage;
-        title = "Dungeon Menu";
+        title = "Crawler Menu";
 
         controller = new MenuController(this, stage);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuView.fxml"));

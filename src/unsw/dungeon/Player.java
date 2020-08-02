@@ -201,6 +201,19 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         return false;
     }
 
+    public boolean hasPickaxe() {
+        for (Entity e: inventory) {
+            if (e instanceof Pickaxe) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void removeWall(Wall wall) {
+        dungeon.removeEntity(wall);
+    }
+
     /**
      * Method that checks players inventory for a potion
      * @return true if player has a potion inventory

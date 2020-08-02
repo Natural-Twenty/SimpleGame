@@ -203,6 +203,11 @@
         "type": "invincibility"
       },
       {
+        "x": 3,
+        "y": 2,
+        "type": "pickaxe"
+      },
+      {
         "x": 4,
         "y": 1,
         "type": "switch"

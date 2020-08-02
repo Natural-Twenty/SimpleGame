@@ -34,6 +34,6 @@
          </font>
       </Text>
       <ChoiceBox fx:id="levelSelectChoiceBox" layoutX="225.0" layoutY="187.0" prefWidth="150.0" />
-      <Button fx:id="levelSelectButton" alignment="CENTER" layoutX="415.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleLevelSelect" text="Play Level" />
+      <Button fx:id="levelSelectButton" alignment="CENTER" layoutX="389.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleLevelSelect" prefHeight="26.0" prefWidth="100.0" text="Play Level" />
    </children>
 </Pane>

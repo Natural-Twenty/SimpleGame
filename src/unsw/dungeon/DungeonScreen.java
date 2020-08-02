@@ -31,7 +31,15 @@ public class DungeonScreen {
 
     }
 
-    public void start() {
+    public void start() throws IOException {
+        // dungeonLoader = new DungeonControllerLoader("testDungeon.json");
+        // controller = dungeonLoader.loadController();
+
+        // loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
+        // loader.setController(controller);
+        // root = loader.load();
+        // scene = new Scene(root);
+        
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();

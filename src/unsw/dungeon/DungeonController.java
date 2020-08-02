@@ -18,6 +18,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * A JavaFX controller for the dungeon.
@@ -139,7 +140,7 @@ public class DungeonController {
     }
 
     @FXML
-    public void handleRetryButton(Event event) {
+    public void handleRetryButton(Event event) throws IOException {
         dungeonScreen.start();
     }
 

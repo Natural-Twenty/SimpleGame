@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'arcade';
+    src: url('/fonts/arcade.ttf');
+}
+
+.text, #logo, #logoShadow {
+    -fx-font-family: "ARCADECLASSIC";
+}

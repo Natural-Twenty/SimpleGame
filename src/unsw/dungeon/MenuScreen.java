@@ -19,7 +19,7 @@ public class MenuScreen {
         this.stage = stage;
         title = "Dungeon Menu";
 
-        controller = new MenuController();
+        controller = new MenuController(this, stage);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuView.fxml"));
         loader.setController(controller);
 

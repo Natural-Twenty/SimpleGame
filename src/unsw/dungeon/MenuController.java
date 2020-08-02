@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -25,15 +26,29 @@ public class MenuController {
     @FXML
     private Pane menuPane;
 
+    private Stage stage;
+
     private DungeonScreen dungeonScreen;
+    private MenuScreen menuScreen;
 
     ObservableList<String> levelList = FXCollections.observableArrayList();
+
+    public MenuController(MenuScreen screen, Stage stage) {
+        this.menuScreen = screen;
+        this.stage = stage;
+    }
 
     @FXML
     public void initialize() {
         loadLevelNames();
-
     }
+
+    /**
+     * When a level is selected from the list, a new dungeonScreen is constructed using the string
+     * and menuscreens stage
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void handleLevelSelect(ActionEvent event) throws IOException {
         String level = levelSelectChoiceBox.getValue();
@@ -42,11 +57,10 @@ public class MenuController {
             return;
         }
 
+        dungeonScreen = new DungeonScreen(stage, level);
+        dungeonScreen.getController().setMenuScreen(menuScreen);
         dungeonScreen.start();
-    }
 
-    public void setDungeonScreen(DungeonScreen dungeonScreen) {
-        this.dungeonScreen = dungeonScreen;
     }
 
     public void loadLevelNames() {

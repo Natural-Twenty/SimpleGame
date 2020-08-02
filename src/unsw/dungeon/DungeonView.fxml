@@ -16,7 +16,6 @@
 <!-- This is the foreground on which moveable entities will be displayed -->
 <!-- This will be the background we print the floor onto and then non-moveable entities -->
 
-
 <BorderPane onKeyPressed="#handleKeyPress" stylesheets="@Dungeon.css" xmlns="http://javafx.com/javafx/11.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
@@ -46,7 +45,7 @@
       </StackPane>
    </center>
    <right>
-      <GridPane fx:id="inventoryGrid" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="160.0" prefWidth="160.0">
+      <GridPane fx:id="inventoryGrid" alignment="CENTER" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="160.0" prefWidth="160.0" BorderPane.alignment="CENTER">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="40.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="120.0" />
@@ -85,7 +84,7 @@
       </GridPane>
    </right>
    <left>
-      <VBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="59.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="59.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="menuButton" mnemonicParsing="false" onMouseClicked="#handleMenuButton" text="Menu">
                <VBox.margin>

@@ -13,7 +13,7 @@
 <!-- This is the foreground on which moveable entities will be displayed -->
 <!-- This will be the background we print the floor onto and then non-moveable entities -->
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress" xmlns="http://javafx.com/javafx/11.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress" stylesheets="@Dungeon.css" xmlns="http://javafx.com/javafx/11.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane fx:id="background">
          <columnConstraints>

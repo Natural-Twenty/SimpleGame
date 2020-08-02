@@ -24,14 +24,16 @@ public class DungeonApplication extends Application {
         // primaryStage.show();
 
         MenuScreen menuScreen = new MenuScreen(primaryStage);
+        //TutorialScreen tutorialScreen = new TutorialScreen(primaryStage);
         DungeonScreen dungeonScreen = new DungeonScreen(primaryStage);
 
         // Both controllers need to know about the other screen.
+        // Dungeons controller sees its screen since I hoped that would allow us to use the same method of
+        // resetting a dungeon from main menu or the retry button
 
         menuScreen.getController().setDungeonScreen(dungeonScreen);
 
         dungeonScreen.getController().setMenuScreen(menuScreen);
-        //let controller see its screen so that it can reset the level without needing to go to menu
         dungeonScreen.getController().setDungeonScreen(dungeonScreen);
 
         menuScreen.start();

@@ -45,7 +45,8 @@ public class DungeonController {
     private List<ImageView> movingEntities;
 
     private MenuScreen menuScreen;
-    private DungeonScreen dungeonScreen;
+    
+    private String level;
 
     private Player player;
 
@@ -97,18 +98,15 @@ public class DungeonController {
                     Number oldValue, Number newValue) {
                 if (newValue.intValue() == 0) {
                     completionMessage.setText("");
-                    menuButton.setVisible(false);
-                    retryButton.setVisible(false);
+                    
 
                 } else if (newValue.intValue() == 1) {
                     completionMessage.setText("LEVEL COMPLETE");
-                    menuButton.setVisible(true);
-                    retryButton.setVisible(true);
+                    
 
                 } else if (newValue.intValue() == 2) {
                     completionMessage.setText("LEVEL FAILED");
-                    menuButton.setVisible(true);
-                    retryButton.setVisible(true);
+                    
                 }
             }
         });
@@ -141,7 +139,7 @@ public class DungeonController {
 
     @FXML
     public void handleRetryButton(Event event) throws IOException {
-        dungeonScreen.start();
+        menuScreen.getController().startDungeon(level);
     }
 
 
@@ -149,8 +147,8 @@ public class DungeonController {
         this.menuScreen = menuScreen;
     }
 
-    public void setDungeonScreen(DungeonScreen dungeonScreen) {
-        this.dungeonScreen = dungeonScreen;
+    public void setLevelName(String level) {
+        this.level = level;
     }
 
 }

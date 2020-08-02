@@ -17,12 +17,20 @@ public class DungeonScreen {
     private FXMLLoader loader;
     Parent root;
 
-    public DungeonScreen(Stage stage) throws IOException {
+    /**
+     * Constructs a new dungeonScreen by parsing the name of the wanted json file from a string
+     * and then creating the necessary objects to load and control the dungeon
+     * @param stage
+     * @param level
+     * @throws IOException
+     */
+    public DungeonScreen(Stage stage, String level) throws IOException {
         this.stage = stage;
         this.title = "Dungeon Level";
 
-        dungeonLoader = new DungeonControllerLoader("testDungeon.json");
+        dungeonLoader = new DungeonControllerLoader(level+".json");
         controller = dungeonLoader.loadController();
+        controller.setLevelName(level);
 
         loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
         loader.setController(controller);
@@ -32,14 +40,6 @@ public class DungeonScreen {
     }
 
     public void start() throws IOException {
-        // dungeonLoader = new DungeonControllerLoader("testDungeon.json");
-        // controller = dungeonLoader.loadController();
-
-        // loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
-        // loader.setController(controller);
-        // root = loader.load();
-        // scene = new Scene(root);
-        
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();

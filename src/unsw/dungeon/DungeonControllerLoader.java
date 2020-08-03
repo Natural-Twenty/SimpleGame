@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -93,12 +94,14 @@ public class DungeonControllerLoader extends DungeonLoader {
     public void onLoad(Door door) {
         ImageView view = new ImageView(closedDoorImage);
         changeStateImage(door, view);
+        //addItemIDHint(door, view);
         addEntity(door, view);
     }
 
     @Override
     public void onLoad(Key key) {
         ImageView view = new ImageView(keyImage);
+        //addItemIDHint(key, view);
         addEntity(key, view);
     }
 
@@ -219,6 +222,15 @@ public class DungeonControllerLoader extends DungeonLoader {
             }
         });
     }
+
+    //these tooltips dont work :/
+    // private void addItemIDHint(Key key, Node node) {
+    //     Tooltip.install(node, new Tooltip("ID: "+key.getID()));
+    // }
+
+    // private void addItemIDHint(Door door, Node node) {
+    //     Tooltip.install(node, new Tooltip("ID: "+door.getID()));
+    // }
 
     /**
      * Create a controller that can be attached to the DungeonView with all the

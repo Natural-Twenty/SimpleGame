@@ -71,6 +71,11 @@ public class MenuController {
         dungeonScreen.start();
     }
 
+    /** 
+     * To add new levels add them to this list
+     * They must have the exact name as 
+     * the .json file they correspond to
+    */
     public void loadLevelNames() {
         String level1 = "maze";
         String level2 = "boulders";

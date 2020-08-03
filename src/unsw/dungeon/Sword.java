@@ -19,6 +19,10 @@ public class Sword extends Entity implements Weapon{
         this.durability = 5;
     }
 
+    public int getDurability() {
+        return durability;
+    }
+
     @Override
     public void useWeapon() {
         durability--;

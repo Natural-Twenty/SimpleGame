@@ -17,6 +17,6 @@ public interface Goal {
      * if the goal has subgoals, they are appended via recursion
      * @return string
      */
-    public String getGoalString();
+    public String getGoalString(int indent);
     
 }

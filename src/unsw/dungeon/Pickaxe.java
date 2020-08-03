@@ -8,6 +8,10 @@ public class Pickaxe extends Entity implements Weapon {
         this.durability = 5;
     }
 
+    public int getDurability() {
+        return durability;
+    }
+
     public void useWeapon() {
         durability--;
     }

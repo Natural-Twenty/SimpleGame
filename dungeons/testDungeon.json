@@ -295,10 +295,15 @@
             "goal": "enemies"
           },
           {
-            "goal": "treasure"
-          },
-          {
-            "goal": "boulders"
+            "goal": "OR",
+            "subgoals": [
+              {
+                "goal": "boulders"
+              },
+              {
+                "goal": "treasure"
+              }
+            ]
           },
           {
             "goal": "exit"

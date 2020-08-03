@@ -103,22 +103,12 @@ public class Dungeon implements Observer{
     public void update(Object obj) {
         if (obj instanceof Goal) {
             update( (Goal) obj);
-        } //else if (obj instanceof Player) {
-        //    update( (Player) obj);
-        //}
+        }
     }
 
     public void update(Goal goal) {
         checkGoalStatus();
     }
-
-    // public void update(Player player) {
-    //     for (Entity e : entities) {
-    //         if (e.getRemoveStatus) {
-    //             entities.remove(e);
-    //         }
-    //     }
-    // }
 
     
 
@@ -151,7 +141,7 @@ public class Dungeon implements Observer{
     }
 
     public String getGoalString() {
-        return goal.getGoalString();
+        return goal.getGoalString(1);
     }
 }
 

@@ -151,6 +151,11 @@ public abstract class DungeonLoader {
             entity = pickaxe;
             break;
         
+        case "water":
+            Water water = new Water(dungeon, x, y);
+            onLoad(water);
+            entity = water;
+            break;
         }
         dungeon.addEntity(entity);
     }
@@ -278,4 +283,6 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Potion potion);
 
     public abstract void onLoad(Pickaxe pickaxe);
+
+    public abstract void onLoad(Water water);
 }

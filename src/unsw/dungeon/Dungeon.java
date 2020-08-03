@@ -143,6 +143,12 @@ public class Dungeon implements Observer{
     public String getGoalString() {
         return goal.getGoalString(1);
     }
+
+    public List<Goal> getGoalObj() {
+        List<Goal> l = new ArrayList<Goal>();
+
+        return l;
+    }
 }
 
 

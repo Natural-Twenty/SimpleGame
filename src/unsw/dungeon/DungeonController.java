@@ -58,6 +58,9 @@ public class DungeonController implements Observer{
     @FXML
     private VBox goalVbox;
 
+    @FXML
+    private GridPane goalGrid;
+
     private List<ImageView> stationaryEntities;
     private List<ImageView> movingEntities;
 
@@ -105,10 +108,47 @@ public class DungeonController implements Observer{
             foreground.getChildren().add(entity);
         }
 
+        //Scenebuilder broke so had to start doing javafx by code
         TextArea txt = new TextArea(dungeon.getGoalString());
         txt.setWrapText(true);
         txt.setEditable(false);
         goalVbox.getChildren().add(txt);
+
+        Image exitImage = new Image((new File("src/images/exit.png")).toURI().toString());
+        Image treasureImage = new Image((new File("src/images/gold_pile.png")).toURI().toString());
+        Image hunterImage = new Image((new File("src/images/deep_elf_master_archer.png")).toURI().toString());
+        Image floorPlateImage = new Image((new File("src/images/pressure_plate.png")).toURI().toString());
+
+        ImageView exitImageView = new ImageView(exitImage);
+        ImageView treasureImageView = new ImageView(treasureImage);
+        ImageView hunterImageView = new ImageView(hunterImage);
+        ImageView floorPlateImageView = new ImageView(floorPlateImage);
+
+        goalGrid.add(exitImageView, 1, 0);
+        goalGrid.add(treasureImageView, 2, 0);
+        goalGrid.add(hunterImageView, 3, 0);
+        goalGrid.add(floorPlateImageView, 4, 0);
+        
+        //Add code that creates correct sized grid pane
+        //Adds image views for the correct goals
+        //Sets up correct trackers for all goals
+
+        //This could get a bit buggy if we have duplicate goals (i.e two eliminate goals? nvm maybe not)
+        //1. Get a list of all leaf goal objects
+        List<Goal> dungeonGoals = dungeon.getGoalObj();
+        
+        //2. We would also probs attach listeners/observers here
+        for (Goal g: dungeonGoals) {
+            if (g instanceof Exit) {
+
+            } else if (g instanceof Treasure) {
+
+            } else if (g instanceof Hunter) {
+                
+            } else if (g instanceof FloorSwitch) {
+                
+            }
+        }
 
         setDungeonListener();
 

@@ -121,7 +121,12 @@ public class FloorSwitch extends Entity implements Goal, Subject{
     }
 
     @Override
-    public String getGoalString() {
-        return "Put boulders on all switches";
+    public String getGoalString(int indent) {
+        String str = "";
+        for (int i = 0; i < indent - 1; i++) {
+            str = str + "--";
+        }
+        str = str+"> Put boulders on all switches";
+        return str;
     }
 }

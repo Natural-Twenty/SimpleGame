@@ -42,14 +42,14 @@ public class GoalOR implements Goal{
     }
 
     @Override
-    public String getGoalString() {
+    public String getGoalString(int indent) {
         String str = "";
         List<String> l = new ArrayList<String>();
         int size = subGoals.size();
 
         //Create a list of subgoals, ignoring duplicates
         for (int i = 0; i < size; i++) {
-            String sG = subGoals.get(i).getGoalString();
+            String sG = subGoals.get(i).getGoalString(indent + 1);
             if (!l.contains(sG)) {
                 l.add(sG);
             }
@@ -60,9 +60,9 @@ public class GoalOR implements Goal{
         for (int i = 0; i < size; i++) {
             String goal = l.get(i);
             if (i == size - 1) {
-                str = str + goal;
+                str = str + goal+"";
             } else {
-                str = str + goal + " OR ";
+                str = str + goal + " OR\n";
             }
         }
 

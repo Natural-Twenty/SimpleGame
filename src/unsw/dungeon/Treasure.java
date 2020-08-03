@@ -65,7 +65,12 @@ public class Treasure extends Entity implements Goal, Subject{
     }
 
     @Override
-    public String getGoalString() {
-        return "Collect all treasure";
+    public String getGoalString(int indent) {
+        String str = "";
+        for (int i = 0; i < indent - 1; i++) {
+            str = str + "--";
+        }
+        str = str+"> Collect all treasure";
+        return str;
     }
 }

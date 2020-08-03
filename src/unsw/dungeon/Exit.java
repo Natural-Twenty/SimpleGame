@@ -83,8 +83,14 @@ public class Exit extends Entity implements Goal, Subject {
     }
 
     @Override
-    public String getGoalString() {
-        return "Get to the exit";
+    public String getGoalString(int indent) {
+        String str = "";
+        for (int i = 0; i < indent; i++) {
+            str = str + "--";
+        }
+        str = str+"> Get to the exit";
+        return str;
+        
     }
     
 }

@@ -295,13 +295,18 @@
             "goal": "enemies"
           },
           {
-            "goal": "treasure"
-          },
-          {
-            "goal": "boulders"
-          },
-          {
             "goal": "exit"
+          },
+          {
+            "goal": "OR",
+            "subgoals": [
+              {
+                "goal": "boulders"
+              },
+              {
+                "goal": "treasure"
+              }
+            ]
           }
         ]
       }

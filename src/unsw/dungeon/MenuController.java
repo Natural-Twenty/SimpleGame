@@ -82,8 +82,9 @@ public class MenuController {
         String level3 = "advanced";
         String level4 = "testDungeon";
         String level5 = "tunnelTown";
+        String level6 = "idTest";
 
-        levelList.addAll(level1, level2, level3, level4, level5);
+        levelList.addAll(level1, level2, level3, level4, level5, level6);
         levelSelectChoiceBox.getItems().addAll(levelList);
     }
 

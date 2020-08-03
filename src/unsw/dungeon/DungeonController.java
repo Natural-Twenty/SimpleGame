@@ -5,10 +5,14 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -49,6 +53,9 @@ public class DungeonController implements Observer{
 
     @FXML
     private Text keyCounter;
+
+    @FXML
+    private VBox goalVbox;
 
     private List<ImageView> stationaryEntities;
     private List<ImageView> movingEntities;
@@ -96,6 +103,11 @@ public class DungeonController implements Observer{
         for (ImageView entity : movingEntities) {
             foreground.getChildren().add(entity);
         }
+
+        TextArea txt = new TextArea(dungeon.getGoalString());
+        txt.setWrapText(true);
+        txt.setEditable(false);
+        goalVbox.getChildren().add(txt);
 
         setDungeonListener();
 

@@ -149,6 +149,10 @@ public class Dungeon implements Observer{
     public List<Entity> getAllEntities() {
         return entities;
     }
+
+    public String getGoalString() {
+        return goal.getGoalString();
+    }
 }
 
 

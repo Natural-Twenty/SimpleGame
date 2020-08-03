@@ -29,12 +29,4 @@ public class Water extends Entity {
             e.setDisplayOnScreen(false);
         }
     }
-
-    // private void boulderCollision(Boulder boulder) {
-    //     dungeon.removeEntity(boulder);
-    //     boulder.setDisplayOnScreen(false);
-    //     dungeon.removeEntity(this);
-    //     setDisplayOnScreen(false);
-    // }
-
 }

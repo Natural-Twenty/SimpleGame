@@ -165,6 +165,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     @Override 
     public void onLoad(Bomb bomb) {
         ImageView view = new ImageView(bombImage);
+        changeStateImage(bomb, view);
         addEntity(bomb, view);
     }
 
@@ -221,12 +222,32 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
 
         if (entity instanceof Bomb) {
-            Bomb bomb = (Bomb) entity;
+            
+        }
+    }
+
+    //If we want to add other images we will method overload 
+    private void changeStateImage(Door door, Node node) {
+        door.openState().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable,
+                    Boolean oldValue, Boolean newValue) {
+                if (newValue == true) {
+                    ImageView image = (ImageView) node;
+                    image.setImage(openDoorImage);
+                } else if (newValue == false) {
+                    ImageView image = (ImageView) node;
+                    image.setImage(closedDoorImage);
+                }
+            }
+        });
+    }
+
+    public void changeStateImage(Bomb bomb, ImageView view) {
             bomb.getFuseTimer().addListener(new ChangeListener<Number>() {
                 @Override
                 public void changed(ObservableValue<? extends Number> observable,
                     Number oldValue, Number newValue) {
-                        ImageView view = (ImageView) node;
                         switch(newValue.intValue()) {
                             case -1:
                                 view.setImage(bombImage);
@@ -247,24 +268,6 @@ public class DungeonControllerLoader extends DungeonLoader {
                         }
                     }
             });
-        }
-    }
-
-    //If we want to add other images we will method overload 
-    private void changeStateImage(Door door, Node node) {
-        door.openState().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable,
-                    Boolean oldValue, Boolean newValue) {
-                if (newValue == true) {
-                    ImageView image = (ImageView) node;
-                    image.setImage(openDoorImage);
-                } else if (newValue == false) {
-                    ImageView image = (ImageView) node;
-                    image.setImage(closedDoorImage);
-                }
-            }
-        });
     }
 
     //these tooltips dont work :/

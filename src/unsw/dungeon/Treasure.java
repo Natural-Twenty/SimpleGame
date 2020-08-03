@@ -63,4 +63,9 @@ public class Treasure extends Entity implements Goal, Subject{
             setDisplayOnScreen(false);
         }
     }
+
+    @Override
+    public String getGoalString() {
+        return "Collect all treasure";
+    }
 }

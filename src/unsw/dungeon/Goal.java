@@ -12,5 +12,11 @@ public interface Goal {
      */
     public boolean isComplete();
 
+    /**
+     * returns the current goal object in string form
+     * if the goal has subgoals, they are appended via recursion
+     * @return string
+     */
+    public String getGoalString();
     
 }

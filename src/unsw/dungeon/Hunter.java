@@ -223,4 +223,9 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
         }
     }
 
+    @Override
+    public String getGoalString() {
+        return "Kill all enemies";
+    }
+
 }

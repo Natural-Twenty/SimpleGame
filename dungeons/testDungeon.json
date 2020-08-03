@@ -267,6 +267,16 @@
         "id": 0
       },
       {
+        "x": 3,
+        "y": 3,
+        "type": "boulder"
+      },
+      {
+        "x": 4,
+        "y": 3,
+        "type": "water"
+      },
+      {
         "x": 1,
         "y": 8,
         "type": "portal",

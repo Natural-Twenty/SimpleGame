@@ -119,4 +119,9 @@ public class FloorSwitch extends Entity implements Goal, Subject{
             o.update(this);
         }
     }
+
+    @Override
+    public String getGoalString() {
+        return "Put boulders on all switches";
+    }
 }

@@ -40,4 +40,32 @@ public class GoalOR implements Goal{
     public void addSubGoal(Goal goal) {
         subGoals.add(goal);
     }
+
+    @Override
+    public String getGoalString() {
+        String str = "";
+        List<String> l = new ArrayList<String>();
+        int size = subGoals.size();
+
+        //Create a list of subgoals, ignoring duplicates
+        for (int i = 0; i < size; i++) {
+            String sG = subGoals.get(i).getGoalString();
+            if (!l.contains(sG)) {
+                l.add(sG);
+            }
+        }
+
+        //Combine list into 1 string
+        size = l.size();
+        for (int i = 0; i < size; i++) {
+            String goal = l.get(i);
+            if (i == size - 1) {
+                str = str + goal;
+            } else {
+                str = str + goal + " OR ";
+            }
+        }
+
+        return str;
+    }
 }

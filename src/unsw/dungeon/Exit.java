@@ -81,5 +81,10 @@ public class Exit extends Entity implements Goal, Subject {
             o.update(this);
         }
     }
+
+    @Override
+    public String getGoalString() {
+        return "Get to the exit";
+    }
     
 }

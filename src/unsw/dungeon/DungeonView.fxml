@@ -16,7 +16,7 @@
 <!-- This is the foreground on which moveable entities will be displayed -->
 <!-- This will be the background we print the floor onto and then non-moveable entities -->
 
-<BorderPane onKeyPressed="#handleKeyPress" stylesheets="@Dungeon.css" xmlns="http://javafx.com/javafx/11.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane onKeyPressed="#handleKeyPress" prefHeight="213.0" prefWidth="317.0" stylesheets="@Dungeon.css" xmlns="http://javafx.com/javafx/11.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
          <children>
@@ -45,12 +45,13 @@
       </StackPane>
    </center>
    <right>
-      <GridPane fx:id="inventoryGrid" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="160.0" BorderPane.alignment="CENTER">
+      <GridPane fx:id="inventoryGrid" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="205.0" prefWidth="80.0" BorderPane.alignment="CENTER">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="40.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="40.0" />
          </columnConstraints>
          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -97,6 +98,16 @@
                   <Font size="23.0" />
                </font>
             </Text>
+            <ImageView fitHeight="40.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@../../images/bomb_unlit.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="bombCounter" strokeType="OUTSIDE" strokeWidth="0.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Text>
          </children>
          <BorderPane.margin>
             <Insets left="10.0" right="10.0" />
@@ -122,4 +133,7 @@
          </BorderPane.margin>
       </VBox>
    </left>
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" BorderPane.alignment="CENTER" />
+   </top>
 </BorderPane>

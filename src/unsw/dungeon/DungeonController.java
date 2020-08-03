@@ -50,6 +50,9 @@ public class DungeonController implements Observer{
     @FXML
     private Text keyCounter;
 
+    @FXML
+    private Text bombCounter;
+
     private List<ImageView> stationaryEntities;
     private List<ImageView> movingEntities;
 
@@ -202,6 +205,13 @@ public class DungeonController implements Observer{
                 keyCounter.setText("0");
             } else {
                 keyCounter.setText("1");
+            }
+
+            Bomb bomb = player.getBomb();
+            if (bomb == null) {
+                bombCounter.setText("0");
+            } else {
+                bombCounter.setText("1");
             }
 
         }

@@ -36,7 +36,7 @@ public class Sword extends Entity implements Weapon{
     public void onCollide(Entity e) {
         if (e instanceof Player) {
             Player player = (Player) e;
-            if (player.hasSword() == false) {
+            if (player.getSword() == null) {
                 player.equip(this);
                 setDisplayOnScreen(false);
             }

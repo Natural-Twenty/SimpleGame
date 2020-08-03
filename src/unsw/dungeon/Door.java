@@ -1,6 +1,5 @@
 package unsw.dungeon;
 
-import java.util.List;
 /**
  * A Door class that represents a door in the dungeon.
  * Uses state design pattern.
@@ -62,42 +61,30 @@ public class Door extends Entity {
 
     @Override
     public boolean isBarrier(Entity e) {
-        if (getOpenState() == true) {
-            // Door is open
+        if (getOpenState()) {// Door is open
             return false;
-        } else if (e instanceof Player) {
-            Player player = (Player) e;
-            List<Entity> inventory = player.getInventory();
-            for (Entity ent : inventory) {
-                if (ent instanceof Key) {
-                    Key key = (Key) ent;
-                    // If key cannot be used, door is barrier. If key can be used, door is not barrier.
-                    if (correctKey(key)) {
-                        player.unequip(key);
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }
-            }
-            // No key found.
-            return true;
-        } else {
-            // We get here if entity is not a player and door is closed.
-            return true;
         }
+        
+        if (e instanceof Player) {
+            return playerDoorInteraction((Player) e);
+        }
+
+        return true;
     }
 
-    // public DoorState getClosedState() {
-    //     return closedState;
-    // }
-
-    // public DoorState getOpenState() {
-    //     return openState;
-    // }
-
-    // public void setState(DoorState state) {
-    //     currState = state;
-    // }
+    /**
+     * Takes in a player and checks if player can open the this door
+     * Key is automatically consumed and door is opened if it is right key
+     * @param p player whose key we are verifying
+     * @return true if door is a barrier at end of interaction
+     */
+    public boolean playerDoorInteraction(Player p) {
+        Key key = p.getKey();
+        if (key != null && correctKey(key)) {
+            p.unequip(key);
+            return false;
+        }
+        return true;
+    }
 
 }

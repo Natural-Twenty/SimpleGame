@@ -23,7 +23,7 @@ public class Pickaxe extends Entity implements Weapon {
     public void onCollide(Entity e) {
         if (e instanceof Player) {
             Player player = (Player) e;
-            if (player.hasPickaxe() == false) {
+            if (player.getPickaxe() == null) {
                 player.equip(this);
                 setDisplayOnScreen(false);
             }

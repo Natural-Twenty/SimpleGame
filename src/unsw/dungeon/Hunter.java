@@ -83,7 +83,7 @@ public class Hunter extends Entity implements MoveBehaviour, Observer, Goal, Sub
     public void update(Player player) {
         int targetX = player.getX();
         int targetY = player.getY();
-        if (player.isInvincible()) {
+        if (player.getPotion() != null) {
             fear();
         } else {
             normalise();

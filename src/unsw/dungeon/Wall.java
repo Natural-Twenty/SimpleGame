@@ -1,7 +1,5 @@
 package unsw.dungeon;
 
-import java.util.List;
-
 
 /**
  * A entity that blocks all entities from passing
@@ -22,12 +20,13 @@ public class Wall extends Entity{
     public boolean isBarrier(Entity e) {
         if (e instanceof Player) {
             Player player = (Player) e;
-            if (player.hasPickaxe()) {
+            if (player.getPickaxe() != null) {
                 return false;
             }
         }
         return true;
     }
+
     @Override
     public void onCollide(Entity e) {
         if (e instanceof Player) {
@@ -37,17 +36,11 @@ public class Wall extends Entity{
     }
 
     private void playerCollision(Player player) {
-        List<Entity> inventory = player.getInventory();
-        Pickaxe pickaxe = null;
-        for (Entity e : inventory) {
-            if (e instanceof Pickaxe) {
-                pickaxe = (Pickaxe) e;
-            }
-        }
-        if (pickaxe != null) {
-            pickaxe.useWeapon();
-            if (pickaxe.isBroken()) {
-                player.unequip(pickaxe);
+        Pickaxe playerPickaxe = player.getPickaxe();
+        if (playerPickaxe != null) {
+            playerPickaxe.useWeapon();
+            if (playerPickaxe.isBroken()) {
+                player.unequip(playerPickaxe);
             }
         }
         player.removeWall(this);

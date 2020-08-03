@@ -103,12 +103,14 @@ public class DungeonControllerLoader extends DungeonLoader {
     public void onLoad(Door door) {
         ImageView view = new ImageView(closedDoorImage);
         changeStateImage(door, view);
+        //addItemIDHint(door, view);
         addEntity(door, view);
     }
 
     @Override
     public void onLoad(Key key) {
         ImageView view = new ImageView(keyImage);
+        //addItemIDHint(key, view);
         addEntity(key, view);
     }
 
@@ -264,6 +266,15 @@ public class DungeonControllerLoader extends DungeonLoader {
             }
         });
     }
+
+    //these tooltips dont work :/
+    // private void addItemIDHint(Key key, Node node) {
+    //     Tooltip.install(node, new Tooltip("ID: "+key.getID()));
+    // }
+
+    // private void addItemIDHint(Door door, Node node) {
+    //     Tooltip.install(node, new Tooltip("ID: "+door.getID()));
+    // }
 
     /**
      * Create a controller that can be attached to the DungeonView with all the

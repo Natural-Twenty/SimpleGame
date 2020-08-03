@@ -45,10 +45,10 @@
       </StackPane>
    </center>
    <right>
-      <GridPane fx:id="inventoryGrid" alignment="CENTER" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="160.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+      <GridPane fx:id="inventoryGrid" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="160.0" BorderPane.alignment="CENTER">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="40.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="40.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -59,17 +59,12 @@
          <children>
             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/greatsword_1_new.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
-               <image>
                   <Image url="@../../images/brilliant_blue_new.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../images/gold_pile.png" />
+                  <Image url="@../../images/Pickaxe.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
@@ -77,9 +72,34 @@
                   <Image url="@../../images/key.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../../images/greatsword_1_new.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="potionCounter" strokeType="OUTSIDE" strokeWidth="0.0" text="0" GridPane.columnIndex="1">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Text>
+            <Text fx:id="swordCounter" strokeType="OUTSIDE" strokeWidth="0.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Text>
+            <Text fx:id="pickaxeCounter" strokeType="OUTSIDE" strokeWidth="0.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Text>
+            <Text fx:id="keyCounter" strokeType="OUTSIDE" strokeWidth="0.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Text>
          </children>
          <BorderPane.margin>
-            <Insets left="10.0" />
+            <Insets left="10.0" right="10.0" />
          </BorderPane.margin>
       </GridPane>
    </right>
@@ -98,7 +118,7 @@
             </Button>
          </children>
          <BorderPane.margin>
-            <Insets right="10.0" />
+            <Insets left="10.0" right="10.0" />
          </BorderPane.margin>
       </VBox>
    </left>

@@ -10,9 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-// import javafx.scene.layout.StackPane;
-// import javafx.collections.ObservableList;
-// import javafx.scene.Node;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
@@ -25,7 +22,7 @@ import java.io.IOException;
  * @author Robert Clifton-Everest
  *
  */
-public class DungeonController {
+public class DungeonController implements Observer{
     @FXML
     private GridPane foreground;
 
@@ -41,6 +38,18 @@ public class DungeonController {
     @FXML
     private Button retryButton;
 
+    @FXML
+    private Text potionCounter;
+
+    @FXML
+    private Text swordCounter;
+
+    @FXML
+    private Text pickaxeCounter;
+
+    @FXML
+    private Text keyCounter;
+
     private List<ImageView> stationaryEntities;
     private List<ImageView> movingEntities;
 
@@ -55,6 +64,7 @@ public class DungeonController {
     public DungeonController(Dungeon dungeon, List<ImageView> stationaryEntities, List<ImageView> movingEntities) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
+        player.attach(this);
         this.stationaryEntities = new ArrayList<>(stationaryEntities);
         this.movingEntities = new ArrayList<>(movingEntities);
     }
@@ -153,6 +163,48 @@ public class DungeonController {
 
     public void setLevelName(String level) {
         this.level = level;
+    }
+
+    public void updatePotionBar() {
+
+    }
+
+    @Override
+    public void update(Object o) {
+        //We want to check if there are any changes to the players
+        //inventory, there may be a neater way to do this
+        if (o instanceof Player) {
+            Player player = (Player) o;
+
+            Potion potion = player.getPotion();
+            if (potion == null) {
+                potionCounter.setText("0");
+            } else {
+                potionCounter.setText(Integer.toString(potion.getDurability() - 1));
+            }
+
+            Sword sword = player.getSword();
+            if (sword == null) {
+                swordCounter.setText("0");
+            } else {
+                swordCounter.setText(Integer.toString(sword.getDurability()));
+            }
+
+            Pickaxe pickaxe = player.getPickaxe();
+            if (pickaxe == null) {
+                pickaxeCounter.setText("0");
+            } else {
+                pickaxeCounter.setText(Integer.toString(pickaxe.getDurability()));
+            }
+
+            Key key = player.getKey();
+            if (key == null) {
+                keyCounter.setText("0");
+            } else {
+                keyCounter.setText("1");
+            }
+
+        }
     }
 
 }

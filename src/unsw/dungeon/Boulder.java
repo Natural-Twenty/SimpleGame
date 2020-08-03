@@ -50,7 +50,7 @@ public class Boulder extends Entity implements MoveBehaviour{
                 // Something is blocking the boulder
                 return false;
             } else {
-                e.onCollide(this);
+                //e.onCollide(this);
             }
         }
     

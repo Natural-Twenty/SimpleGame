@@ -127,6 +127,10 @@ public class DungeonController {
             case RIGHT:
                 player.moveRight();
                 break;
+            case B:
+                if (player.getBomb() != null) {
+                    player.plantBomb();
+                }
             default:
                 break;
             }

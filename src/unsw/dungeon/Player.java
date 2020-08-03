@@ -64,6 +64,13 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         }
     }
 
+    public void plantBomb() {
+        Bomb bomb = getBomb();
+        unequip(bomb);
+        bomb.ignite();
+        bomb.plant(getX(), getY());
+    }
+
     /**
      * This method takes in an x and y coordinate and then checks the dungeon to see if the player can move
      * into said coordinates
@@ -176,6 +183,8 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         //if e is a potion its also an observer to player movement
         if (e instanceof Potion) {
             attach( (Potion) e);
+        } else if (e instanceof Bomb) {
+            attach( (Bomb) e);
         }
         dungeon.removeEntity(e);
     }
@@ -214,6 +223,15 @@ public class Player extends Entity implements MoveBehaviour, Subject{
         for (Entity e: inventory) {
             if (e instanceof Key) {
                 return (Key) e;
+            }
+        }
+        return null;
+    }
+
+    public Bomb getBomb() {
+        for (Entity e : inventory) {
+            if (e instanceof Bomb) {
+                return (Bomb) e;
             }
         }
         return null;
@@ -259,8 +277,21 @@ public class Player extends Entity implements MoveBehaviour, Subject{
      */
     @Override
     public void updateObservers() {
+        Bomb bomb = null;
         for (Observer o : listObservers) {
             o.update(this);
+            if (o instanceof Bomb) {
+                bomb = (Bomb) o;
+            }
+        }
+        detachBomb(bomb);
+    }
+
+    private void detachBomb(Bomb bomb) {
+        if (bomb != null) {
+            if (bomb.hasDetonated()) {
+                detach(bomb);
+            }
         }
     }
 

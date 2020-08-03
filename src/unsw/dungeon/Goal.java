@@ -1,7 +1,5 @@
 package unsw.dungeon;
 
-import java.util.List;
-
 /**
  * Component part of the Goal composite pattern
  * @author Frank Merriman, The Tran

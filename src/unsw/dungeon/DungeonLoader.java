@@ -156,7 +156,12 @@ public abstract class DungeonLoader {
             onLoad(water);
             entity = water;
             break;
+        case "bomb":
+            Bomb bomb = new Bomb(dungeon, x, y);
+            onLoad(bomb);
+            entity = bomb;
         }
+
         dungeon.addEntity(entity);
     }
 
@@ -285,4 +290,6 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Pickaxe pickaxe);
 
     public abstract void onLoad(Water water);
+
+    public abstract void onLoad(Bomb bom);
 }

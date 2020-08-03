@@ -149,6 +149,10 @@ public class DungeonController implements Observer{
             case RIGHT:
                 player.moveRight();
                 break;
+            case B:
+                if (player.getBomb() != null) {
+                    player.plantBomb();
+                }
             default:
                 break;
             }

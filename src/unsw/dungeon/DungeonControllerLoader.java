@@ -40,6 +40,11 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image swordImage;
     private Image pickaxeImage;
     private Image waterImage;
+    private Image bombImage;
+    private Image bombImage1;
+    private Image bombImage2;
+    private Image bombImage3;
+    private Image bombImage4;
 
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
@@ -63,6 +68,11 @@ public class DungeonControllerLoader extends DungeonLoader {
         swordImage = new Image((new File("src/images/greatsword_1_new.png")).toURI().toString());
         pickaxeImage = new Image((new File("src/images/Pickaxe.png")).toURI().toString());
         waterImage = new Image((new File("src/images/water.png")).toURI().toString());
+        bombImage = new Image((new File("src/images/bomb_unlit.png")).toURI().toString());
+        bombImage1 = new Image((new File("src/images/bomb_lit_1.png")).toURI().toString());
+        bombImage2 = new Image((new File("src/images/bomb_lit_2.png")).toURI().toString());
+        bombImage3 = new Image((new File("src/images/bomb_lit_3.png")).toURI().toString());
+        bombImage4 = new Image((new File("src/images/bomb_lit_4.png")).toURI().toString());
     }
 
     @Override
@@ -152,6 +162,12 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(water, view);
     }
 
+    @Override 
+    public void onLoad(Bomb bomb) {
+        ImageView view = new ImageView(bombImage);
+        addEntity(bomb, view);
+    }
+
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
         
@@ -203,6 +219,35 @@ public class DungeonControllerLoader extends DungeonLoader {
                 }
             }
         });
+
+        if (entity instanceof Bomb) {
+            Bomb bomb = (Bomb) entity;
+            bomb.getFuseTimer().addListener(new ChangeListener<Number>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> observable,
+                    Number oldValue, Number newValue) {
+                        ImageView view = (ImageView) node;
+                        switch(newValue.intValue()) {
+                            case -1:
+                                view.setImage(bombImage);
+                                break;
+                            case 3:
+                                view.setImage(bombImage1);
+                                break;
+                            case 2:
+                                view.setImage(bombImage2);
+                                break;
+                            case 1:
+                                view.setImage(bombImage3);
+                                break;
+                            case 0:
+                                view.setImage(bombImage4);
+                                break;
+                            
+                        }
+                    }
+            });
+        }
     }
 
     //If we want to add other images we will method overload 

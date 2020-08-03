@@ -1,6 +1,5 @@
 package unsw.dungeon;
 
-import java.util.List;
 
 /**
  * A potion entity that makes a player impervious to attacks
@@ -34,13 +33,9 @@ public class Potion extends Entity implements Weapon, Observer {
      * @param player
      */
     public void update(Player player) {
-        List<Entity> inventory = player.getInventory();
-
-        if (inventory.contains(this)) {
-            useWeapon();
-            if (isBroken()) {
-                player.unequip(this);
-            }
+        useWeapon();
+        if (isBroken()) {
+            player.unequip(this);
         }
     }
 
@@ -61,7 +56,7 @@ public class Potion extends Entity implements Weapon, Observer {
     public void onCollide(Entity e) {
         if (e instanceof Player) {
             Player player = (Player) e;
-            if (player.isInvincible() == false) {
+            if (player.getPotion() == null) {
                 player.equip(this);
                 setDisplayOnScreen(false);
             }

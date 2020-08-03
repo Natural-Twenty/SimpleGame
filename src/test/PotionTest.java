@@ -24,11 +24,11 @@ public class PotionTest {
         Potion otherPotion = new Potion(0, 4);
         dungeon.addEntity(otherPotion);
 
-        assertFalse(player.isInvincible());
+        assertFalse(player.getPotion() != null);
         player.moveDown(); // Counts as first "move"
         List<Entity> check = dungeon.getEntities(0, 1);
         assertFalse(check.contains(potion)); //potion removed after pickup
-        assertTrue(player.isInvincible());
+        assertTrue(player.getPotion() != null);
 
         player.moveDown(); // 2
         player.moveDown(); // 3
@@ -43,9 +43,9 @@ public class PotionTest {
         player.moveDown(); // 8
         player.moveDown(); // 9
         player.moveDown(); // 10
-        assertTrue(player.isInvincible());
+        assertTrue(player.getPotion() != null);
         player.moveDown(); // During 11th turn player is invincible but when update runs at end it is removed
-        assertFalse(player.isInvincible());
+        assertFalse(player.getPotion() != null);
         //So you stay invincible for 10 moves
     }
 
@@ -77,9 +77,9 @@ public class PotionTest {
         player.attach(hunterRight);
         
 
-        assertFalse(player.isInvincible());
+        assertFalse(player.getPotion() != null);
         player.moveDown(); // Counts as first "move"
-        assertTrue(player.isInvincible());
+        assertTrue(player.getPotion() != null);
 
         //Player moves and becomes invincible before updating all its Observers at end of turn
         //So enemies should be doing reverse behaviour to normal

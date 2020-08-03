@@ -84,8 +84,10 @@ public class MenuController {
     
 
     public void handleTutorialBtn(ActionEvent event) throws IOException {
-        tutorialScreen = new TutorialScreen(stage);
-        tutorialScreen.getController().setMenuScreen(menuScreen);
         tutorialScreen.start();
+    }
+
+    public void setTutorialScreen(TutorialScreen tutorialScreen) {
+        this.tutorialScreen = tutorialScreen;
     }
 }

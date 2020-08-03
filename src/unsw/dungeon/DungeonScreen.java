@@ -45,6 +45,10 @@ public class DungeonScreen {
         stage.show();
         root.requestFocus();
         
+        //this should stop players from resizing windows
+        //if window is wrong size retry button fixes most issues
+        stage.setResizable(false);
+        
     }
 
     public DungeonController getController() {

@@ -190,24 +190,33 @@ public class Player extends Entity implements MoveBehaviour, Subject{
 
     /**
      * Method that checks players inventory for a sword
-     * @return true if player has a sword inventory
+     * @return sword if player has a sword inventory else null
      */
-    public boolean hasSword() {
+    public Sword getSword() {
         for (Entity e : inventory) {
             if (e instanceof Sword) {
-                return true;
+                return (Sword) e;
             }
         }
-        return false;
+        return null;
     }
 
-    public boolean hasPickaxe() {
+    public Pickaxe getPickaxe() {
         for (Entity e: inventory) {
             if (e instanceof Pickaxe) {
-                return true;
+                return (Pickaxe) e;
             }
         }
-        return false;
+        return null;
+    }
+
+    public Key getKey() {
+        for (Entity e: inventory) {
+            if (e instanceof Key) {
+                return (Key) e;
+            }
+        }
+        return null;
     }
 
     public void removeWall(Wall wall) {
@@ -216,15 +225,15 @@ public class Player extends Entity implements MoveBehaviour, Subject{
 
     /**
      * Method that checks players inventory for a potion
-     * @return true if player has a potion inventory
+     * @return potion if one else null
      */
-    public boolean isInvincible() {
+    public Potion getPotion() {
         for (Entity e : inventory) {
             if (e instanceof Potion) {
-                return true;
+                return (Potion) e;
             }
         }
-        return false;
+        return null;
     }
 
     /**
@@ -262,30 +271,17 @@ public class Player extends Entity implements MoveBehaviour, Subject{
      * @return true if player has an item that can be used to fight
      */
     public boolean canFight(Hunter hunter) {
+        Sword playerSword = getSword();
 
-        if (isInvincible()) {
+        if (getPotion() != null) {
             return true;
-        } else if (hasSword()) {
-            Sword playerSword = null;
-            //only has one sword so find it and degrade quality
-            for (Entity e : inventory) {
-                if (e instanceof Sword) {
-                    playerSword =  (Sword) e;
-                    // playerSword.useWeapon();
-                    // if (playerSword.isBroken()) {
-                    //     unequip(playerSword);
-                    // }
-                    // return true;
-                }
+        } else if (playerSword != null) {
+            playerSword.useWeapon();
+            if (playerSword.isBroken()) {
+                unequip(playerSword);
             }
-            if (playerSword != null) {
-                playerSword.useWeapon();
-                    if (playerSword.isBroken()) {
-                        unequip(playerSword);
-                    }
-                    return true;
-                }
-            }
+            return true;
+        }
 
         return false;
     }

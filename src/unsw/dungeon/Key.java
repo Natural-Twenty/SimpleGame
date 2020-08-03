@@ -1,6 +1,5 @@
 package unsw.dungeon;
 
-import java.util.List;
 
 /**
  * A entity that can be used by the player to open a specific door
@@ -29,27 +28,13 @@ public class Key extends Entity {
     public void onCollide(Entity e) {
         if (e instanceof Player) {
             Player player = (Player) e;
-            List<Entity> inventory = player.getInventory();
-            if(canPickUpKey(inventory)) {
+            Key playerKey = player.getKey();
+
+            if(playerKey == null) {
                 player.equip(this);
                 setDisplayOnScreen(false);
             }
         }
     }
-
-    /**
-     * Checks a players inventory for any existing keys
-     * to see if there is room for this key
-     * @param inventory of player we are checking
-     * @return true if inventory has no key else false
-     */
-    private boolean canPickUpKey(List<Entity> inventory) {
-        for (Entity e : inventory) {
-            if (e instanceof Key) {
-                return false;
-            }
-        }
-        // We are here because there is no key in inventory.
-        return true;
-    }
+    
 }

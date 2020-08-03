@@ -3,6 +3,6 @@
     src: url('/fonts/arcade.ttf');
 }
 
-.text, #completionMessage {
+.text, #completionMessage, #potionCounter, #swordCounter, #pickaxeCounter, #keyCounter {
     -fx-font-family: "ARCADECLASSIC";
 }

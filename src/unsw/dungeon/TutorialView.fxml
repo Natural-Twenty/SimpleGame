@@ -111,9 +111,8 @@
           <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="113.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="74.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -140,6 +139,24 @@
                </image>
             </ImageView>
             <TextArea editable="false" opacity="0.9" prefHeight="200.0" prefWidth="200.0" text="Invincibility potion: Pick this up by moving&#10;over it. Used upon pickup and will grant you&#10;invincibility that lasts 10 moves. All enemies&#10;will move away from you and reaching them&#10;will kill them" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@../../images/Pickaxe.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
+               <image>
+                  <Image url="@../../images/bomb_unlit.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
+               <image>
+                  <Image url="@../../images/water.png" />
+               </image>
+            </ImageView>
+            <TextArea prefHeight="200.0" prefWidth="200.0" text="Pickaxe: Can be destroy walls. Move into a&#10;wall to destroy it. Has 5 uses. Pick it up by&#10;moving over it." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextArea prefHeight="200.0" prefWidth="200.0" text="Bomb: Picked up by moving over it. Use with&#10;'B' key. Destroys everything in a 3x3 around&#10;it except the ground. You and the enemy can&#10;die to bombs. Bombs explode after 4 moves." GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextArea prefHeight="200.0" prefWidth="200.0" text="Water: This deep pool of water blocks all&#10;movement. You can push a boulder into this&#10;to fill it in and make it passable terrain. &#10;However, the boulder will disappear." GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
    </children>

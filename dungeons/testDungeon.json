@@ -295,6 +295,9 @@
             "goal": "enemies"
           },
           {
+            "goal": "exit"
+          },
+          {
             "goal": "OR",
             "subgoals": [
               {
@@ -304,9 +307,6 @@
                 "goal": "treasure"
               }
             ]
-          },
-          {
-            "goal": "exit"
           }
         ]
       }

@@ -208,6 +208,11 @@
         "type": "pickaxe"
       },
       {
+        "x": 2,
+        "y": 2,
+        "type": "bomb"
+      },
+      {
         "x": 4,
         "y": 1,
         "type": "switch"

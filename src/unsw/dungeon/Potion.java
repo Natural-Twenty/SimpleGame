@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * A potion entity that makes a player impervious to attacks
@@ -8,7 +10,7 @@ package unsw.dungeon;
  */
 public class Potion extends Entity implements Weapon, Observer {
 
-    int durability;
+    IntegerProperty durability;
 
     /**
      * Potion lasts 10 turns once picked up
@@ -17,8 +19,19 @@ public class Potion extends Entity implements Weapon, Observer {
      */
     public Potion(int x, int y) {
         super(x, y);
-        this.durability = 11; //Need an extra durability over expected 
-                             //since update runs after equiping
+        durability = new SimpleIntegerProperty(11); //Need an extra durability over expected since update runs after equiping
+    }
+
+    public IntegerProperty durability() {
+        return durability;
+    }
+
+    public void setDurability(int i) {
+        durability.set(i);
+    }
+
+    public int getDurability() {
+        return durability.get();
     }
 
     @Override
@@ -41,12 +54,12 @@ public class Potion extends Entity implements Weapon, Observer {
 
     @Override
     public void useWeapon() {
-        durability--;
+        setDurability(getDurability() - 1);
     }
 
     @Override
     public boolean isBroken() {
-        if (durability <= 0) {
+        if (getDurability() <= 0) {
             return true;
         }
         return false;

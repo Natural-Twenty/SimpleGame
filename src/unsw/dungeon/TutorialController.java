@@ -2,7 +2,6 @@ package unsw.dungeon;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -27,14 +26,7 @@ public class TutorialController {
     @FXML
     private GridPane gridpane2;
 
-    private TutorialScreen tutorialScreen;
-    private Stage stage;
     private MenuScreen menuScreen;
-
-    public TutorialController(TutorialScreen screen, Stage stage) {
-        this.tutorialScreen = screen;
-        this.stage = stage;
-    }
 
     @FXML
     public void handleExitBtn(ActionEvent event) throws IOException {

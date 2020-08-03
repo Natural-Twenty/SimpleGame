@@ -16,9 +16,9 @@ public class TutorialScreen {
 
     public TutorialScreen(Stage stage) throws IOException {
         this.stage = stage;
-        title = "Tutorial";
+        title = "Crawler Tutorial";
 
-        controller = new TutorialController(this, stage);
+        controller = new TutorialController();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TutorialView.fxml"));
         loader.setController(controller);
 

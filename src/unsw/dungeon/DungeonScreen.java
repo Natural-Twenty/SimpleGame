@@ -40,6 +40,7 @@ public class DungeonScreen {
     }
 
     public void start() throws IOException {
+
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
@@ -47,7 +48,7 @@ public class DungeonScreen {
         
         //this should stop players from resizing windows
         //if window is wrong size retry button fixes most issues
-        stage.setResizable(false);
+        //stage.setResizable(false);
         
     }
 

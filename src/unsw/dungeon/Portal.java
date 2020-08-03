@@ -31,6 +31,9 @@ public class Portal extends Entity {
     public void onCollide(Entity e) {
         if(e instanceof MoveBehaviour) {
             Portal portalPair = findPair();
+            if (portalPair == null) {
+                return;
+            }
             int teleportX = portalPair.getX();
             int teleportY = portalPair.getY();
             movePushables(e, teleportX, teleportY);

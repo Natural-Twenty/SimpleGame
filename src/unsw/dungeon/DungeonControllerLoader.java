@@ -220,10 +220,6 @@ public class DungeonControllerLoader extends DungeonLoader {
                 }
             }
         });
-
-        if (entity instanceof Bomb) {
-            
-        }
     }
 
     //If we want to add other images we will method overload 

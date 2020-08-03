@@ -178,10 +178,6 @@ public class DungeonController implements Observer{
         this.level = level;
     }
 
-    public void updatePotionBar() {
-
-    }
-
     @Override
     public void update(Object o) {
         //We want to check if there are any changes to the players

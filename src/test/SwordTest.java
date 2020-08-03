@@ -36,13 +36,13 @@ public class SwordTest {
         player.attach(hunter5);
 
         player.moveDown();
-        assertTrue(player.hasSword());
+        assertTrue(player.getSword() != null);
 
         //shouldnt pick up existing sword
         player.moveDown();
         assertTrue(dungeon.getEntities(0, 2).contains(sword2));
 
         player.moveDown();
-        assertFalse(player.hasSword());
+        assertFalse(player.getSword() != null);
     }
 }

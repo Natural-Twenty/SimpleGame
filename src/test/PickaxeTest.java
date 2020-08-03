@@ -23,7 +23,7 @@ public class PickaxeTest {
         dungeon.addEntity(wall);
 
         player.moveRight();
-        assertTrue(player.hasPickaxe());
+        assertTrue(player.getPickaxe() != null);
         assertFalse(dungeon.getAllEntities().contains(pickaxe));
 
         player.moveRight();

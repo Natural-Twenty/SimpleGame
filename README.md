@@ -10,35 +10,14 @@
 
 * Learn the application of design patterns.
 
-## Due Dates
-
-Milestone 1: 9AM Tuesday Week 7 (Demonstration: Week 7 Lab)
-
-Milestone 2: 9AM Tuesday Week 8 (Demonstration: Week 8 Lab)
-
-Final milestone: 9AM Monday Week 10 (Demonstration: Week 10 Lab)
-
-**NOTE:** There is **NO** provision for late submissions with a late penalty. Not submitting by the deadline is considered non-submission.
-
-## Value: 35 marks
+## Set time limitation: 1 month (4 weeks)
 
 ---
 
 ## Overview
 
-You have received a request from a client for an application for the playing of dungeon-style puzzles. With a partner from your lab class, you will follow an agile development process to design and implement a desktop Java application that satisfies the requirements of the client (see below). The final piece of software you deliver is expected to be of professional quality, user-friendly, and demonstrate the knowledge and skills you have acquired in this course.
+You have received a request from a client for an application for the playing of dungeon-style puzzles. You will follow an agile development process to design and implement a desktop Java application that satisfies the requirements of the client (see below). The final piece of software you deliver is expected to be of professional quality, user-friendly, and demonstrate the knowledge and skills you have acquired in this course.
 
-## Partner
-
-You should by now have a partner and group set-up on webcms3, after following the week-03 lab instructions. Your repositories will be created from these webcms3 groups.
-
-If you do not have a webcms3 project group yet, you will be randomly assigned to a group.
-
-Only groups of 2 are allowed by default. Groups of 1 are never allowed without special consideration, since this violates course learning outcomes requiring teamwork.
-
-Once created, your group Gitlab repository will be available here (replace *GROUP_NAME* with your group's name):
-
-https://gitlab.cse.unsw.edu.au/COMP2511/20T2/GROUP_NAME
 
 ## Project setup
 
@@ -223,11 +202,8 @@ This final milestone will be a culmination of all the work done in the previous 
 
 In the week 10 lab, your tutor will ask you questions, and assign marks based on your answers to these questions (and also through offline marking when appropriate).
 
-## Assessment
 
-You will be assessed on your ability to apply what you have learnt in this course as well as your ability to produce a significant piece of software.
-
-In cases where the client has not been explicit in their requirements, you will need to make your own design decisions with your partner. However, this does not mean you can ignore whatever requirements the client has given you. You may be asked to justify any assumptions you have made during marking.
+In cases where the client has not been explicit in their requirements, you will need to make your own design decisions with your partner. However, this does not mean you can ignore whatever requirements the client has given you.
 
 You are expected to use git appropriately by committing regularly with meaningful commit messages and using feature branches to manage significant changes. Similarly, you should use the task board to coordinate work with your partner. You will need to take the principles you learnt from COMP1531 and apply them here.
 
@@ -260,29 +236,6 @@ Please adhere to the provided layout of the directories, and filenames and filep
 
 You may add additional Java files with new Java classes in the *src/unsw/dungeon* folder.
 
-## Equal Constribution
-
-While it is up to you how to divide the work between you and your partner, both of you are expected to contribute code. Just creating diagrams and documentation is not sufficient contribution.
-
-You are expected to contribute equally to your partner every week. At the end of every week, you are required to log the distribution of work during that week (by listing work completed, and percentages of work completed by each person) at the bottom of your README.md. If both partners in a team fail to submit a log by 9am Monday, we will assume the contribution for the previous week was equal and not engage in redistribution of marks for that week. If one partner fails to submit a log by 9am Monday, we will automatically believe the partner who submitted a log and redistribute marks accordingly. No further consideration will be granted in this regard.
-
-If there is a disparity in the amount of work completed, you should email your tutor to discuss and resolve this.
-
-We will automatically assume that the author of work is the author of the git commit pushing it to your repository for assessing contribution levels - you should not allow you partner to push your work.
-
-We will only consider work pushed to the Gitlab repository in determining contribution levels.
-
-At the end of the trimester, marks will be re-distributed between project partners in instances of unequal contribution (as per the weekly logs, verified by Gitlab commits).
-
-Failure to make any contribution to your group-project during any 2-week period without special consideration will automatically result in a penalty being applied to your project mark, in addition to further redistribution of marks.
-
-## Submission
-
-We require your submission to execute without modification after your repository is cloned on a CSE machine (by opening the root repository directory in VSCode, and clicking the *"Run"* link in the **DungeonApplication.java** file. You should test this before submitting.
-
-Failure of your repository to work by these specifications may result in a loss of marks. Your tutor will not attempt to fix your code when marking your work (no matter how minor the necessary modificaton).
-
-Only one person in each group should submit. We will assess the latest submission as of the due-time by either partner.
 
 ### Milestone 1
 
@@ -292,33 +245,9 @@ You **do not** have to run a submission command for this to be submitted - we wi
 
 ### Milestone 2
 
-Submit the contents of your GitLab repository with the following command:
-
-```bash
-$ 2511 submit milestone2
-```
-
 Your UML class diagram should be a PDF file at the root of your repository named `design.pdf`.
 
-### Milestone 3
 
-Submit the contents of your GitLab repository with the following command:
-
-```bash
-$ 2511 submit milestone3
-```
-
-You will demonstrate your application to your tutor in Week 10. You may be asked to justify your design decisions and explain how you worked with your partner.
-
-## Marking criteria
-
-The marks are allocated as follows:
-
-* Milestone 1 (7 marks)
-* Milestone 2 (11 marks)
-* Final milestone (17 marks)
-
-Below is a *rough* guide on how you will be assessed for each milestone.
 
 ### Milestone 1
 
@@ -401,24 +330,4 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 [boulders]:      examples/boulders.png
 [advanced]:      examples/advanced.png
 
-## Logs of work completed per partner
 
-### Week-05
-
-Fill in here.
-
-### Week-06
-
-User and epic stories: Frank Merriman - 50%, The Minh Tran - 50% [Equal distribution]
-
-### Week-07
-
-Fill in here.
-
-### Week-08
-
-Fill in here.
-
-### Week-09
-
-Fill in here.
